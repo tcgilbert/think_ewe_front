@@ -2,11 +2,13 @@ import React from "react";
 import Login from "./Login";
 import Signup from "./Signup";
 
-const Signup_Login = () => {
+const Signup_Login = (props) => {
+
+
     return (
         <div>
-            <Login />
-            <Signup />
+            <Login setUser={props.setUser} setAuth={props.setAuth}/>
+            <Signup setUser={props.setUser} setAuth={props.setAuth}/>
         </div>
     );
 };
