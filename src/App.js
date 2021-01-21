@@ -11,7 +11,7 @@ import Profile from "./components/Profile"
 import Dashboard from "./components/Dashboard"
 
 function App() {
-    const [currentUser, setCurrentUser] = useState(null);
+    const [currentUser, setCurrentUser] = useState("");
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const SERVER = process.env.REACT_APP_SERVER;
     
@@ -98,6 +98,7 @@ function App() {
                 path="/dashboard"
                 component={Dashboard}
                 user={currentUser}
+                setUser={setCurrentUser}
             />
             <button onClick={handleLogout} type="submit">
                 Logout

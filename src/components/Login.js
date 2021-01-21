@@ -4,7 +4,6 @@ import useForm from "../utilities/useForm";
 
 const Login = (props) => {
     const [values, handleChange] = useForm({ identifier: "", password: "" });
-    const SERVER = process.env.REACT_APP_SERVER
 
     return (
         <div>
