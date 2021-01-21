@@ -15,7 +15,7 @@ const LandingPage = (props) => {
             // look for user
             console.log(values);
             const requestedUser = await axios.post(`${SERVER}/users/login`, {
-                email: values.identifier,
+                identifier: values.identifier,
                 password: values.password,
             });
             // extract token

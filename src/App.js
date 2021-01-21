@@ -33,19 +33,20 @@ function App() {
     };
 
     // send token to backend to check for user
-    useEffect(async () => {
+    useEffect(() => {
         const token = localStorage.getItem("jwtToken");
         if (token) {
-            console.log(token);
-            const tokenUser = await axios.post(`${SERVER}/users/check-token`, {
-                token: token,
-            });
-            const userFound = await tokenUser.data.user_found;
-            if (userFound) {
-                const userInfo = await jwt_decode(token);
-                setCurrentUser(userInfo);
-                setIsAuthenticated(true);
-            }
+            checkToken(token)
+            // console.log(token);
+            // const tokenUser = await axios.post(`${SERVER}/users/check-token`, {
+            //     token: token,
+            // });
+            // const userFound = await tokenUser.data.user_found;
+            // if (userFound) {
+            //     const userInfo = await jwt_decode(token);
+            //     setCurrentUser(userInfo);
+            //     setIsAuthenticated(true);
+            // }
         }
     }, []);
 
@@ -57,6 +58,18 @@ function App() {
             setIsAuthenticated(false);
         }
     };
+
+    const checkToken = async (token) => {
+        const tokenUser = await axios.post(`${SERVER}/users/check-token`, {
+            token: token,
+        });
+        const userFound = await tokenUser.data.user_found;
+        if (userFound) {
+            const userInfo = await jwt_decode(token);
+            setCurrentUser(userInfo);
+            setIsAuthenticated(true);
+        }
+    }
 
     return (
         <div className="App">
