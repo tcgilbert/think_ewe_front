@@ -69,6 +69,8 @@ function App() {
                         <LandingPage
                             setUser={setCurrentUser}
                             setAuth={setIsAuthenticated}
+                            isAuth={isAuthenticated}
+                            currentUser={currentUser}
                         />
                     );
                 }}
