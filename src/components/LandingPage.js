@@ -4,10 +4,9 @@ import Signup from "./Signup";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 
+
 const LandingPage = (props) => {
     const SERVER = process.env.REACT_APP_SERVER;
-
-
 
     const handleSignUp = async (values) => {
         try {
@@ -42,16 +41,21 @@ const LandingPage = (props) => {
         } else {
             return (
                 <div className="login-signup">
-                    <Login
-                        handleLogin={props.handleLogin}
-                        setUser={props.setUser}
-                        setAuth={props.setAuth}
-                    />
-                    <Signup
-                        handleSignup={handleSignUp}
-                        setUser={props.setUser}
-                        setAuth={props.setAuth}
-                    />
+                    <div>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto soluta assumenda blanditiis, fugiat rerum sequi? Fugiat fuga laudantium aspernatur. Ab nulla expedita dicta libero omnis animi? Quia porro sunt neque?
+                    </div>
+                    <div className="landing-forms">
+                        <Signup
+                            handleSignup={handleSignUp}
+                            setUser={props.setUser}
+                            setAuth={props.setAuth}
+                        />
+                        <Login
+                            handleLogin={props.handleLogin}
+                            setUser={props.setUser}
+                            setAuth={props.setAuth}
+                        />
+                    </div>
                 </div>
             );
         }

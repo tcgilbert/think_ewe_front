@@ -24,9 +24,19 @@ html {
     background-color: white;
     border: solid 2px gray;
     border-radius: 10px;
+    box-shadow: 0px 5px 15px 5px rgba(0,0,0,0.15);
     width: 50%;
-    margin: 150px auto;
+    height: 500px;
+    margin: 100px auto;
     padding: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.landing-forms {
+    width: 50em;
+    padding: 0 10px;
+    margin: 0 0 0 50px;
 }
 
 /* Elements */
