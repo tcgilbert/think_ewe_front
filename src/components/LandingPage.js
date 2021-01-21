@@ -5,7 +5,7 @@ import axios from 'axios'
 import setAuthToken from '../utilities/setAuthToken'
 import jwt_decode from 'jwt-decode'
 
-const Signup_Login = (props) => {
+const LandingPage = (props) => {
 
     const SERVER = process.env.REACT_APP_SERVER
 
@@ -45,4 +45,4 @@ const Signup_Login = (props) => {
     );
 };
 
-export default Signup_Login;
+export default LandingPage;
