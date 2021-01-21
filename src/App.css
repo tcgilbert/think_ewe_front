@@ -20,6 +20,15 @@ html {
     justify-content: space-between;
 }
 
+.login-signup {
+    background-color: white;
+    border: solid 2px gray;
+    border-radius: 10px;
+    width: 50%;
+    margin: 150px auto;
+    padding: 10px;
+}
+
 /* Elements */
 
 #title {

@@ -2,42 +2,12 @@ import React from "react";
 import Login from "./Login";
 import Signup from "./Signup";
 import axios from "axios";
-import setAuthToken from "../utilities/setAuthToken";
-import jwt_decode from "jwt-decode";
 import { Redirect } from "react-router-dom";
 
 const LandingPage = (props) => {
     const SERVER = process.env.REACT_APP_SERVER;
-    const autoLoginValues = {
-        identifier: "tcgilbert94@gmail.com",
-        password: "00000000",
-    };
 
-    const handleLogin = async (values) => {
-        try {
-            console.log("logging in");
-            // look for user
-            console.log(values);
-            const requestedUser = await axios.post(`${SERVER}/users/login`, {
-                identifier: values.identifier,
-                password: values.password,
-            });
-            // extract token
-            const { token } = requestedUser.data;
-            // add to local storage
-            localStorage.setItem("jwtToken", token);
-            // set token
-            setAuthToken(token);
-            // decode token
-            const userInfo = jwt_decode(token);
-            // set the current user
-            props.setUser(userInfo);
-            props.setAuth(true);
-        } catch (error) {
-            console.log(error);
-            console.log(`LOGIN ERROR: ${error.data}`);
-        }
-    };
+
 
     const handleSignUp = async (values) => {
         try {
@@ -55,15 +25,11 @@ const LandingPage = (props) => {
                     identifier: newUser.data.email,
                     password: values.password,
                 };
-                handleLogin(loginValues);
+                props.handleLogin(loginValues);
             }
         } catch (error) {
             console.log(`SIGNUP ERROR: ${error.data}`);
         }
-    };
-
-    const autoLogin = (values) => {
-        handleLogin(values);
     };
 
     const Redirections = () => {
@@ -75,9 +41,9 @@ const LandingPage = (props) => {
             }
         } else {
             return (
-                <div>
+                <div className="login-signup">
                     <Login
-                        handleLogin={handleLogin}
+                        handleLogin={props.handleLogin}
                         setUser={props.setUser}
                         setAuth={props.setAuth}
                     />
@@ -86,12 +52,6 @@ const LandingPage = (props) => {
                         setUser={props.setUser}
                         setAuth={props.setAuth}
                     />
-                    <button
-                        type="submit"
-                        onClick={() => autoLogin(autoLoginValues)}
-                    >
-                        Auto Login
-                    </button>
                 </div>
             );
         }

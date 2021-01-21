@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Route, Redirect } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-
+import setAuthToken from "./utilities/setAuthToken";
 
 // components
 import LandingPage from "./components/LandingPage";
@@ -16,6 +16,10 @@ function App() {
     const [currentUser, setCurrentUser] = useState("");
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const SERVER = process.env.REACT_APP_SERVER;
+    const autoLoginValues = {
+        identifier: "tcgilbert94@gmail.com",
+        password: "00000000",
+    };
 
     // Private Route
     const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -32,6 +36,32 @@ function App() {
                 }}
             />
         );
+    };
+    // handle log in
+    const handleLogin = async (values) => {
+        try {
+            console.log("logging in");
+            // look for user
+            console.log(values);
+            const requestedUser = await axios.post(`${SERVER}/users/login`, {
+                identifier: values.identifier,
+                password: values.password,
+            });
+            // extract token
+            const { token } = requestedUser.data;
+            // add to local storage
+            localStorage.setItem("jwtToken", token);
+            // set token
+            setAuthToken(token);
+            // decode token
+            const userInfo = jwt_decode(token);
+            // set the current user
+            setCurrentUser(userInfo);
+            setIsAuthenticated(true);
+        } catch (error) {
+            console.log(error);
+            console.log(`LOGIN ERROR: ${error.data}`);
+        }
     };
 
     // send token to backend to check for user
@@ -75,7 +105,7 @@ function App() {
 
     return (
         <div>
-            <Navigation handleLogout={handleLogout}/>
+            <Navigation handleLogout={handleLogout} />
             <div className="app-container">
                 <Route
                     exact
@@ -83,6 +113,7 @@ function App() {
                     render={() => {
                         return (
                             <LandingPage
+                                handleLogin={handleLogin}
                                 setUser={setCurrentUser}
                                 setAuth={setIsAuthenticated}
                                 isAuth={isAuthenticated}
@@ -102,8 +133,11 @@ function App() {
                     user={currentUser}
                     setUser={setCurrentUser}
                 />
-                <button onClick={handleLogout} type="submit">
-                    Logout
+                <button
+                    type="submit"
+                    onClick={() => handleLogin(autoLoginValues)}
+                >
+                    Auto Login
                 </button>
             </div>
         </div>
