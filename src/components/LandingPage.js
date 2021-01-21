@@ -13,6 +13,7 @@ const LandingPage = (props) => {
         try {
             console.log("logging in");
             // look for user
+            console.log(values);
             const requestedUser = await axios.post(`${SERVER}/users/login`, {
                 email: values.identifier,
                 password: values.password,
@@ -34,6 +35,29 @@ const LandingPage = (props) => {
         }
     };
 
+    const handleSignUp = async (values) => {
+        try {
+            console.log("signing up");
+            if (values.confirmPassword !== values.password) {
+                return console.log("Passwords do not match");
+            }
+            const newUser = await axios.post(`${SERVER}/users/signup`, {
+                email: values.email,
+                name: values.name,
+                password: values.password
+            });
+            if (newUser) {
+                const loginValues = {
+                    identifier: newUser.data.email,
+                    password: values.password
+                }
+                handleLogin(loginValues)
+            }
+        } catch (error) {
+            console.log(`SIGNUP ERROR: ${error.data}`);
+        }
+    }
+
     const Redirections = () => {
         if (props.isAuth) {
             if (props.currentUser.registered) {
@@ -49,7 +73,7 @@ const LandingPage = (props) => {
                         setUser={props.setUser}
                         setAuth={props.setAuth}
                     />
-                    <Signup setUser={props.setUser} setAuth={props.setAuth} />
+                    <Signup handleSignup={handleSignUp} setUser={props.setUser} setAuth={props.setAuth} />
                 </div>
             );
         }

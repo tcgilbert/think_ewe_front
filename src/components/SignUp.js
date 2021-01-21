@@ -1,7 +1,7 @@
 import React from "react";
 import useForm from "../utilities/useForm";
 
-const Signup = () => {
+const Signup = (props) => {
     const [values, handleChange] = useForm({
         email: "",
         name: "",
@@ -40,6 +40,7 @@ const Signup = () => {
                 value={values.confirmPassword}
                 onChange={handleChange}
             />
+            <button type="submit" onClick={() => props.handleSignup(values)}>Sign Up</button>
         </div>
     );
 };
