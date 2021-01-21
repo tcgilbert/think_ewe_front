@@ -1,12 +1,14 @@
 // imports
 import "./App.css";
 import { useEffect, useState } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 // components
 import LandingPage from "./components/LandingPage";
+import Profile from "./components/Profile"
+import Dashboard from "./components/Dashboard"
 
 function App() {
     const [currentUser, setCurrentUser] = useState(null);
@@ -15,16 +17,20 @@ function App() {
 
     // Private Route
     const PrivateRoute = ({ component: Component, ...rest }) => {
-        const user = localStorage.getItem("jwtToken")
+        const user = localStorage.getItem("jwtToken");
         return (
             <Route
                 {...rest}
                 render={(props) => {
-                    return user ? <Component {...rest} {...props} /> : <Redirect to="/" />
+                    return user ? (
+                        <Component {...rest} {...props} />
+                    ) : (
+                        <Redirect to="/" />
+                    );
                 }}
             />
-        )
-    }
+        );
+    };
 
     // send token to backend to check for user
     useEffect(async () => {
@@ -66,6 +72,16 @@ function App() {
                         />
                     );
                 }}
+            />
+            <PrivateRoute
+                path="/profile"
+                component={Profile}
+                user={currentUser}
+            />
+            <PrivateRoute
+                path="/dashboard"
+                component={Dashboard}
+                user={currentUser}
             />
             <button onClick={handleLogout} type="submit">
                 Logout
