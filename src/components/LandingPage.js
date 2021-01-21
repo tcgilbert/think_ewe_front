@@ -8,6 +8,10 @@ import { Redirect } from "react-router-dom";
 
 const LandingPage = (props) => {
     const SERVER = process.env.REACT_APP_SERVER;
+    const autoLoginValues = {
+        identifier: "tcgilbert94@gmail.com",
+        password: '00000000'
+    }
 
     const handleLogin = async (values) => {
         try {
@@ -58,6 +62,10 @@ const LandingPage = (props) => {
         }
     }
 
+    const autoLogin = (values) => {
+        handleLogin(values)
+    }
+
     const Redirections = () => {
         if (props.isAuth) {
             if (props.currentUser.registered) {
@@ -74,6 +82,7 @@ const LandingPage = (props) => {
                         setAuth={props.setAuth}
                     />
                     <Signup handleSignup={handleSignUp} setUser={props.setUser} setAuth={props.setAuth} />
+                    <button type="submit" onClick={() => autoLogin(autoLoginValues)}>Auto Login</button>
                 </div>
             );
         }

@@ -14,6 +14,7 @@ function App() {
     const [currentUser, setCurrentUser] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const SERVER = process.env.REACT_APP_SERVER;
+    
 
     // Private Route
     const PrivateRoute = ({ component: Component, ...rest }) => {
