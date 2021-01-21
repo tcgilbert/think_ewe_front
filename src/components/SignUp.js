@@ -1,5 +1,7 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import useForm from "../utilities/useForm";
+import { TextField } from '@material-ui/core'
 
 const Signup = (props) => {
     const [values, handleChange] = useForm({
@@ -12,33 +14,41 @@ const Signup = (props) => {
     return (
         <div>
             <h3>Signup</h3>
-            <label htmlFor="email">Email</label>
-            <input
-                type="text"
-                name="email"
-                value={values.email}
-                onChange={handleChange}
+            <TextField
+            type="email"
+            variant="outlined"
+            size="small"
+            label="Email"
+            name="email"
+            value={values.email}
+            onChange={handleChange}
             />
-            <label htmlFor="email">Name</label>
-            <input
-                type="text"
-                name="name"
-                value={values.name}
-                onChange={handleChange}
+            <TextField
+            variant="outlined"
+            size="small"
+            label="Name"
+            type="text"
+            name="name"
+            value={values.name}
+            onChange={handleChange}
             />
-            <label htmlFor="password">Password</label>
-            <input
-                type="password"
-                name="password"
-                value={values.password}
-                onChange={handleChange}
+            <TextField
+            variant="outlined"
+            size="small"
+            label="Password"
+            type="password"
+            name="password"
+            value={values.password}
+            onChange={handleChange}
             />
-            <label htmlFor="password">Confirm Password</label>
-            <input
-                type="password"
-                name="confirmPassword"
-                value={values.confirmPassword}
-                onChange={handleChange}
+            <TextField
+            variant="outlined"
+            size="small"
+            label="Confirm Password"
+            type="password"
+            name="confirmPassword"
+            value={values.confirmPassword}
+            onChange={handleChange}
             />
             <button type="submit" onClick={() => props.handleSignup(values)}>Sign Up</button>
         </div>
