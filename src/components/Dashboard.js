@@ -2,6 +2,7 @@ import React from "react";
 import useForm from "../utilities/useForm";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import { TextField, Button, FormControl } from "@material-ui/core";
 
 const Dashboard = (props) => {
     const [values, handleChange] = useForm({ username: null, bio: "" });
@@ -9,7 +10,6 @@ const Dashboard = (props) => {
 
     const handleSubmit = async () => {
         console.log("updating user");
-        console.log(props.user);
         if (!values.username) {
             console.log("Username is required");
             return;
@@ -40,32 +40,42 @@ const Dashboard = (props) => {
             return (
                 <div>
                     <h3>Welcome, {props.user.name}!</h3>
-                    <label htmlFor="email">Pick a username</label>
-                    <input
-                        type="text"
-                        name="username"
-                        value={values.username}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="bio">Bio (optional)</label>
-                    <input
-                        type="text"
-                        name="bio"
-                        value={values.bio}
-                        onChange={handleChange}
-                    />
-                    <button type="submit" onClick={handleSubmit}>
-                        Submit
-                    </button>
+                    <FormControl>
+                        <TextField
+                            label="Username"
+                            type="text"
+                            variant="outlined"
+                            size="small"
+                            type="text"
+                            name="username"
+                            value={values.username}
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            label="Bio"
+                            type="text"
+                            variant="outlined"
+                            multiline
+                            rows={4}
+                            size="small"
+                            type="text"
+                            name="bio"
+                            value={values.bio}
+                            onChange={handleChange}
+                        />
+                        <Button
+                            variant="contained"
+                            type="submit"
+                            onClick={handleSubmit}
+                        >
+                            Submit
+                        </Button>
+                    </FormControl>
                 </div>
             );
         }
     };
-    return (
-        <div>
-            {handleRedirect()}
-        </div>
-    ) 
+    return <div>{handleRedirect()}</div>;
 };
 
 export default Dashboard;

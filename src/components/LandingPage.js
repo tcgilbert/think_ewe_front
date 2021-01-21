@@ -10,8 +10,8 @@ const LandingPage = (props) => {
     const SERVER = process.env.REACT_APP_SERVER;
     const autoLoginValues = {
         identifier: "tcgilbert94@gmail.com",
-        password: '00000000'
-    }
+        password: "00000000",
+    };
 
     const handleLogin = async (values) => {
         try {
@@ -48,23 +48,23 @@ const LandingPage = (props) => {
             const newUser = await axios.post(`${SERVER}/users/signup`, {
                 email: values.email,
                 name: values.name,
-                password: values.password
+                password: values.password,
             });
             if (newUser) {
                 const loginValues = {
                     identifier: newUser.data.email,
-                    password: values.password
-                }
-                handleLogin(loginValues)
+                    password: values.password,
+                };
+                handleLogin(loginValues);
             }
         } catch (error) {
             console.log(`SIGNUP ERROR: ${error.data}`);
         }
-    }
+    };
 
     const autoLogin = (values) => {
-        handleLogin(values)
-    }
+        handleLogin(values);
+    };
 
     const Redirections = () => {
         if (props.isAuth) {
@@ -81,18 +81,23 @@ const LandingPage = (props) => {
                         setUser={props.setUser}
                         setAuth={props.setAuth}
                     />
-                    <Signup handleSignup={handleSignUp} setUser={props.setUser} setAuth={props.setAuth} />
-                    <button type="submit" onClick={() => autoLogin(autoLoginValues)}>Auto Login</button>
+                    <Signup
+                        handleSignup={handleSignUp}
+                        setUser={props.setUser}
+                        setAuth={props.setAuth}
+                    />
+                    <button
+                        type="submit"
+                        onClick={() => autoLogin(autoLoginValues)}
+                    >
+                        Auto Login
+                    </button>
                 </div>
             );
         }
     };
 
-    return (
-        <div>
-            {Redirections()}
-        </div>
-    );
+    return <div>{Redirections()}</div>;
 };
 
 export default LandingPage;

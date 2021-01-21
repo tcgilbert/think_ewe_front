@@ -1,6 +1,6 @@
 import React from "react";
 import useForm from "../utilities/useForm";
-
+import { TextField, Button } from "@material-ui/core";
 
 const Login = (props) => {
     const [values, handleChange] = useForm({ identifier: "", password: "" });
@@ -8,21 +8,31 @@ const Login = (props) => {
     return (
         <div>
             <h3>Login</h3>
-            <label htmlFor="email">Email or Username</label>
-            <input
+            <TextField
                 type="text"
+                variant="outlined"
+                size="small"
+                label="Email or Username"
                 name="identifier"
                 value={values.identifier}
                 onChange={handleChange}
             />
-            <label htmlFor="password">Password</label>
-            <input
+            <TextField
+                variant="outlined"
+                size="small"
+                label="Password"
                 type="password"
                 name="password"
                 value={values.password}
                 onChange={handleChange}
             />
-            <button type="submit" onClick={() => props.handleLogin(values)}>Login</button>
+            <Button
+                variant="contained"
+                type="submit"
+                onClick={() => props.handleLogin(values)}
+            >
+                Login
+            </Button>
         </div>
     );
 };
