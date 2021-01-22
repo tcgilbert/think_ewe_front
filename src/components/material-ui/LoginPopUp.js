@@ -19,7 +19,6 @@ export default function LoginPopUp(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     useEffect(() => {
-        console.log("triggered");
         const button = document.getElementById("login-btn")
         if (props.logLink) {
             setAnchorEl(button)

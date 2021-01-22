@@ -12,11 +12,11 @@ const Signup = (props) => {
     });
 
     return (
-        <div>
-            <p>Register for an account</p>
-            <FormControl>
+        <>
+            <FormControl fullWidth="true">
                 <Box mb={1.5}>
                     <TextField
+                        fullWidth="true"
                         type="email"
                         variant="outlined"
                         size="small"
@@ -28,6 +28,7 @@ const Signup = (props) => {
                 </Box>
                 <Box mb={1.5}>
                     <TextField
+                        fullWidth="true"
                         variant="outlined"
                         size="small"
                         label="Name"
@@ -39,6 +40,7 @@ const Signup = (props) => {
                 </Box>
                 <Box mb={1.5}>
                     <TextField
+                        fullWidth="true"
                         variant="outlined"
                         size="small"
                         label="Password"
@@ -50,6 +52,7 @@ const Signup = (props) => {
                 </Box>
                 <Box mb={1.5}>
                     <TextField
+                        fullWidth="true"
                         variant="outlined"
                         size="small"
                         label="Confirm Password"
@@ -64,10 +67,10 @@ const Signup = (props) => {
                     type="submit"
                     onClick={() => props.handleSignup(values)}
                 >
-                    Sign Up
+                    Create Account
                 </Button>
             </FormControl>
-        </div>
+        </>
     );
 };
 

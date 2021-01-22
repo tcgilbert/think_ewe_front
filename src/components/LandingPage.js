@@ -41,9 +41,9 @@ const LandingPage = (props) => {
         } else {
             return (
                 <div className="login-signup">
-                    <Box ml={10} mt={5}>
+                    <Box>
                         <div class="flex-row">
-                            <div>
+                            <Box>
                                 <img
                                     id="landing-img"
                                     src={
@@ -54,17 +54,21 @@ const LandingPage = (props) => {
                                 />
                                 <h1 id="landing-title">Think Ewe</h1>
                                 <p id="landing-subtitle">
-                                    A social network for readers
+                                A Novel approach to Social Media
                                 </p>
-                            </div>
-                            <div>
-                                <span>Already have an account?</span><button id="log-link-btn" onClick={() => {props.setLogLink(true)}}>Login</button>
+                            </Box>
+                            <Box>
+                                <Box mb={3}>
+                                    <span>Already have an account?</span><button id="log-link-btn" onClick={() => {props.setLogLink(true)}}>Login</button>
+                                    <hr/>
+                                    
+                                </Box>
                                 <Signup
                                     handleSignup={handleSignUp}
                                     setUser={props.setUser}
                                     setAuth={props.setAuth}
                                 />
-                            </div>
+                            </Box>
                         </div>
                     </Box>
                 </div>
