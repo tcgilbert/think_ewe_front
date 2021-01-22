@@ -1,7 +1,7 @@
 // imports
 import "./App.css";
 import { useEffect, useState } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, useHistory } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utilities/setAuthToken";
@@ -17,6 +17,7 @@ function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [logLink, setLogLink] = useState(false);
     const SERVER = process.env.REACT_APP_SERVER;
+    const history = useHistory();
     const autoLoginValues = {
         identifier: "tcgilbert94@gmail.com",
         password: "00000000",
@@ -67,8 +68,6 @@ function App() {
         }
     };
 
-
-
     // send token to backend to check for user
     useEffect(() => {
 
@@ -99,6 +98,7 @@ function App() {
     const handleLogout = () => {
         setCurrentUser(null);
         setIsAuthenticated(false);
+        history.push("/")
         if (localStorage.getItem("jwtToken")) {
             localStorage.removeItem("jwtToken");
         }

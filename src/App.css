@@ -4,7 +4,20 @@ html {
     background-color: whitesmoke;
 }
 
+h2, h3 {
+    padding: 0;
+    margin: 0;
+}
+
 /* Classes */
+
+.inline {
+    display: inline-block;
+}
+
+.center {
+    text-align: center;
+}
 
 .app-container {
     margin: 0 10px;
@@ -80,6 +93,26 @@ html {
     border-radius: 10px;
 }
 
+.profile-container {
+    margin: 50px;
+    border: solid 2px red;
+    display: flex;
+    flex-direction: row;
+}
+
+.user-info {
+    width: 30%;
+    border: solid 2px dodgerblue;
+    margin: 10px;
+}
+
+.dynamic-content {
+    width: 70%;
+    border: solid 2px dodgerblue;
+    margin: 10px;
+}
+
+
 /* Elements */
 
 #title {
@@ -126,4 +159,12 @@ html {
 
 #login-btn {
     color: white;
+}
+
+#profile-pic {
+    padding: 5px;
+    width: 200px;
+    height: 200px;
+    border: solid 10px #333;
+    border-radius: 40px;
 }

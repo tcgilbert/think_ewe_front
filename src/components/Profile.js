@@ -1,11 +1,14 @@
 import React from 'react'
+import UserInfo from '../components/UserInfo'
+import DynamicContent from '../components/DynamicContent'
+import NavTabs from './material-ui/NavTabs'
 
 const Profile = (props) => {
 
-
     return (
-        <div>
-            <h3>User profile</h3>
+        <div className="profile-container">
+            <UserInfo user={props.user}/>
+            <DynamicContent />
         </div>
     )
 }
