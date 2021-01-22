@@ -67,3 +67,16 @@ html {
     margin: 0;
     padding: 0;
 }
+
+#log-link-btn {
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 17px;
+}
+
+#log-link-btn:hover {
+    font-style: italic;
+    cursor: pointer;
+    text-decoration: underline;
+}

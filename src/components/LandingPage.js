@@ -1,8 +1,8 @@
 import React from "react";
-import Login from "./Login";
 import Signup from "./Signup";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import { Button } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 
 const LandingPage = (props) => {
@@ -58,6 +58,7 @@ const LandingPage = (props) => {
                                 </p>
                             </div>
                             <div>
+                                <span>Already have an account?</span><button id="log-link-btn" onClick={() => {props.setLogLink(true)}}>Login</button>
                                 <Signup
                                     handleSignup={handleSignUp}
                                     setUser={props.setUser}
@@ -66,14 +67,6 @@ const LandingPage = (props) => {
                             </div>
                         </div>
                     </Box>
-{/* 
-                    <Box>
-                        <Login
-                            handleLogin={props.handleLogin}
-                            setUser={props.setUser}
-                            setAuth={props.setAuth}
-                        />
-                    </Box> */}
                 </div>
             );
         }

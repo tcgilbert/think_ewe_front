@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Button from "@material-ui/core/Button";
 import Login from "../Login";
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,6 +16,15 @@ export default function LoginPopUp(props) {
     const [identifier, setIdentifier] = useState("");
     const [password, setPassword] = useState("");
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const modalRef = useRef(null)
+
+    useEffect(() => {
+        console.log("triggered");
+        if (props.logLink) {
+            setAnchorEl(modalRef)
+        }
+
+    }, [props.logLink])
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -24,6 +33,7 @@ export default function LoginPopUp(props) {
     const handleClose = () => {
         setIdentifier("")
         setPassword("")
+        props.setLogLink(false)
         setAnchorEl(null);
     };
 
@@ -32,6 +42,7 @@ export default function LoginPopUp(props) {
     return (
         <div>
             <Button
+                modalRef={el => modalRef = el}
                 aria-describedby={id}
                 variant="contained"
                 color="primary"

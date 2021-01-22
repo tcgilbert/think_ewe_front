@@ -1,5 +1,4 @@
 import React from "react";
-import useForm from "../utilities/useForm";
 import { TextField, Button, FormControl } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 
@@ -19,6 +18,7 @@ const Login = (props) => {
             <FormControl>
                 <Box mb={1.5}>
                     <TextField
+                        autoFocus
                         type="text"
                         variant="outlined"
                         size="small"

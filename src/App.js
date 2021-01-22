@@ -15,6 +15,7 @@ import Navigation from "./components/Navigation";
 function App() {
     const [currentUser, setCurrentUser] = useState("");
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [logLink, setLogLink] = useState(false);
     const SERVER = process.env.REACT_APP_SERVER;
     const autoLoginValues = {
         identifier: "tcgilbert94@gmail.com",
@@ -105,7 +106,12 @@ function App() {
 
     return (
         <div>
-            <Navigation handleLogin={handleLogin} handleLogout={handleLogout} />
+            <Navigation
+                logLink={logLink}
+                setLogLink={setLogLink}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+            />
             <div className="app-container">
                 <Route
                     exact
@@ -113,6 +119,8 @@ function App() {
                     render={() => {
                         return (
                             <LandingPage
+                                logLink={logLink}
+                                setLogLink={setLogLink}
                                 handleLogin={handleLogin}
                                 setUser={setCurrentUser}
                                 setAuth={setIsAuthenticated}
