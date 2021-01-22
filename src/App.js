@@ -43,7 +43,6 @@ function App() {
         try {
             console.log("logging in");
             // look for user
-            console.log(values);
             const requestedUser = await axios.post(`${SERVER}/users/login`, {
                 identifier: values.identifier,
                 password: values.password,
@@ -56,8 +55,11 @@ function App() {
             setAuthToken(token);
             // decode token
             const userInfo = jwt_decode(token);
+            // fetch user
+            const apiRes = await axios.get(`${SERVER}/users/${userInfo.id}`);
+            const user = apiRes.data.requestedUser;
             // set the current user
-            setCurrentUser(userInfo);
+            setCurrentUser(user);
             setIsAuthenticated(true);
         } catch (error) {
             console.log(error);
@@ -70,37 +72,31 @@ function App() {
         const token = localStorage.getItem("jwtToken");
         if (token) {
             checkToken(token);
-            // console.log(token);
-            // const tokenUser = await axios.post(`${SERVER}/users/check-token`, {
-            //     token: token,
-            // });
-            // const userFound = await tokenUser.data.user_found;
-            // if (userFound) {
-            //     const userInfo = await jwt_decode(token);
-            //     setCurrentUser(userInfo);
-            //     setIsAuthenticated(true);
-            // }
         }
     }, []);
 
     const handleLogout = () => {
         console.log("logging out");
+        setCurrentUser(null);
+        setIsAuthenticated(false);
         if (localStorage.getItem("jwtToken")) {
             localStorage.removeItem("jwtToken");
-            setCurrentUser(null);
-            setIsAuthenticated(false);
         }
     };
 
     const checkToken = async (token) => {
+        console.log("checking token");
         const tokenUser = await axios.post(`${SERVER}/users/check-token`, {
             token: token,
         });
         const userFound = await tokenUser.data.user_found;
         if (userFound) {
-            const userInfo = await jwt_decode(token);
-            setCurrentUser(userInfo);
+            console.log("found user");
+            setCurrentUser(userFound);
             setIsAuthenticated(true);
+            setAuthToken(token);
+        } else {
+            handleLogout();
         }
     };
 

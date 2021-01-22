@@ -71,11 +71,7 @@ const Dashboard = (props) => {
             });
             let apiRes = await axios.get(`${SERVER}/users/${props.user.id}`);
             const updatedUser = await apiRes.data.requestedUser;
-            const userCopy = JSON.parse(JSON.stringify(props.user));
-            userCopy.username = updatedUser.username;
-            userCopy.bio = updatedUser.bio;
-            userCopy.registered = updatedUser.registered;
-            props.setUser(userCopy);
+            props.setUser(updatedUser);
         } catch (error) {
             console.log(`UPDATE ERROR: ${error}`);
         }
