@@ -44,8 +44,6 @@ export default function LoginPopUp(props) {
             <Button
                 id="login-btn"
                 aria-describedby={id}
-                variant="contained"
-                color="primary"
                 onClick={handleClick}
             >
                 Log In

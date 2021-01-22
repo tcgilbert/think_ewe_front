@@ -111,6 +111,7 @@ function App() {
                 setLogLink={setLogLink}
                 handleLogin={handleLogin}
                 handleLogout={handleLogout}
+                isAuthenticated={isAuthenticated}
             />
             <div className="app-container">
                 <Route

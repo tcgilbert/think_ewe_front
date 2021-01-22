@@ -2,7 +2,6 @@ import React from "react";
 import Signup from "./Signup";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-import { Button } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 
 const LandingPage = (props) => {

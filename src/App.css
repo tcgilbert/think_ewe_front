@@ -34,12 +34,42 @@ html {
     justify-content: space-between;
 }
 
+.dashboard-container {
+    /* text-align: center; */
+    background-color: white;
+    border: solid 2px gray;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px 5px rgba(0,0,0,0.15);
+    width: 50%;
+    height: 40%;
+    margin: 100px auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .flex-row {
     padding: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
+
+.avatar-img {
+    width: 50px;
+    height: 50px;
+    padding: 7px;
+}
+
+.avatar-container {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 /* Elements */
 
 #title {
@@ -71,6 +101,7 @@ html {
 }
 
 #log-link-btn {
+    color: tomato;
     outline: none;
     border: none;
     background: none;
@@ -81,4 +112,8 @@ html {
     font-style: italic;
     cursor: pointer;
     text-decoration: underline;
+}
+
+#login-btn {
+    color: white;
 }
