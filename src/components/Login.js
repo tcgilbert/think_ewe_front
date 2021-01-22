@@ -4,39 +4,45 @@ import { TextField, Button, FormControl } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 
 const Login = (props) => {
-    const [values, handleChange] = useForm({ identifier: "", password: "" });
+
+    const handleSubmit = () => {
+        const values = {
+            identifier: props.identifier,
+            password: props.password
+        }
+        props.handleClose()
+        props.handleLogin(values)
+    }
 
     return (
         <div>
-            <p>Already have an account?</p>
             <FormControl>
-                <Box mb={1}>
+                <Box mb={1.5}>
                     <TextField
-                        spacing={5}
                         type="text"
                         variant="outlined"
                         size="small"
                         label="Username/Email"
                         name="identifier"
-                        value={values.identifier}
-                        onChange={handleChange}
+                        value={props.identifier}
+                        onChange={(e) => props.setIdentifier(e.target.value)}
                     />
                 </Box>
-                <Box mb={1}>
+                <Box mb={1.5}>
                     <TextField
                         variant="outlined"
                         size="small"
                         label="Password"
                         type="password"
                         name="password"
-                        value={values.password}
-                        onChange={handleChange}
+                        value={props.password}
+                        onChange={(e) => props.setPassword(e.target.value)}
                     />
                 </Box>
                 <Button
                     variant="contained"
                     type="submit"
-                    onClick={() => props.handleLogin(values)}
+                    onClick={handleSubmit}
                 >
                     Login
                 </Button>

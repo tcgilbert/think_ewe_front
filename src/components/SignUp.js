@@ -15,7 +15,7 @@ const Signup = (props) => {
         <div>
             <p>Register for an account</p>
             <FormControl>
-                <Box mb={1}>
+                <Box mb={1.5}>
                     <TextField
                         type="email"
                         variant="outlined"
@@ -26,7 +26,7 @@ const Signup = (props) => {
                         onChange={handleChange}
                     />
                 </Box>
-                <Box mb={1}>
+                <Box mb={1.5}>
                     <TextField
                         variant="outlined"
                         size="small"
@@ -37,7 +37,7 @@ const Signup = (props) => {
                         onChange={handleChange}
                     />
                 </Box>
-                <Box mb={1}>
+                <Box mb={1.5}>
                     <TextField
                         variant="outlined"
                         size="small"
@@ -48,7 +48,7 @@ const Signup = (props) => {
                         onChange={handleChange}
                     />
                 </Box>
-                <Box mb={1}>
+                <Box mb={1.5}>
                     <TextField
                         variant="outlined"
                         size="small"

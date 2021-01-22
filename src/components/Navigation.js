@@ -1,11 +1,15 @@
 import React from 'react'
 import { Button } from "@material-ui/core";
+import LoginPopUp from './material-ui/LoginPopUp'
 
 const Navigation = (props) => {
     return (
         <div className="nav-bar">
             <h1 id="title">Think Ewe</h1>
-            <Button onClick={props.handleLogout} id="logout">Log Out</Button>
+            <div className="flex-row">
+                <LoginPopUp handleLogin={props.handleLogin}/>
+                <Button onClick={props.handleLogout} id="logout">Log Out</Button>
+            </div>
         </div>
     )
 }

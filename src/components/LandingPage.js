@@ -3,7 +3,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-
+import Box from "@material-ui/core/Box";
 
 const LandingPage = (props) => {
     const SERVER = process.env.REACT_APP_SERVER;
@@ -41,21 +41,39 @@ const LandingPage = (props) => {
         } else {
             return (
                 <div className="login-signup">
-                    <div>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto soluta assumenda blanditiis, fugiat rerum sequi? Fugiat fuga laudantium aspernatur. Ab nulla expedita dicta libero omnis animi? Quia porro sunt neque?
-                    </div>
-                    <div className="landing-forms">
-                        <Signup
-                            handleSignup={handleSignUp}
-                            setUser={props.setUser}
-                            setAuth={props.setAuth}
-                        />
+                    <Box ml={10} mt={5}>
+                        <div class="flex-row">
+                            <div>
+                                <img
+                                    id="landing-img"
+                                    src={
+                                        process.env.PUBLIC_URL +
+                                        "/images/logo-gray.png"
+                                    }
+                                    alt=""
+                                />
+                                <h1 id="landing-title">Think Ewe</h1>
+                                <p id="landing-subtitle">
+                                    A social network for readers
+                                </p>
+                            </div>
+                            <div>
+                                <Signup
+                                    handleSignup={handleSignUp}
+                                    setUser={props.setUser}
+                                    setAuth={props.setAuth}
+                                />
+                            </div>
+                        </div>
+                    </Box>
+{/* 
+                    <Box>
                         <Login
                             handleLogin={props.handleLogin}
                             setUser={props.setUser}
                             setAuth={props.setAuth}
                         />
-                    </div>
+                    </Box> */}
                 </div>
             );
         }

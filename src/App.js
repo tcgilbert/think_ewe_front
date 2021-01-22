@@ -105,7 +105,7 @@ function App() {
 
     return (
         <div>
-            <Navigation handleLogout={handleLogout} />
+            <Navigation handleLogin={handleLogin} handleLogout={handleLogout} />
             <div className="app-container">
                 <Route
                     exact

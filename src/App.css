@@ -25,20 +25,19 @@ html {
     border: solid 2px gray;
     border-radius: 10px;
     box-shadow: 0px 5px 15px 5px rgba(0,0,0,0.15);
-    width: 50%;
-    height: 500px;
+    width: 40%;
+    height: 550px;
     margin: 100px auto;
     padding: 10px;
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.flex-row {
+    display: flex;
     flex-direction: row;
 }
-
-.landing-forms {
-    width: 50em;
-    padding: 0 10px;
-    margin: 0 0 0 50px;
-}
-
 /* Elements */
 
 #title {
@@ -49,4 +48,22 @@ html {
 #logout{
     color: whitesmoke;
     font-size: 15px;
+}
+
+#landing-img {
+    width: 250px;
+    height: 250px;
+    margin: 0 35px 0 0;
+}
+
+#landing-title {
+    text-align: center;
+    margin: 0 0 0 0;
+    padding: 0;
+}
+
+#landing-subtitle {
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
