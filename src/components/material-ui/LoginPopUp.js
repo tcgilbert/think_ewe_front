@@ -11,17 +11,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 export default function LoginPopUp(props) {
     const classes = useStyles();
     const [identifier, setIdentifier] = useState("");
     const [password, setPassword] = useState("");
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const modalRef = useRef(null)
 
     useEffect(() => {
         console.log("triggered");
+        const button = document.getElementById("login-btn")
         if (props.logLink) {
-            setAnchorEl(modalRef)
+            setAnchorEl(button)
         }
 
     }, [props.logLink])
@@ -42,7 +43,7 @@ export default function LoginPopUp(props) {
     return (
         <div>
             <Button
-                modalRef={el => modalRef = el}
+                id="login-btn"
                 aria-describedby={id}
                 variant="contained"
                 color="primary"
