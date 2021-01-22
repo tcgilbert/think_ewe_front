@@ -61,6 +61,17 @@ const Dashboard = (props) => {
             zebra,
         ];
 
+        const selectAvatar = (ele) => {
+            if (ele.id === "polar-bear") {
+                setAvatar("Polar Bear");
+            } else if (ele.id === "sheep2") {
+                setAvatar("Sheep");
+            } else {
+                setAvatar(capitalizeFirstLetter(ele.id))
+            }
+            setAvatarPath(ele.alt);
+        };
+
         // manage selections
         avatars.forEach((ele) => {
             ele.addEventListener("click", () => {
@@ -78,17 +89,7 @@ const Dashboard = (props) => {
     }, []);
 
 
-    const selectAvatar = (ele) => {
-        if (ele.id === "polar-bear") {
-            setAvatar("Polar Bear");
-        } else if (ele.id === "sheep2") {
-            setAvatar("Sheep");
-        } else {
-            setAvatar(capitalizeFirstLetter(ele.id))
-        }
-        setAvatarPath(ele.alt);
 
-    };
 
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -179,7 +180,6 @@ const Dashboard = (props) => {
                                 type="text"
                                 variant="outlined"
                                 size="small"
-                                type="text"
                                 name="username"
                                 value={values.username}
                                 onChange={handleChange}
@@ -194,7 +194,6 @@ const Dashboard = (props) => {
                                 multiline
                                 rows={4}
                                 size="small"
-                                type="text"
                                 name="bio"
                                 value={values.bio}
                                 onChange={handleChange}

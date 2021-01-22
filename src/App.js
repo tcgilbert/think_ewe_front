@@ -67,16 +67,36 @@ function App() {
         }
     };
 
+
+
     // send token to backend to check for user
     useEffect(() => {
+
+        const checkToken = async (token) => {
+            try {
+                const tokenUser = await axios.post(`${SERVER}/users/check-token`, {
+                    token: token,
+                });
+                const userFound = await tokenUser.data.user_found;;
+                if (userFound) {
+                    setCurrentUser(userFound);
+                    setIsAuthenticated(true);
+                    setAuthToken(token);
+                } else {
+                    handleLogout();
+                }
+            } catch (error) {
+                handleLogout();
+            }
+        };
+
         const token = localStorage.getItem("jwtToken");
         if (token) {
             checkToken(token);
         }
-    }, []);
+    }, [SERVER]);
 
     const handleLogout = () => {
-        console.log("logging out");
         setCurrentUser(null);
         setIsAuthenticated(false);
         if (localStorage.getItem("jwtToken")) {
@@ -84,29 +104,7 @@ function App() {
         }
     };
 
-    const checkToken = async (token) => {
-        console.log("checking token");
-        try {
-            const tokenUser = await axios.post(`${SERVER}/users/check-token`, {
-                token: token,
-            });
-            const userFound = await tokenUser.data.user_found;
-            console.log(userFound);
-            if (userFound) {
-                console.log(userFound);
-                console.log("found user");
-                setCurrentUser(userFound);
-                setIsAuthenticated(true);
-                setAuthToken(token);
-            } else {
-                console.log("logging out");
-                handleLogout();
-            }
-        } catch (error) {
-            console.log("logging out");
-            handleLogout();
-        }
-    };
+
 
     return (
         <div>
