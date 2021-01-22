@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useForm from "../utilities/useForm";
 import axios from "axios";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { TextField, Button, FormControl } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 
@@ -88,14 +88,13 @@ const Dashboard = (props) => {
                 });
             });
         });
-    }, []);
+    }, [history, props.user.registered]);
 
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
     const handleSubmit = async () => {
-        console.log("updating user");
         if (!values.username) {
             console.log("Username is required");
             return;
