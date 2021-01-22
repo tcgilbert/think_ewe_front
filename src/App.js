@@ -86,16 +86,24 @@ function App() {
 
     const checkToken = async (token) => {
         console.log("checking token");
-        const tokenUser = await axios.post(`${SERVER}/users/check-token`, {
-            token: token,
-        });
-        const userFound = await tokenUser.data.user_found;
-        if (userFound) {
-            console.log("found user");
-            setCurrentUser(userFound);
-            setIsAuthenticated(true);
-            setAuthToken(token);
-        } else {
+        try {
+            const tokenUser = await axios.post(`${SERVER}/users/check-token`, {
+                token: token,
+            });
+            const userFound = await tokenUser.data.user_found;
+            console.log(userFound);
+            if (userFound) {
+                console.log(userFound);
+                console.log("found user");
+                setCurrentUser(userFound);
+                setIsAuthenticated(true);
+                setAuthToken(token);
+            } else {
+                console.log("logging out");
+                handleLogout();
+            }
+        } catch (error) {
+            console.log("logging out");
             handleLogout();
         }
     };
