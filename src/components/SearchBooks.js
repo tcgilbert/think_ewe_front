@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SearchBar from "../utilities/SearchBar";
 import axios from 'axios'
 
@@ -8,12 +8,21 @@ const SearchBooks = () => {
     const [searchResults, setSearchResults] = useState([])
     const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY
 
+
+    useEffect(() => {
+        if (search === "") {
+            setSearchResults([])
+        }
+        handleSearch()
+    }, [search])
+
+
     const handleSearch = async () => {
         console.log("searching");
         let books = []
         try {
             let axiosRes = await axios.get(
-                `https://www.googleapis.com/books/v1/volumes?q=${search}&maxResults=10&key=${API_KEY}`
+                `https://www.googleapis.com/books/v1/volumes?q=${search.toLowerCase()}&maxResults=10&key=${API_KEY}`
               );
             let resArray = await axiosRes.data.items;
             if (resArray !== "undefined") {
