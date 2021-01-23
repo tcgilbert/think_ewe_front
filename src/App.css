@@ -135,8 +135,9 @@ h2, h3, p {
 }
 
 .new-post-form {
-    width: 40em;
-    height: 35em;
+    padding: 0;
+    width: auto;
+    height: auto;
 }
 
 .upper-create-form {
@@ -154,7 +155,20 @@ h2, h3, p {
     cursor: pointer;
 }
 
+.flex-column {
+    margin: 0 2px 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
 /* Elements */
+#new-post-divider {
+    margin: 5px 0 20px 10px;
+    width: 20em;
+}
+
 #title-published {
     margin-left: 5px;
     display: flex;
@@ -236,7 +250,7 @@ h2, h3, p {
 }
 
 #create-post-img {
-    width: 12em;
+    width: 10em;
     height: "auto";
 }
 

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { TextField, Button } from "@material-ui/core";
+import Divider from '@material-ui/core/Divider';
+import Box from "@material-ui/core/Box";
 
 const NewPostForm = (props) => {
     const { authors, imgUrl, publishedDate, publisher, title } = props.book;
     const [ratingDisplayed, setRatingDisplayed] = useState("");
-    const [rating, setRating] = useState(null)
+    const [rating, setRating] = useState(null);
 
     useEffect(() => {
         // select the stars from DOM
@@ -103,98 +106,21 @@ const NewPostForm = (props) => {
 
         // handle clicks on stars
         starOne.addEventListener("click", () => {
-            console.log('clicked star one')
+            console.log("clicked star one");
             if (notSelected) {
                 // setNotSelected(false)
-                notSelected = false
-                setRating(1)
-                setRatingDisplayed("Good!")
+                notSelected = false;
+                setRating(1);
+                setRatingDisplayed("Good!");
                 starOne.setAttribute(
                     "src",
                     `${process.env.PUBLIC_URL}/images/star.svg`
                 );
-            }
-            else {
+            } else {
                 // setNotSelected(true)
-                notSelected = true
-                setRating(null)
-                setRatingDisplayed("")
-                starOne.setAttribute(
-                    "src",
-                    `${process.env.PUBLIC_URL}/images/star-empty.svg`
-                );
-                starTwo.setAttribute(
-                    "src",
-                    `${process.env.PUBLIC_URL}/images/star-empty.svg`
-                );
-                starThree.setAttribute(
-                    "src",
-                    `${process.env.PUBLIC_URL}/images/star-empty.svg`
-                );
-            }
-        });
-      
-        starTwo.addEventListener("click", () => {
-            console.log('clicked star one')
-            if (notSelected) {
-                // setNotSelected(false)
-                notSelected = false
-                setRating(2)
-                setRatingDisplayed("Great!")
-                starOne.setAttribute(
-                    "src",
-                    `${process.env.PUBLIC_URL}/images/star.svg`
-                );
-                starTwo.setAttribute(
-                    "src",
-                    `${process.env.PUBLIC_URL}/images/star.svg`
-                );
-            }
-            else {
-                // setNotSelected(true)
-                notSelected = true
-                setRating(null)
-                setRatingDisplayed("")
-                starOne.setAttribute(
-                    "src",
-                    `${process.env.PUBLIC_URL}/images/star-empty.svg`
-                );
-                starTwo.setAttribute(
-                    "src",
-                    `${process.env.PUBLIC_URL}/images/star-empty.svg`
-                );
-                starThree.setAttribute(
-                    "src",
-                    `${process.env.PUBLIC_URL}/images/star-empty.svg`
-                );
-            }
-        });
-      
-        starThree.addEventListener("click", () => {
-            console.log('clicked star one')
-            if (notSelected) {
-                // setNotSelected(false)
-                notSelected = false
-                setRating(3)
-                setRatingDisplayed("Exceptional!")
-                starOne.setAttribute(
-                    "src",
-                    `${process.env.PUBLIC_URL}/images/star.svg`
-                );
-                starTwo.setAttribute(
-                    "src",
-                    `${process.env.PUBLIC_URL}/images/star.svg`
-                );
-                starThree.setAttribute(
-                    "src",
-                    `${process.env.PUBLIC_URL}/images/star.svg`
-                );
-            }
-            else {
-                // setNotSelected(true)
-                notSelected = true
-                setRating(null)
-                setRatingDisplayed("")
+                notSelected = true;
+                setRating(null);
+                setRatingDisplayed("");
                 starOne.setAttribute(
                     "src",
                     `${process.env.PUBLIC_URL}/images/star-empty.svg`
@@ -210,6 +136,79 @@ const NewPostForm = (props) => {
             }
         });
 
+        starTwo.addEventListener("click", () => {
+            console.log("clicked star one");
+            if (notSelected) {
+                // setNotSelected(false)
+                notSelected = false;
+                setRating(2);
+                setRatingDisplayed("Great!");
+                starOne.setAttribute(
+                    "src",
+                    `${process.env.PUBLIC_URL}/images/star.svg`
+                );
+                starTwo.setAttribute(
+                    "src",
+                    `${process.env.PUBLIC_URL}/images/star.svg`
+                );
+            } else {
+                // setNotSelected(true)
+                notSelected = true;
+                setRating(null);
+                setRatingDisplayed("");
+                starOne.setAttribute(
+                    "src",
+                    `${process.env.PUBLIC_URL}/images/star-empty.svg`
+                );
+                starTwo.setAttribute(
+                    "src",
+                    `${process.env.PUBLIC_URL}/images/star-empty.svg`
+                );
+                starThree.setAttribute(
+                    "src",
+                    `${process.env.PUBLIC_URL}/images/star-empty.svg`
+                );
+            }
+        });
+
+        starThree.addEventListener("click", () => {
+            console.log("clicked star one");
+            if (notSelected) {
+                // setNotSelected(false)
+                notSelected = false;
+                setRating(3);
+                setRatingDisplayed("Exceptional!");
+                starOne.setAttribute(
+                    "src",
+                    `${process.env.PUBLIC_URL}/images/star.svg`
+                );
+                starTwo.setAttribute(
+                    "src",
+                    `${process.env.PUBLIC_URL}/images/star.svg`
+                );
+                starThree.setAttribute(
+                    "src",
+                    `${process.env.PUBLIC_URL}/images/star.svg`
+                );
+            } else {
+                // setNotSelected(true)
+                notSelected = true;
+                setRating(null);
+                setRatingDisplayed("");
+                starOne.setAttribute(
+                    "src",
+                    `${process.env.PUBLIC_URL}/images/star-empty.svg`
+                );
+                starTwo.setAttribute(
+                    "src",
+                    `${process.env.PUBLIC_URL}/images/star-empty.svg`
+                );
+                starThree.setAttribute(
+                    "src",
+                    `${process.env.PUBLIC_URL}/images/star-empty.svg`
+                );
+            }
+        });
     }, []);
 
     return (
@@ -218,39 +217,63 @@ const NewPostForm = (props) => {
                 <div>
                     <img id="create-post-img" src={imgUrl} alt="Book Cover" />
                 </div>
-                <div>
+                <div className="flex-column">
                     <div>
                         <h2 id="create-post-title">{title}</h2>
                         <p id="create-post-author">By: {authors[0]}</p>
-                        <p id="create-post-publisher">
-                            Published By: <strong>{publisher}</strong> -{" "}
-                            <em>{publishedDate}</em>
-                        </p>
+
+                    </div>
+                    <div>
+                        <Divider id="new-post-divider" orientation="horizontal" />
+                        <h2>Your Rating: {ratingDisplayed}</h2>
+                        <div className="stars">
+                            <img
+                                id="star-one"
+                                className="star-img-form"
+                                src={
+                                    process.env.PUBLIC_URL +
+                                    "images/star-empty.svg"
+                                }
+                                alt="Star"
+                            />
+                            <img
+                                id="star-two"
+                                className="star-img-form"
+                                src={
+                                    process.env.PUBLIC_URL +
+                                    "images/star-empty.svg"
+                                }
+                                alt="Star"
+                            />
+                            <img
+                                id="star-three"
+                                className="star-img-form"
+                                src={
+                                    process.env.PUBLIC_URL +
+                                    "images/star-empty.svg"
+                                }
+                                alt="Star"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className="rating-container">
-                <h2>Your Rating: {ratingDisplayed}</h2>
-                <div className="stars">
-                    <img
-                        id="star-one"
-                        className="star-img-form"
-                        src={process.env.PUBLIC_URL + "images/star-empty.svg"}
-                        alt="Star"
+            <div className="form-container">
+                <Box my={1}>
+                    <TextField
+                        fullWidth="true"
+                        label="Your Thoughts..."
+                        type="text"
+                        variant="outlined"
+                        multiline
+                        rows={5}
+                        size="small"
+                        name="bio"
                     />
-                    <img
-                        id="star-two"
-                        className="star-img-form"
-                        src={process.env.PUBLIC_URL + "images/star-empty.svg"}
-                        alt="Star"
-                    />
-                    <img
-                        id="star-three"
-                        className="star-img-form"
-                        src={process.env.PUBLIC_URL + "images/star-empty.svg"}
-                        alt="Star"
-                    />
-                </div>
+                </Box>
+                <Button fullWidth="true" variant="contained" type="submit">
+                    Submit Post
+                </Button>
             </div>
         </div>
     );
