@@ -150,6 +150,10 @@ h2, h3, p {
     height: 50px;
 }
 
+.stars:hover {
+    cursor: pointer;
+}
+
 /* Elements */
 #title-published {
     margin-left: 5px;
