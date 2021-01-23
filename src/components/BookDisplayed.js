@@ -1,5 +1,5 @@
 import React from "react";
-import Box from "@material-ui/core/Box";
+import { Button } from "@material-ui/core";
 
 const BookDisplayed = (props) => {
     return (
@@ -20,6 +20,7 @@ const BookDisplayed = (props) => {
                     </div>
                 </div>
             </div>
+            <Button onClick={() => props.handleCreatePost(props.book)} variant="contained">Create <br/>Post</Button>
         </div>
     );
 };
