@@ -15,8 +15,8 @@ const DynamicContent = () => {
     const handleCreatePost = (book) => {
         console.log("book selected");
         console.log(book);
-        // setOpenModal(true)
-        // setCreatePostBook(book)
+        setOpenModal(true)
+        setCreatePostBook(book)
     }
 
     const handleContent = () => {
@@ -33,7 +33,7 @@ const DynamicContent = () => {
         <div className="dynamic-content">
             <NavTabs setShownContent={setShownContent}/>
             {handleContent()}
-            <BookPostModal setOpenModal={setOpenModal} openModal={openModal}/>
+            <BookPostModal book={createPostBook} setOpenModal={setOpenModal} openModal={openModal}/>
         </div>
     )
 }

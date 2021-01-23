@@ -134,6 +134,10 @@ h2, h3 {
     flex-direction: row;
 }
 
+.new-post-form {
+    width: 35em;
+    height: 35em;
+}
 
 /* Elements */
 #title-published {
@@ -210,4 +214,13 @@ h2, h3 {
 #book-publisher {
     margin: 0 0 5px;
     font-size: 15px;
+}
+
+#create-post-title {
+    font-size: 40px;
+}
+
+#create-post-img {
+    width: 12em;
+    height: "auto";
 }
