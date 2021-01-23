@@ -4,7 +4,7 @@ html {
     background-color: whitesmoke;
 }
 
-h2, h3 {
+h2, h3, p {
     padding: 0;
     margin: 0;
 }
@@ -135,8 +135,19 @@ h2, h3 {
 }
 
 .new-post-form {
-    width: 35em;
+    width: 40em;
     height: 35em;
+}
+
+.upper-create-form {
+    display: flex;
+    flex-direction: row;
+}
+
+.star-img-form {
+    margin: 5px 10px 5px 0;
+    width: 50px;
+    height: 50px;
 }
 
 /* Elements */
@@ -223,4 +234,12 @@ h2, h3 {
 #create-post-img {
     width: 12em;
     height: "auto";
+}
+
+#create-post-author {
+    font-size: 20px;
+}
+
+#create-post-publisher {
+
 }
