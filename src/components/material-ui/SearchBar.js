@@ -37,6 +37,7 @@ export default function SearchBar(props) {
         <SearchIcon />
       </IconButton>
       <InputBase
+        autoFocus
         className={classes.input}
         placeholder="Search Books..."
         value={props.search}

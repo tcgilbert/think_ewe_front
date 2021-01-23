@@ -1,7 +1,7 @@
 import React from 'react'
 import UserInfo from '../components/UserInfo'
 import DynamicContent from '../components/DynamicContent'
-import NavTabs from './material-ui/NavTabs'
+
 
 const Profile = (props) => {
 

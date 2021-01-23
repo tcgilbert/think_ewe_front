@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function CenteredTabs() {
+export default function CenteredTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -32,9 +32,9 @@ export default function CenteredTabs() {
         indicatorColor="primary"
         variant="fullWidth"
       >
-        <Tab className={classes.tabBtn} label="My Feed"/>
-        <Tab className={classes.tabBtn} label="My Posts"/>
-        <Tab className={classes.tabBtn} label="Search Books"/>
+        <Tab onClick={() => props.setShownContent("myFeed")} className={classes.tabBtn} label="My Feed"/>
+        <Tab onClick={() => props.setShownContent("myPosts")} className={classes.tabBtn} label="My Posts"/>
+        <Tab onClick={() => props.setShownContent("searchBooks")} className={classes.tabBtn} label="Search Books"/>
       </Tabs>
     </Paper>
   );
