@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import SearchBar from "../utilities/SearchBar";
+import SearchBar from "./material-ui/SearchBar";
+import BookDisplayed from './BookDisplayed'
 import axios from 'axios'
 
 const SearchBooks = () => {
@@ -53,15 +54,15 @@ const SearchBooks = () => {
     }
 
     const resultsDisplayed = searchResults.map((book, idx) => {
-        return <li key={idx}>{book.title}</li>
+        return <BookDisplayed key={idx} book={book}/>
     })
 
     return (
         <div>
             <SearchBar handleSearch={handleSearch} search={search} setSearch={setSearch}/>
-            <ul>
+            
                 {resultsDisplayed}
-            </ul>
+            
         </div>
     );
 };

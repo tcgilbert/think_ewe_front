@@ -112,8 +112,33 @@ h2, h3 {
     margin: 10px;
 }
 
+.book-container {
+    width: auto;
+    background: white;
+    margin: 5px;
+    padding: 5px;
+    border: solid 1px gray;
+    border-radius: 5px;
+}
+
+.cover-img {
+    width: "auto";
+    height: 160px;
+}
+
+.cover-info-container {
+    display: flex;
+    flex-direction: row;
+}
+
 
 /* Elements */
+#title-published {
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 #title {
     margin: 0;
@@ -167,4 +192,19 @@ h2, h3 {
     height: 200px;
     border: solid 10px #333;
     border-radius: 40px;
+}
+
+#by-author {
+    font-size: large;
+    margin: 0;
+}
+
+#book-title {
+    font-size: 20px;
+    margin: 5px 0 0;
+}
+
+#book-publisher {
+    margin: 0;
+    font-size: 15px;
 }
