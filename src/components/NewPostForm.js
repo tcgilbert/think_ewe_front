@@ -4,7 +4,7 @@ import Divider from '@material-ui/core/Divider';
 import Box from "@material-ui/core/Box";
 
 const NewPostForm = (props) => {
-    const { authors, imgUrl, publishedDate, publisher, title } = props.book;
+    const { authors, imgUrl, title } = props.book;
     const [ratingDisplayed, setRatingDisplayed] = useState("");
     const [rating, setRating] = useState(null);
 

@@ -50,7 +50,7 @@ const SearchBooks = (props) => {
     };
 
     const resultsDisplayed = searchResults.map((book, idx) => {
-        return <BookDisplayed handleCreatePost={props.handleCreatePost} key={idx} book={book} />;
+        return <BookDisplayed handleModal={props.handleModal} key={idx} book={book} />;
     });
 
 

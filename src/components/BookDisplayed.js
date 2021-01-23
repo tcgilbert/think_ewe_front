@@ -20,7 +20,7 @@ const BookDisplayed = (props) => {
                     </div>
                 </div>
             </div>
-            <Button onClick={() => props.handleCreatePost(props.book)} variant="contained">Create <br/>Post</Button>
+            <Button onClick={() => props.handleModal(props.book)} variant="contained">Create <br/>Post</Button>
         </div>
     );
 };

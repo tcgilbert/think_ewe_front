@@ -12,7 +12,7 @@ const DynamicContent = () => {
     const [openModal, setOpenModal] = useState(false)
     const [createPostBook, setCreatePostBook] = useState(null)
     
-    const handleCreatePost = (book) => {
+    const handleModal = (book) => {
         console.log("book selected");
         console.log(book);
         setOpenModal(true)
@@ -23,7 +23,7 @@ const DynamicContent = () => {
         if (shownContent === "myPosts") {
             return <MyPosts />
         } else if (shownContent === "searchBooks") {
-            return <SearchBooks handleCreatePost={handleCreatePost}/>
+            return <SearchBooks handleModal={handleModal}/>
         } else {
             return <MyFeed />
         }
