@@ -32,8 +32,8 @@ export default function SearchBar(props) {
   const classes = useStyles();
 
   return (
-    <Paper component="form" className={classes.root}>
-      <IconButton className={classes.iconButton} aria-label="menu">
+    <Paper className={classes.root}>
+      <IconButton onClick={props.handleSearch} className={classes.iconButton}>
         <SearchIcon />
       </IconButton>
       <InputBase
@@ -44,7 +44,7 @@ export default function SearchBar(props) {
         inputProps={{ 'aria-label': 'search google maps' }}
       />
       <Divider className={classes.divider} orientation="vertical" />
-      <IconButton color="primary" className={classes.iconButton} aria-label="directions">
+      <IconButton onClick={() => props.setSearch("")} color="primary" className={classes.iconButton} aria-label="directions">
         <ClearIcon />
       </IconButton>
     </Paper>
