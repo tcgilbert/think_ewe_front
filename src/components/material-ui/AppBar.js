@@ -58,11 +58,9 @@ const useStyles = makeStyles((theme) => ({
 export default function PrimarySearchAppBar(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [searchAnchorEl, setSearchAnchorEl] = React.useState(null);
     const history = useHistory();
 
     const isMenuOpen = Boolean(anchorEl);
-    const isSearchMenuOpen = Boolean(searchAnchorEl)
 
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -71,16 +69,7 @@ export default function PrimarySearchAppBar(props) {
     const handleProfileMenuClose = () => {
         setAnchorEl(null);
     };
-    
-    const handleSearchMenuOpen = (event) => {
-        console.log("hey");
-        setSearchAnchorEl(event.currentTarget);
-    };
 
-    const handleSearchMenuClose = () => {
-        console.log("closing");
-        setSearchAnchorEl(null);
-    };
 
     const handleProfile = () => {
         history.push("/profile");
@@ -103,23 +92,6 @@ export default function PrimarySearchAppBar(props) {
         </Menu>
     );
 
-    const searchBarId = "user-search-bar"
-    const searchPayload = props.searchResults.map((user, idx) => {
-        return <MenuItem onClick={handleSearchMenuClose} key={idx}>{user.username}</MenuItem>
-    })
-    const renderSearchResults = (
-        <Menu
-            anchorEl={searchAnchorEl}
-            anchorOrigin={{ vertical: "top", horizontal: "right" }}
-            id={searchBarId}
-            keepMounted
-            transformOrigin={{ vertical: "top", horizontal: "right" }}
-            open={isSearchMenuOpen}
-            onClose={handleSearchMenuClose}
-        >
-            {searchPayload}
-        </Menu>
-    );
 
     return (
         <div className={classes.grow}>
@@ -136,7 +108,6 @@ export default function PrimarySearchAppBar(props) {
                             placeholder="Search Users…"
                             value={props.search}
                             onChange={(e) => props.setSearch(e.target.value)}
-                            onClick={handleSearchMenuOpen}
                             classes={{
                                 root: classes.inputRoot,
                                 input: classes.inputInput,
@@ -168,7 +139,6 @@ export default function PrimarySearchAppBar(props) {
                 </Toolbar>
             </AppBar>
             {renderMenu}
-            {renderSearchResults}
         </div>
     );
 }

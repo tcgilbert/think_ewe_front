@@ -9,13 +9,14 @@ const Navigation = (props) => {
     const [searchResults, setSearchResults] = useState([])
     const SERVER = process.env.REACT_APP_SERVER
 
-    // useEffect(() => {
-
-    // }, [search])
+    useEffect(() => {
+        if (search !== "") {
+            handleSearch()
+        }
+    }, [search])
 
 
     const handleSearch = async () => {
-        let users = []
         try {
             let apiRes = await axios.get(`${SERVER}/users/find/${search}`)
             console.log(apiRes);
