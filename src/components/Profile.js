@@ -8,7 +8,7 @@ const Profile = (props) => {
     return (
         <div className="profile-container">
             <UserInfo user={props.user}/>
-            <DynamicContent />
+            <DynamicContent user={props.user}/>
         </div>
     )
 }

@@ -11,6 +11,7 @@ const SearchBooks = (props) => {
     const [openModal, setOpenModal] = useState(false)
     const [createPostBook, setCreatePostBook] = useState(null)
     const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+    const SERVER = process.env.REACT_APP_SERVER;
 
     const handleModal = (book) => {
         console.log(book);
@@ -21,8 +22,10 @@ const SearchBooks = (props) => {
     const handleBookPostSubmit = async (book_post) => {
         setOpenModal(false)
         console.log("submitting post");
+        book_post.user_id = props.user.id
         console.log(book_post);
-        
+        const createPost = await axios.post(`${SERVER}/book-post/create`, book_post)
+        console.log(createPost);
     }
 
     useEffect(() => {

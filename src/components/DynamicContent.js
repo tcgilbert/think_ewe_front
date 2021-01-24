@@ -6,7 +6,7 @@ import MyFeed from './MyFeed'
 // import BookPostModal from './material-ui/BookPostModal'
 
 
-const DynamicContent = () => {
+const DynamicContent = (props) => {
 
     const [shownContent, setShownContent] = useState("myFeed")
     // const [openModal, setOpenModal] = useState(false)
@@ -31,7 +31,7 @@ const DynamicContent = () => {
         if (shownContent === "myPosts") {
             return <MyPosts />
         } else if (shownContent === "searchBooks") {
-            return <SearchBooks/>
+            return <SearchBooks user={props.user}/>
         } else {
             return <MyFeed />
         }
