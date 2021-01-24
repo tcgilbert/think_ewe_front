@@ -15,12 +15,11 @@ const MyPosts = (props) => {
     }
 
     const handleBookPostUpdate = async (post) => {
-        console.log("updating book");
-        console.log(post);
         try {
             await axios.put(`${SERVER}/book-post/update`, {
                 post
             })
+            props.fetchBookPosts()
         } catch (error) {
             console.log(`UPDATE POST ERROR: ${error}`);
         }

@@ -33,7 +33,7 @@ const DynamicContent = (props) => {
     // returns selected component
     const handleContent = () => {
         if (shownContent === "myPosts") {
-            return <MyPosts myBookPosts={myBookPosts} user={props.user}/>
+            return <MyPosts fetchBookPosts={fetchBookPosts} myBookPosts={myBookPosts} user={props.user}/>
         } else if (shownContent === "searchBooks") {
             return <SearchBooks setShownContent={setShownContent} user={props.user}/>
         } else {
