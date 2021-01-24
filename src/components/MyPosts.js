@@ -1,6 +1,7 @@
 import UserBookPost from './UserBookPost'
 import PostEditModal from './material-ui/PostEditModal'
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 
 const MyPosts = (props) => {
 
@@ -8,18 +9,21 @@ const MyPosts = (props) => {
     const [openModal, setOpenModal] = useState(false)
     const SERVER = process.env.REACT_APP_SERVER;
     
-    const editPost = () => {
-        
-    }
-    
     const handleModal = (post) => {
         setOpenModal(true)
         setPostToEdit(post)
     }
 
-    const handleBookPostUpdate = (post) => {
+    const handleBookPostUpdate = async (post) => {
         console.log("updating book");
         console.log(post);
+        try {
+            await axios.put(`${SERVER}/book-post/update`, {
+                post
+            })
+        } catch (error) {
+            console.log(`UPDATE POST ERROR: ${error}`);
+        }
     }
 
     const posts = props.myBookPosts.map((post, idx) => {

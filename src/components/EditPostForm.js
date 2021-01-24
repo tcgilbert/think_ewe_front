@@ -4,7 +4,7 @@ import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
 
 const EditPostForm = (props) => {
-    const { authors, cover_url, title } = props.post;
+    const { authors, cover_url, title, id } = props.post;
     const [ratingDisplayed, setRatingDisplayed] = useState("");
     const [rating, setRating] = useState(props.post.rating);
     const [blurb, setBlurb] = useState(props.post.blurb);
@@ -15,26 +15,13 @@ const EditPostForm = (props) => {
             return;
         }
         const book_post = {
-            authors,
-            title,
-            cover_url: cover_url,
-            rating,
-            blurb,
+            post_id: id,
+            blurb, 
+            rating
         };
         props.handleSubmit(book_post);
         props.handleClose();
     };
-
-    // set the rating on mount
-    // useEffect(() => {
-    //     if (rating === 1) {
-    //         setRatingDisplayed("Good!")
-    //     } else if (rating === 2) {
-    //         setRatingDisplayed("Great!")
-    //     } else {
-    //         setRatingDisplayed("Exceptional!")
-    //     }
-    // }, [])
 
     useEffect(() => {
         // select the stars from DOM
