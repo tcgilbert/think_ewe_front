@@ -86,7 +86,7 @@ export default function PostEditModal(props) {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        {/* <EditPostForm handleClose={handleClose} handleSubmit={props.handleBookPostSubmit} post={props.post}/> */}
+                        <EditPostForm handleClose={handleClose} handleSubmit={props.handleBookPostSubmit} post={props.post}/>
                     </div>
                 </Fade>
             </Modal>

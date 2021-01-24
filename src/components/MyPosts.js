@@ -24,7 +24,7 @@ const MyPosts = (props) => {
     return (
         <div>
             {posts}
-            <PostEditModal setOpenModal={setOpenModal} openModal={openModal}/>
+            <PostEditModal setOpenModal={setOpenModal} openModal={openModal} post={postToEdit}/>
         </div>
     )
 }

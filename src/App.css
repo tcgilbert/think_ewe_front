@@ -208,6 +208,10 @@ h2, h3, p {
     justify-content: space-between;
 }
 
+.btn-group {
+    display: flex;
+    flex-direction: row;
+}
 
 /* Elements */
 #new-post-divider {
