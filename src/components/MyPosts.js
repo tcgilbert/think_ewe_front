@@ -17,6 +17,11 @@ const MyPosts = (props) => {
         setPostToEdit(post)
     }
 
+    const handleBookPostUpdate = (post) => {
+        console.log("updating book");
+        console.log(post);
+    }
+
     const posts = props.myBookPosts.map((post, idx) => {
         return <UserBookPost handleModal={handleModal} user={props.user} key={idx} post={post} />
     })
@@ -24,7 +29,7 @@ const MyPosts = (props) => {
     return (
         <div>
             {posts}
-            <PostEditModal setOpenModal={setOpenModal} openModal={openModal} post={postToEdit}/>
+            <PostEditModal handleBookPostUpdate={handleBookPostUpdate} setOpenModal={setOpenModal} openModal={openModal} post={postToEdit}/>
         </div>
     )
 }
