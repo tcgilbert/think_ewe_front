@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: "20px",
         paddingLeft: "20px",
         paddingRight: "20px",
-        paddingBottom: "10px"
+        paddingBottom: "10px",
     },
 }));
 
@@ -86,7 +86,12 @@ export default function PostEditModal(props) {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <EditPostForm handleClose={handleClose} handleSubmit={props.handleBookPostUpdate} post={props.post}/>
+                        <EditPostForm
+                            handleClose={handleClose}
+                            handleDelete={props.handleBookPostDelete}
+                            handleSubmit={props.handleBookPostUpdate}
+                            post={props.post}
+                        />
                     </div>
                 </Fade>
             </Modal>

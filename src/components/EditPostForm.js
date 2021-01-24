@@ -23,6 +23,11 @@ const EditPostForm = (props) => {
         props.handleClose();
     };
 
+    const deletePost = () => {
+        props.handleDelete(id)
+        props.handleClose()
+    }
+
     useEffect(() => {
         // select the stars from DOM
         const starOne = document.getElementById("star-one");
@@ -327,7 +332,7 @@ const EditPostForm = (props) => {
                     />
                 </Box>
                 <div className="btn-group">
-                    <Button fullWidth="true" variant="contained" type="submit">
+                    <Button onClick={() => deletePost()} fullWidth="true" variant="contained" type="submit">
                         Delete Post
                     </Button>
                     <Button
