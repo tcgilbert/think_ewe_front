@@ -65,10 +65,6 @@ export default function BookPostModal(props) {
         }
     }, [props.openModal]);
 
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
     const handleClose = () => {
         props.setOpenModal(false);
         setOpen(false);
@@ -94,7 +90,7 @@ export default function BookPostModal(props) {
                         <p id="spring-modal-description">
                             react-spring animates me.
                         </p> */}
-                        <NewPostForm book={props.book}/>
+                        <NewPostForm handleClose={handleClose} handleSubmit={props.handleBookPostSubmit} book={props.book}/>
                     </div>
                 </Fade>
             </Modal>

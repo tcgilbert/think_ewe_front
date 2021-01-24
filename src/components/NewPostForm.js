@@ -7,6 +7,23 @@ const NewPostForm = (props) => {
     const { authors, imgUrl, title } = props.book;
     const [ratingDisplayed, setRatingDisplayed] = useState("");
     const [rating, setRating] = useState(null);
+    const [blurb, setBlurb] = useState("")
+
+    const validateSubmission = () => {
+        if (!rating) {
+            console.log("A rating is required");
+            return
+        }
+        const book_post = {
+            authors,
+            title,
+            cover_url: imgUrl,
+            rating,
+            blurb,
+        }
+        props.handleSubmit(book_post)
+        props.handleClose()
+    }
 
     useEffect(() => {
         // select the stars from DOM
@@ -265,13 +282,15 @@ const NewPostForm = (props) => {
                         label="Your Thoughts..."
                         type="text"
                         variant="outlined"
+                        value={blurb}
+                        onChange={(e) => setBlurb(e.target.value)}
                         multiline
                         rows={5}
                         size="small"
                         name="bio"
                     />
                 </Box>
-                <Button fullWidth="true" variant="contained" type="submit">
+                <Button onClick={() => validateSubmission()} fullWidth="true" variant="contained" type="submit">
                     Submit Post
                 </Button>
             </div>

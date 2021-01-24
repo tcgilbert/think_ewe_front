@@ -1,13 +1,29 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "./material-ui/SearchBar";
 import BookDisplayed from "./BookDisplayed";
+import BookPostModal from './material-ui/BookPostModal'
 import axios from "axios";
 
 
 const SearchBooks = (props) => {
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
+    const [openModal, setOpenModal] = useState(false)
+    const [createPostBook, setCreatePostBook] = useState(null)
     const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+
+    const handleModal = (book) => {
+        console.log(book);
+        setOpenModal(true)
+        setCreatePostBook(book)
+    }
+
+    const handleBookPostSubmit = async (book_post) => {
+        setOpenModal(false)
+        console.log("submitting post");
+        console.log(book_post);
+        
+    }
 
     useEffect(() => {
         if (search === "") {
@@ -50,7 +66,7 @@ const SearchBooks = (props) => {
     };
 
     const resultsDisplayed = searchResults.map((book, idx) => {
-        return <BookDisplayed handleModal={props.handleModal} key={idx} book={book} />;
+        return <BookDisplayed handleModal={handleModal} key={idx} book={book} />;
     });
 
 
@@ -62,6 +78,7 @@ const SearchBooks = (props) => {
                 setSearch={setSearch}
             />
             {resultsDisplayed}
+            <BookPostModal handleBookPostSubmit={handleBookPostSubmit} book={createPostBook}  setOpenModal={setOpenModal} openModal={openModal}/>
         </div>
     );
 };
