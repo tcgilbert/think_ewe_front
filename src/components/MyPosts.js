@@ -1,9 +1,15 @@
-import React from 'react'
+import UserBookPost from './UserBookPost'
 
-const MyPosts = () => {
+const MyPosts = (props) => {
+
+    const posts = props.myBookPosts.map((post, idx) => {
+        return <UserBookPost user={props.user} key={idx} post={post} />
+    })
+
+
     return (
         <div>
-            <div>My book posts will go here</div>
+            {posts}
         </div>
     )
 }

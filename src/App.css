@@ -124,6 +124,25 @@ h2, h3, p {
     justify-content: space-between;
 }
 
+.book-post-container {
+    width: auto;
+    background: white;
+    margin: 5px;
+    padding: 5px;
+    border: solid 1px gray;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.post-social-content {
+    background-color: lightgray;
+    border-radius: 5px;
+    padding: 5px 8px;
+    width: 100%;
+}
+
 .cover-img {
     width: "auto";
     max-width: 100px;
@@ -133,6 +152,12 @@ h2, h3, p {
 .cover-info-container {
     display: flex;
     flex-direction: row;
+}
+
+.cover-info-container-post {
+    display: flex;
+    flex-direction: row;
+    width: 65%;
 }
 
 .new-post-form {
@@ -151,6 +176,12 @@ h2, h3, p {
     margin: 5px 10px 5px 0;
     width: 50px;
     height: 50px;
+}
+
+.star-img-post {
+    margin: 5px 10px 5px 0;
+    width: 40px;
+    height: 40px;
 }
 
 .stars:hover {
@@ -176,6 +207,15 @@ h2, h3, p {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+#title-rating-author {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: auto;
+    max-width: 300px;;
 }
 
 #title {
@@ -260,6 +300,4 @@ h2, h3, p {
     font-size: 20px;
 }
 
-#create-post-publisher {
 
-}

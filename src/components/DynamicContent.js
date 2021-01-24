@@ -1,35 +1,41 @@
-import React, { useState } from 'react'
+import axios from 'axios'
+import React, {useEffect, useState} from 'react'
 import NavTabs from './material-ui/NavTabs'
 import SearchBooks from './SearchBooks'
 import MyPosts from './MyPosts'
 import MyFeed from './MyFeed'
-// import BookPostModal from './material-ui/BookPostModal'
+
 
 
 const DynamicContent = (props) => {
 
-    const [shownContent, setShownContent] = useState("myFeed")
-    // const [openModal, setOpenModal] = useState(false)
-    // const [createPostBook, setCreatePostBook] = useState(null)
-    
-    // opens and closes the modal
-    // const handleModal = (book) => {
-    //     console.log(book);
-    //     setOpenModal(true)
-    //     setCreatePostBook(book)
-    // }
 
-    // submits bookpost to back-end
-    // const handleBookPostSubmit = (book_post) => {
-    //     setOpenModal(false)
-    //     console.log("submitting post");
-    //     console.log(book_post);
-    // }
+    const [shownContent, setShownContent] = useState("myFeed")
+    const [myBookPosts, setMyBookPosts] = useState([])
+    const SERVER = process.env.REACT_APP_SERVER;
+
+    // load book posts on state switch
+    useEffect(() => {
+
+        if (shownContent === "myPosts") {
+            // function to get books
+            fetchBookPosts()
+        }
+
+    }, [shownContent])
+
+    const fetchBookPosts = async () => {
+        let apiRes = await axios.get(`${SERVER}/book-post/${props.user.id}`)
+        let usersPosts = await apiRes.data.posts
+        setMyBookPosts(usersPosts)
+    }
+
+
 
     // returns selected component
     const handleContent = () => {
         if (shownContent === "myPosts") {
-            return <MyPosts />
+            return <MyPosts myBookPosts={myBookPosts} user={props.user}/>
         } else if (shownContent === "searchBooks") {
             return <SearchBooks user={props.user}/>
         } else {
@@ -41,7 +47,7 @@ const DynamicContent = (props) => {
         <div className="dynamic-content">
             <NavTabs setShownContent={setShownContent}/>
             {handleContent()}
-            {/* <BookPostModal handleBookPostSubmit={handleBookPostSubmit} book={createPostBook}  setOpenModal={setOpenModal} openModal={openModal}/> */}
+           
         </div>
     )
 }

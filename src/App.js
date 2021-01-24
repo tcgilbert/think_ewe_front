@@ -41,6 +41,7 @@ function App() {
     };
     // handle log in
     const handleLogin = async (values) => {
+        console.log(values);
         try {
             console.log("logging in");
             // look for user
