@@ -141,6 +141,19 @@ h2, h3, p {
     border-radius: 5px;
     padding: 5px 8px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.post-actions {
+    margin-left: auto;
+}
+
+.action-button {
+    border: none;
+    border-radius: 3px;
+    background-color: whitesmoke;
 }
 
 .cover-img {
