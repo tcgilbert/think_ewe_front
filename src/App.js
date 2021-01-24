@@ -11,6 +11,7 @@ import LandingPage from "./components/LandingPage";
 import Profile from "./components/Profile";
 import Dashboard from "./components/Dashboard";
 import Navigation from "./components/Navigation";
+import OtherUserProfile from './components/OtherUserProfile'
 
 function App() {
     const [currentUser, setCurrentUser] = useState("");
@@ -58,7 +59,7 @@ function App() {
             // decode token
             const userInfo = jwt_decode(token);
             // fetch user
-            const apiRes = await axios.get(`${SERVER}/users/${userInfo.id}`);
+            const apiRes = await axios.get(`${SERVER}/users/current/${userInfo.id}`);
             const user = apiRes.data.requestedUser;
             // set the current user
             setCurrentUser(user);
@@ -137,6 +138,11 @@ function App() {
                 <PrivateRoute
                     path="/profile"
                     component={Profile}
+                    user={currentUser}
+                />
+                <PrivateRoute
+                    path="user/:username"
+                    component={OtherUserProfile}
                     user={currentUser}
                 />
                 <PrivateRoute

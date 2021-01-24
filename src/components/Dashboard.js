@@ -107,7 +107,7 @@ const Dashboard = (props) => {
                 avatar: avatarPath,
                 id: props.user.id,
             });
-            let apiRes = await axios.get(`${SERVER}/users/${props.user.id}`);
+            let apiRes = await axios.get(`${SERVER}/users/current/${props.user.id}`);
             const updatedUser = await apiRes.data.requestedUser;
             props.setUser(updatedUser);
             history.push("/profile")
