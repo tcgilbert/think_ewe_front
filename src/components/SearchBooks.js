@@ -25,8 +25,8 @@ const SearchBooks = (props) => {
         book_post.user_id = props.user.id
         console.log(book_post);
         try {
-            const createPost = await axios.post(`${SERVER}/book-post/create`, book_post)
-            console.log(createPost);
+            await axios.post(`${SERVER}/book-post/create`, book_post)
+            props.setShownContent("myPosts")
         } catch (error) {
             console.log(`ERROR CREATING POST: ${error}`);
         }
