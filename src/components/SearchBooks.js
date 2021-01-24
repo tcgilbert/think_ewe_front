@@ -24,8 +24,12 @@ const SearchBooks = (props) => {
         console.log("submitting post");
         book_post.user_id = props.user.id
         console.log(book_post);
-        const createPost = await axios.post(`${SERVER}/book-post/create`, book_post)
-        console.log(createPost);
+        try {
+            const createPost = await axios.post(`${SERVER}/book-post/create`, book_post)
+            console.log(createPost);
+        } catch (error) {
+            console.log(`ERROR CREATING POST: ${error}`);
+        }
     }
 
     useEffect(() => {
