@@ -6,7 +6,7 @@ import axios from "axios";
 const Navigation = (props) => {
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
-    const [searchFocus, setSearchFocus] = useState(false)
+    const [searchFocus, setSearchFocus] = useState(false);
     const SERVER = process.env.REACT_APP_SERVER;
 
     useEffect(() => {
@@ -28,26 +28,26 @@ const Navigation = (props) => {
         }
     };
 
-
-
     const searchDisplayed = searchResults.map((user, idx) => {
         if (searchFocus) {
             return (
-                <div className="search-wrapper-parent" key={idx}>
-                    <div className="search-wrapper">
-                        <div>
-                            <div className="avatar-username">
-                                <img
-                                    className="tiny-avatar"
-                                    src={`${process.env.PUBLIC_URL}${user.avatar}`}
-                                    alt="avatar"
-                                />
-                                <p id="search-username"><strong>@{user.username}</strong></p>
+                    <div className="search-wrapper-parent" key={idx}>
+                        <div className="search-wrapper">
+                            <div>
+                                <div className="avatar-username">
+                                    <img
+                                        className="tiny-avatar"
+                                        src={`${process.env.PUBLIC_URL}${user.avatar}`}
+                                        alt="avatar"
+                                    />
+                                    <p id="search-username">
+                                        <strong>@{user.username}</strong>
+                                    </p>
+                                </div>
                             </div>
+                            {user.name}
                         </div>
-                        {user.name}
                     </div>
-                </div>
             );
         } else {
             return
@@ -57,20 +57,28 @@ const Navigation = (props) => {
     const handleSearchResults = () => {
         if (searchResults.length === 0 && searchFocus) {
             return (
-            <div className="search-wrapper-parent">
-                <div className="search-wrapper">
-                    <div>
-                        <div className="avatar-username">
-                            <p id="search-username">No results...</p>
+                <div className="absolute-child">
+                    <div className="search-wrapper-parent">
+                        <div className="search-wrapper">
+                            <div>
+                                <div className="avatar-username">
+                                    <p id="search-username">No results...</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            );
+        } else if (searchFocus) {
+            return (
+                <div className="absolute-child">
+                    {searchDisplayed}
+                </div>
             )
         } else {
-            return searchDisplayed
+            return
         }
-    }
+    };
 
     const handleNavBars = () => {
         if (props.isAuthenticated) {
@@ -103,8 +111,8 @@ const Navigation = (props) => {
         <>
             {handleNavBars()}
             <button onClick={handleSearch}>search</button>
-            <div className="relative-parent">
-                <div className="absolute-child">{handleSearchResults()}</div>
+            <div id="search-results-parent" className="relative-parent">
+                {handleSearchResults()}
             </div>
         </>
     );
