@@ -10,10 +10,9 @@ const EditProfileForm = (props) => {
     const [avatar, setAvatar] = useState(null);
     const [avatarPath, setAvatarPath] = useState(null);
     const SERVER = process.env.REACT_APP_SERVER;
-    const history = useHistory()
+    const history = useHistory();
 
     useEffect(() => {
-
         // get avatars from DOM once page is mounted
         const llama = document.getElementById("llama");
         const buffalo = document.getElementById("buffalo");
@@ -73,6 +72,17 @@ const EditProfileForm = (props) => {
             setAvatarPath(ele.alt);
         };
 
+        // set already selected values
+        setAvatarPath(props.user.avatar);
+        let previousAvatar;
+        avatars.forEach((avatar) => {
+            // console.log(avatar.alt);
+            if (props.user.avatar === avatar.alt) {
+                selectAvatar(avatar);
+                avatar.classList.add("avatar-selection")
+            }
+        });
+
         // manage selections
         avatars.forEach((ele) => {
             ele.addEventListener("click", () => {
@@ -105,10 +115,12 @@ const EditProfileForm = (props) => {
                 avatar: avatarPath,
                 id: props.user.id,
             });
-            let apiRes = await axios.get(`${SERVER}/users/current/${props.user.id}`);
+            let apiRes = await axios.get(
+                `${SERVER}/users/current/${props.user.id}`
+            );
             const updatedUser = await apiRes.data.requestedUser;
             props.setUser(updatedUser);
-            history.push("/profile")
+            history.push("/profile");
         } catch (error) {
             console.log(`UPDATE ERROR: ${error}`);
         }
