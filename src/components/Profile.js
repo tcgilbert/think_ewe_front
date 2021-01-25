@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react'
 import UserInfo from '../components/UserInfo'
 import DynamicContent from '../components/DynamicContent'
 import axios from 'axios'
+import EditBookPostModal from './material-ui/EditProfileModal'
+import EditProfileModal from './material-ui/EditProfileModal'
 
 
 const Profile = (props) => {
 
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
+    const [openModal, setOpenModal] = useState(false)
     const [feed, setFeed] = useState([])
     const SERVER = process.env.REACT_APP_SERVER;
 
@@ -62,10 +65,14 @@ const Profile = (props) => {
     }
 
     return (
+        <>
+
         <div className="profile-container">
-            <UserInfo followers={followers} following={following} user={props.user}/>
+            <UserInfo setOpenModal={setOpenModal} followers={followers} following={following} user={props.user}/>
             <DynamicContent feed={feed} user={props.user}/>
         </div>
+        <EditProfileModal user={props.user} openModal={openModal} setOpenModal={setOpenModal}/>
+        </>
     )
 }
 

@@ -20,7 +20,7 @@ const UserInfo = (props) => {
             <p>Following: {props.following.length}</p>
             <p>Followers: {props.followers.length}</p>
             <Box mt={2}>
-                <Button fullWidth="true" variant="outlined">Edit Profile</Button>
+                <Button onClick={() => props.setOpenModal(true)} fullWidth="true" variant="outlined">Edit Profile</Button>
             </Box>
         </div>
     );

@@ -21,9 +21,7 @@ const SearchBooks = (props) => {
 
     const handleBookPostSubmit = async (book_post) => {
         setOpenModal(false)
-        console.log("submitting post");
         book_post.user_id = props.user.id
-        console.log(book_post);
         try {
             await axios.post(`${SERVER}/book-post/create`, book_post)
             props.setShownContent("myPosts")
