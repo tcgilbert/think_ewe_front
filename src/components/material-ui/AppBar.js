@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     searchIcon: {
-        padding: theme.spacing(0, 2),
+        padding: theme.spacing(0, 1),
         height: "100%",
         position: "absolute",
         pointerEvents: "none",
@@ -62,7 +62,10 @@ const useStyles = makeStyles((theme) => ({
         margin: 4,
     },
     iconButton: {
-        padding: 10,
+        paddingTop: 3,
+        paddingBottom: 3,
+        paddingRight: 5,
+        paddingLeft: 3,
         color: "white",
     },
 }));
