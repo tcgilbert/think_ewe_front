@@ -25,7 +25,7 @@ const DynamicContent = (props) => {
     }, [shownContent])
 
     const fetchBookPosts = async () => {
-        let apiRes = await axios.get(`${SERVER}/book-post/${props.user.id}`)
+        let apiRes = await axios.get(`${SERVER}/book-post/user/${props.user.id}`)
         let usersPosts = await apiRes.data.posts
         setMyBookPosts(usersPosts)
     }

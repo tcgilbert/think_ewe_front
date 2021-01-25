@@ -33,10 +33,27 @@ const Profile = (props) => {
         }
     };
 
+    const fetchFeed = async () => {
+        let accountIds = []
+        following.forEach((ele) => {
+            accountIds.push(ele.following_id)
+        })
+        console.log(accountIds);
+        try {
+            let apiRes = await axios.post(`${SERVER}/book-post/feed`, {
+                accountIds: accountIds
+            })
+            console.log(apiRes);
+        } catch (error) {
+            console.log(`FEED FETCHING ERROR: ${error}`);
+        }
+    }
+
     return (
         <div className="profile-container">
             <UserInfo followers={followers} following={following} user={props.user}/>
             <DynamicContent user={props.user}/>
+            <button onClick={fetchFeed}>Fetch feed</button>
         </div>
     )
 }
