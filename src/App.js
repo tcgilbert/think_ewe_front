@@ -1,7 +1,7 @@
 // imports
 import "./App.css";
 import { useEffect, useState } from "react";
-import { Route, Redirect, useHistory } from "react-router-dom";
+import { Route, Redirect, useHistory, Switch } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utilities/setAuthToken";
@@ -120,6 +120,7 @@ function App() {
                 isAuthenticated={isAuthenticated}
             />
             <div className="app-container">
+                <Switch>
                     <Route
                         exact
                         path="/"
@@ -156,6 +157,7 @@ function App() {
                         user={currentUser}
                         setUser={setCurrentUser}
                     />
+                </Switch>
                 <button
                     type="submit"
                     onClick={() => handleLogin(autoLoginValues)}
