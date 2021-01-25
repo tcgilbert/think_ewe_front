@@ -43,7 +43,7 @@ const DynamicContent = (props) => {
 
     return (
         <div className="dynamic-content">
-            <NavTabs setShownContent={setShownContent}/>
+            <NavTabs shownContent={shownContent} setShownContent={setShownContent}/>
             {handleContent()}
            
         </div>

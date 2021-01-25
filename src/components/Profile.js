@@ -1,33 +1,28 @@
-import React, { useState, useEffect } from 'react'
-import UserInfo from '../components/UserInfo'
-import DynamicContent from '../components/DynamicContent'
-import axios from 'axios'
-import EditBookPostModal from './material-ui/EditProfileModal'
-import EditProfileModal from './material-ui/EditProfileModal'
-
+import React, { useState, useEffect } from "react";
+import UserInfo from "../components/UserInfo";
+import DynamicContent from "../components/DynamicContent";
+import axios from "axios";
+import EditProfileModal from "./material-ui/EditProfileModal";
 
 const Profile = (props) => {
-
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
-    const [openModal, setOpenModal] = useState(false)
-    const [feed, setFeed] = useState([])
+    const [openModal, setOpenModal] = useState(false);
+    const [feed, setFeed] = useState([]);
     const SERVER = process.env.REACT_APP_SERVER;
 
     useEffect(() => {
         if (props.user) {
-            fetchSocials()
-            fetchFeed()
+            fetchSocials();
+            fetchFeed();
         }
-    }, [])
+    }, []);
 
     useEffect(() => {
         if (props.user) {
-            fetchFeed()
+            fetchFeed();
         }
-    }, [following])
-
-
+    }, [following]);
 
     const fetchSocials = async () => {
         try {
@@ -48,32 +43,41 @@ const Profile = (props) => {
 
     const fetchFeed = async () => {
         console.log("skadjgfasdjghkk");
-        let accountIds = []
+        let accountIds = [];
         following.forEach((ele) => {
-            accountIds.push(ele.following_id)
-        })
+            accountIds.push(ele.following_id);
+        });
         console.log(accountIds);
         try {
             let apiRes = await axios.post(`${SERVER}/book-post/feed`, {
-                accountIds: accountIds
-            })
-            let feedData = await apiRes.data.posts
-            setFeed(feedData)
+                accountIds: accountIds,
+            });
+            let feedData = await apiRes.data.posts;
+            setFeed(feedData);
         } catch (error) {
             console.log(`FEED FETCHING ERROR: ${error}`);
         }
-    }
+    };
 
     return (
         <>
-
-        <div className="profile-container">
-            <UserInfo setOpenModal={setOpenModal} followers={followers} following={following} user={props.user}/>
-            <DynamicContent feed={feed} user={props.user}/>
-        </div>
-        <EditProfileModal setUser={props.setUser} user={props.user} openModal={openModal} setOpenModal={setOpenModal}/>
+            <div className="profile-container">
+                <UserInfo
+                    setOpenModal={setOpenModal}
+                    followers={followers}
+                    following={following}
+                    user={props.user}
+                />
+                <DynamicContent feed={feed} user={props.user} />
+            </div>
+            <EditProfileModal
+                setUser={props.setUser}
+                user={props.user}
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+            />
         </>
-    )
-}
+    );
+};
 
-export default Profile
+export default Profile;
