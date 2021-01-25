@@ -70,11 +70,14 @@ export default function PrimarySearchAppBar(props) {
         setAnchorEl(null);
     };
 
-
     const handleProfile = () => {
         history.push("/profile");
         setAnchorEl(null);
     };
+
+    const handleSearchMenu = () => {
+        props.setSearchFocus(true)
+    }
 
     const menuId = "primary-search-account-menu";
     const renderMenu = (
@@ -108,6 +111,8 @@ export default function PrimarySearchAppBar(props) {
                             placeholder="Search Users…"
                             value={props.search}
                             onChange={(e) => props.setSearch(e.target.value)}
+                            onFocus={() => handleSearchMenu()}
+                            onBlur={() => props.setSearchFocus(false)}
                             classes={{
                                 root: classes.inputRoot,
                                 input: classes.inputInput,
