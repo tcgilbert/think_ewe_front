@@ -14,8 +14,17 @@ const Profile = (props) => {
     useEffect(() => {
         if (props.user) {
             fetchSocials()
+            fetchFeed()
         }
     }, [])
+
+    useEffect(() => {
+        if (props.user) {
+            fetchFeed()
+        }
+    }, [following])
+
+
 
     const fetchSocials = async () => {
         try {
@@ -35,6 +44,7 @@ const Profile = (props) => {
     };
 
     const fetchFeed = async () => {
+        console.log("skadjgfasdjghkk");
         let accountIds = []
         following.forEach((ele) => {
             accountIds.push(ele.following_id)
@@ -55,7 +65,6 @@ const Profile = (props) => {
         <div className="profile-container">
             <UserInfo followers={followers} following={following} user={props.user}/>
             <DynamicContent feed={feed} user={props.user}/>
-            <button onClick={fetchFeed}>Fetch feed</button>
         </div>
     )
 }
