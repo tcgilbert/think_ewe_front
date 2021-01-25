@@ -2,12 +2,18 @@ import React, { useState, useEffect } from "react";
 import LoginPopUp from "./material-ui/LoginPopUp";
 import AppBar from "./material-ui/AppBar";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
+import Popover from "@material-ui/core/Popover";
 
 const Navigation = (props) => {
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [searchFocus, setSearchFocus] = useState(false);
+    const [anchorEl, setAnchorEl] = React.useState(null);
     const SERVER = process.env.REACT_APP_SERVER;
+    const open = Boolean(anchorEl);
+    const id = open ? "simple-popover" : undefined;
+    const history = useHistory();
 
     useEffect(() => {
         if (search !== "") {
@@ -16,6 +22,11 @@ const Navigation = (props) => {
             setSearchResults([]);
         }
     }, [search]);
+
+    const handleRedirect = (username) => {
+        console.log(username);
+        setSearchFocus(false);
+    };
 
     const handleSearch = async () => {
         try {
@@ -31,26 +42,30 @@ const Navigation = (props) => {
     const searchDisplayed = searchResults.map((user, idx) => {
         if (searchFocus) {
             return (
-                    <div className="search-wrapper-parent" key={idx}>
-                        <div className="search-wrapper">
-                            <div>
-                                <div className="avatar-username">
-                                    <img
-                                        className="tiny-avatar"
-                                        src={`${process.env.PUBLIC_URL}${user.avatar}`}
-                                        alt="avatar"
-                                    />
-                                    <p id="search-username">
-                                        <strong>@{user.username}</strong>
-                                    </p>
-                                </div>
+                <div
+                    onClick={() => handleRedirect(user.username)}
+                    className="search-wrapper-parent"
+                    key={idx}
+                >
+                    <div className="search-wrapper">
+                        <div>
+                            <div className="avatar-username">
+                                <img
+                                    className="tiny-avatar"
+                                    src={`${process.env.PUBLIC_URL}${user.avatar}`}
+                                    alt="avatar"
+                                />
+                                <p id="search-username">
+                                    <strong>@{user.username}</strong>
+                                </p>
                             </div>
-                            {user.name}
                         </div>
+                        {user.name}
                     </div>
+                </div>
             );
         } else {
-            return
+            return;
         }
     });
 
@@ -70,13 +85,9 @@ const Navigation = (props) => {
                 </div>
             );
         } else if (searchFocus) {
-            return (
-                <div className="absolute-child">
-                    {searchDisplayed}
-                </div>
-            )
+            return <div className="absolute-child">{searchDisplayed}</div>;
         } else {
-            return
+            return;
         }
     };
 
@@ -110,7 +121,6 @@ const Navigation = (props) => {
     return (
         <>
             {handleNavBars()}
-            <button onClick={handleSearch}>search</button>
             <div id="search-results-parent" className="relative-parent">
                 {handleSearchResults()}
             </div>

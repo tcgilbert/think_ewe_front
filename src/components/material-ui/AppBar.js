@@ -11,6 +11,8 @@ import Menu from "@material-ui/core/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import ClearIcon from "@material-ui/icons/Clear";
+import Divider from "@material-ui/core/Divider";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
     },
     search: {
         position: "relative",
+        display: "flex",
+        alignItems: "center",
         borderRadius: theme.shape.borderRadius,
         backgroundColor: fade(theme.palette.common.white, 0.15),
         "&:hover": {
@@ -53,6 +57,14 @@ const useStyles = makeStyles((theme) => ({
         transition: theme.transitions.create("width"),
         width: "100%",
     },
+    divider: {
+        height: 28,
+        margin: 4,
+    },
+    iconButton: {
+        padding: 10,
+        color: "white",
+    },
 }));
 
 export default function PrimarySearchAppBar(props) {
@@ -65,7 +77,7 @@ export default function PrimarySearchAppBar(props) {
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
     };
-    
+
     const handleProfileMenuClose = () => {
         setAnchorEl(null);
     };
@@ -76,7 +88,12 @@ export default function PrimarySearchAppBar(props) {
     };
 
     const handleSearchMenu = () => {
-        props.setSearchFocus(true)
+        props.setSearchFocus(true);
+    };
+
+    const cancelSearch = () => {
+        props.setSearch("")
+        props.setSearchFocus(false);
     }
 
     const menuId = "primary-search-account-menu";
@@ -95,7 +112,6 @@ export default function PrimarySearchAppBar(props) {
         </Menu>
     );
 
-
     return (
         <div className={classes.grow}>
             <AppBar position="static">
@@ -108,17 +124,27 @@ export default function PrimarySearchAppBar(props) {
                             <SearchIcon />
                         </div>
                         <InputBase
-                            placeholder="Search Users…"
+                            placeholder="Search Users"
                             value={props.search}
                             onChange={(e) => props.setSearch(e.target.value)}
                             onFocus={() => handleSearchMenu()}
-                            onBlur={() => props.setSearchFocus(false)}
                             classes={{
                                 root: classes.inputRoot,
                                 input: classes.inputInput,
                             }}
                             inputProps={{ "aria-label": "search" }}
                         />
+                        <Divider
+                            className={classes.divider}
+                            orientation="vertical"
+                        />
+                        <IconButton
+                            onClick={() => cancelSearch()}
+                            className={classes.iconButton}
+                            aria-label="directions"
+                        >
+                            <ClearIcon />
+                        </IconButton>
                     </div>
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
