@@ -11,6 +11,14 @@ const Signup = (props) => {
         confirmPassword: "",
     });
 
+    const checkPasswordError = () => {
+        if (props.passwordLengthWrong || props.passwordsDontMatch) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     return (
         <>
             <FormControl fullWidth="true">
@@ -24,6 +32,8 @@ const Signup = (props) => {
                         name="email"
                         value={values.email}
                         onChange={handleChange}
+                        error={props.emptyEmail}
+                        helperText={props.emptyEmail ? "Email is required" : null}
                     />
                 </Box>
                 <Box mb={1.5}>
@@ -36,6 +46,8 @@ const Signup = (props) => {
                         name="name"
                         value={values.name}
                         onChange={handleChange}
+                        error={props.emptyName}
+                        helperText={props.emptyName ? "Name is required" : null}
                     />
                 </Box>
                 <Box mb={1.5}>
@@ -48,6 +60,8 @@ const Signup = (props) => {
                         name="password"
                         value={values.password}
                         onChange={handleChange}
+                        error={checkPasswordError()}
+                        helperText={props.passwordsDontMatch ? "Passwords do not match" : props.passwordLengthWrong ? "Password must be at least 6 characters" : null}
                     />
                 </Box>
                 <Box mb={1.5}>
@@ -60,6 +74,8 @@ const Signup = (props) => {
                         name="confirmPassword"
                         value={values.confirmPassword}
                         onChange={handleChange}
+                        error={checkPasswordError()}
+                        helperText={props.passwordsDontMatch ? "Passwords do not match" : props.passwordLengthWrong ? "Password must be at least 6 characters" : null}
                     />
                 </Box>
                 <Button
