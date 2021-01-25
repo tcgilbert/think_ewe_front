@@ -71,7 +71,7 @@ const Profile = (props) => {
             <UserInfo setOpenModal={setOpenModal} followers={followers} following={following} user={props.user}/>
             <DynamicContent feed={feed} user={props.user}/>
         </div>
-        <EditProfileModal user={props.user} openModal={openModal} setOpenModal={setOpenModal}/>
+        <EditProfileModal setUser={props.setUser} user={props.user} openModal={openModal} setOpenModal={setOpenModal}/>
         </>
     )
 }

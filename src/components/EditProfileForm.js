@@ -6,7 +6,7 @@ import { TextField, Button, FormControl } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 
 const EditProfileForm = (props) => {
-    const [values, handleChange] = useForm({ username: null, bio: "" });
+    const [values, handleChange] = useForm({ username: props.user.username, bio: props.user.bio });
     const [avatar, setAvatar] = useState(null);
     const [avatarPath, setAvatarPath] = useState(null);
     const SERVER = process.env.REACT_APP_SERVER;
@@ -76,7 +76,6 @@ const EditProfileForm = (props) => {
         setAvatarPath(props.user.avatar);
         let previousAvatar;
         avatars.forEach((avatar) => {
-            // console.log(avatar.alt);
             if (props.user.avatar === avatar.alt) {
                 selectAvatar(avatar);
                 avatar.classList.add("avatar-selection")

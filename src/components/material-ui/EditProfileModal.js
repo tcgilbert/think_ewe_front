@@ -88,7 +88,7 @@ export default function EditProfileModal(props) {
                 }}
             >
                 <Fade id="remove-modal-border" in={open}>
-                        <EditProfileForm user={props.user}/>
+                        <EditProfileForm setUser={props.setUser} user={props.user}/>
                 </Fade>
             </Modal>
         </>

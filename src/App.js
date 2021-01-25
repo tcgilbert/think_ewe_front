@@ -143,6 +143,7 @@ function App() {
                         path="/profile"
                         component={Profile}
                         user={currentUser}
+                        setUser={setCurrentUser}
                     />
                     <PrivateRoute
                         exact
