@@ -86,10 +86,6 @@ export default function BookPostModal(props) {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        {/* <h2 id="spring-modal-title">Create New Post</h2>
-                        <p id="spring-modal-description">
-                            react-spring animates me.
-                        </p> */}
                         <NewPostForm handleClose={handleClose} handleSubmit={props.handleBookPostSubmit} book={props.book}/>
                     </div>
                 </Fade>

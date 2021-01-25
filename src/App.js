@@ -11,7 +11,7 @@ import LandingPage from "./components/LandingPage";
 import Profile from "./components/Profile";
 import Dashboard from "./components/Dashboard";
 import Navigation from "./components/Navigation";
-import OtherUserProfile from './components/OtherUserProfile'
+import OtherUserProfile from "./components/OtherUserProfile";
 
 function App() {
     const [currentUser, setCurrentUser] = useState("");
@@ -59,7 +59,9 @@ function App() {
             // decode token
             const userInfo = jwt_decode(token);
             // fetch user
-            const apiRes = await axios.get(`${SERVER}/users/current/${userInfo.id}`);
+            const apiRes = await axios.get(
+                `${SERVER}/users/current/${userInfo.id}`
+            );
             const user = apiRes.data.requestedUser;
             // set the current user
             setCurrentUser(user);
@@ -72,13 +74,15 @@ function App() {
 
     // send token to backend to check for user
     useEffect(() => {
-
         const checkToken = async (token) => {
             try {
-                const tokenUser = await axios.post(`${SERVER}/users/check-token`, {
-                    token: token,
-                });
-                const userFound = await tokenUser.data.user_found;;
+                const tokenUser = await axios.post(
+                    `${SERVER}/users/check-token`,
+                    {
+                        token: token,
+                    }
+                );
+                const userFound = await tokenUser.data.user_found;
                 if (userFound) {
                     setCurrentUser(userFound);
                     setIsAuthenticated(true);
@@ -100,13 +104,11 @@ function App() {
     const handleLogout = () => {
         setCurrentUser(null);
         setIsAuthenticated(false);
-        history.push("/")
+        history.push("/");
         if (localStorage.getItem("jwtToken")) {
             localStorage.removeItem("jwtToken");
         }
     };
-
-
 
     return (
         <div>
@@ -118,39 +120,42 @@ function App() {
                 isAuthenticated={isAuthenticated}
             />
             <div className="app-container">
-                <Route
-                    exact
-                    path="/"
-                    render={() => {
-                        return (
-                            <LandingPage
-                                logLink={logLink}
-                                setLogLink={setLogLink}
-                                handleLogin={handleLogin}
-                                setUser={setCurrentUser}
-                                setAuth={setIsAuthenticated}
-                                isAuth={isAuthenticated}
-                                currentUser={currentUser}
-                            />
-                        );
-                    }}
-                />
-                <PrivateRoute
-                    path="/profile"
-                    component={Profile}
-                    user={currentUser}
-                />
-                <PrivateRoute
-                    path="user/:username"
-                    component={OtherUserProfile}
-                    user={currentUser}
-                />
-                <PrivateRoute
-                    path="/dashboard"
-                    component={Dashboard}
-                    user={currentUser}
-                    setUser={setCurrentUser}
-                />
+                    <Route
+                        exact
+                        path="/"
+                        render={() => {
+                            return (
+                                <LandingPage
+                                    logLink={logLink}
+                                    setLogLink={setLogLink}
+                                    handleLogin={handleLogin}
+                                    setUser={setCurrentUser}
+                                    setAuth={setIsAuthenticated}
+                                    isAuth={isAuthenticated}
+                                    currentUser={currentUser}
+                                />
+                            );
+                        }}
+                    />
+                    <PrivateRoute
+                        exact
+                        path="/profile"
+                        component={Profile}
+                        user={currentUser}
+                    />
+                    <PrivateRoute
+                        exact
+                        path="/user/:username"
+                        component={OtherUserProfile}
+                        user={currentUser}
+                    />
+                    <PrivateRoute
+                        exact
+                        path="/dashboard"
+                        component={Dashboard}
+                        user={currentUser}
+                        setUser={setCurrentUser}
+                    />
                 <button
                     type="submit"
                     onClick={() => handleLogin(autoLoginValues)}

@@ -85,7 +85,7 @@ const SearchBooks = (props) => {
                 setSearch={setSearch}
             />
             {resultsDisplayed}
-            <BookPostModal handleBookPostSubmit={handleBookPostSubmit} book={createPostBook} setOpenModal={setOpenModal} openModal={openModal}/>
+            <BookPostModal setShownContent={props.setShownContent} handleBookPostSubmit={handleBookPostSubmit} book={createPostBook} setOpenModal={setOpenModal} openModal={openModal}/>
         </div>
     );
 };

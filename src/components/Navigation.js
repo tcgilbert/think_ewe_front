@@ -2,17 +2,13 @@ import React, { useState, useEffect } from "react";
 import LoginPopUp from "./material-ui/LoginPopUp";
 import AppBar from "./material-ui/AppBar";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
-import Popover from "@material-ui/core/Popover";
+import { useHistory, Redirect } from "react-router-dom";
 
 const Navigation = (props) => {
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [searchFocus, setSearchFocus] = useState(false);
-    const [anchorEl, setAnchorEl] = React.useState(null);
     const SERVER = process.env.REACT_APP_SERVER;
-    const open = Boolean(anchorEl);
-    const id = open ? "simple-popover" : undefined;
     const history = useHistory();
 
     useEffect(() => {
@@ -24,14 +20,13 @@ const Navigation = (props) => {
     }, [search]);
 
     const handleRedirect = (username) => {
-        console.log(username);
+        history.push(`/user/${username}`)
         setSearchFocus(false);
     };
 
     const handleSearch = async () => {
         try {
             let apiRes = await axios.get(`${SERVER}/users/find/${search}`);
-            console.log(apiRes);
             let matches = await apiRes.data.matchesPayload;
             setSearchResults(matches);
         } catch (error) {
@@ -72,7 +67,7 @@ const Navigation = (props) => {
     const handleSearchResults = () => {
         if (searchResults.length === 0 && searchFocus) {
             return (
-                <div className="absolute-child">
+                <div onClick={() => setSearchFocus(false)} className="absolute-child">
                     <div className="search-wrapper-parent">
                         <div className="search-wrapper">
                             <div>
@@ -87,7 +82,7 @@ const Navigation = (props) => {
         } else if (searchFocus) {
             return <div className="absolute-child">{searchDisplayed}</div>;
         } else {
-            return;
+            return 
         }
     };
 
