@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import UserInfo from '../components/UserInfo'
+import OtherUserInfo from '../components/OtherUserInfo'
 import OtherNavTabs from './material-ui/OtherNavTabs'
 import OtherUserBookPost from './OtherUserBookPost'
 
@@ -47,15 +47,25 @@ const OtherUserProfile = (props) => {
         }
     }
 
+    const handleFollow = async () => {
+        console.log(props.user.id);
+        console.log(otherUser.id);
+        let apiRes = await axios.post(`${SERVER}/social/follow/create`, {
+            follower_id: props.user.id,
+            following_id: otherUser.id
+        })
+    }
+
     const handleContent = () => {
         if (otherUser) {
             return (
-                <UserInfo user={otherUser}/>
+                <OtherUserInfo handleFollow={handleFollow} user={otherUser}/>
             )
         } else {
             return <h1>Loading...</h1>
         }
     }
+
 
     const handleBookPosts = () => {
  
