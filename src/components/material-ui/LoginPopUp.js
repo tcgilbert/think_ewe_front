@@ -64,6 +64,7 @@ export default function LoginPopUp(props) {
             >
                 <Typography className={classes.typography}>
                     <Login
+                        isAuthenticated={props.isAuthenticated}
                         handleClose={handleClose}
                         handleLogin={props.handleLogin}
                         identifier={identifier}

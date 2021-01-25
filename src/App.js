@@ -67,7 +67,7 @@ function App() {
             setCurrentUser(user);
             setIsAuthenticated(true);
         } catch (error) {
-            console.log(error);
+            return await error
             console.log(`LOGIN ERROR: ${error.data}`);
         }
     };

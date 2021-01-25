@@ -105,6 +105,7 @@ const Navigation = (props) => {
                 <div className="nav-bar">
                     <h1 id="title">Think Ewe</h1>
                     <LoginPopUp
+                        isAuthenticated={props.isAuthenticated}
                         logLink={props.logLink}
                         setLogLink={props.setLogLink}
                         handleLogin={props.handleLogin}
