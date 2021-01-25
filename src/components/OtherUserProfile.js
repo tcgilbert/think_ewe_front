@@ -39,7 +39,7 @@ const OtherUserProfile = (props) => {
 
     const fetchPosts = async () => {
         try {
-            let apiRes = await axios.get(`${SERVER}/book-post/${otherUser.id}`);
+            let apiRes = await axios.get(`${SERVER}/book-post/user/${otherUser.id}`);
             let usersPosts = await apiRes.data.posts;
             setBookPosts(usersPosts);
         } catch (error) {

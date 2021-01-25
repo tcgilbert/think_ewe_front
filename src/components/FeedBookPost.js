@@ -47,7 +47,7 @@ const FeedBookPost = (props) => {
             </div>
             <div className="post-social-content">
                 <p>
-                    @{username}: {props.post.blurb}
+                    <a href={`/user/${username}`}>@{username}</a>: {props.post.blurb}
                 </p>
                 <div className="post-actions">
     
