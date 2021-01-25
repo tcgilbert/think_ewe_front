@@ -37,7 +37,7 @@ const DynamicContent = (props) => {
         } else if (shownContent === "searchBooks") {
             return <SearchBooks setShownContent={setShownContent} user={props.user}/>
         } else {
-            return <MyFeed />
+            return <MyFeed feed={props.feed} />
         }
     }
 

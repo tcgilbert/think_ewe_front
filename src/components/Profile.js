@@ -8,6 +8,7 @@ const Profile = (props) => {
 
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
+    const [feed, setFeed] = useState([])
     const SERVER = process.env.REACT_APP_SERVER;
 
     useEffect(() => {
@@ -43,7 +44,8 @@ const Profile = (props) => {
             let apiRes = await axios.post(`${SERVER}/book-post/feed`, {
                 accountIds: accountIds
             })
-            console.log(apiRes);
+            let feedData = await apiRes.data.posts
+            setFeed(feedData)
         } catch (error) {
             console.log(`FEED FETCHING ERROR: ${error}`);
         }
@@ -52,7 +54,7 @@ const Profile = (props) => {
     return (
         <div className="profile-container">
             <UserInfo followers={followers} following={following} user={props.user}/>
-            <DynamicContent user={props.user}/>
+            <DynamicContent feed={feed} user={props.user}/>
             <button onClick={fetchFeed}>Fetch feed</button>
         </div>
     )

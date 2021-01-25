@@ -1,9 +1,15 @@
 import React from 'react'
+import FeedBookPost from './FeedBookPost'
 
-const MyFeed = () => {
+const MyFeed = (props) => {
+
+    const handleFeed = props.feed.map((post, key) => {
+        return <FeedBookPost post={post}/>
+    })
+
     return (
         <div>
-            <div>Social network feed</div>
+            {handleFeed}
         </div>
     )
 }
