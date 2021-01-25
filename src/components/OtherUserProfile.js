@@ -60,16 +60,25 @@ const OtherUserProfile = (props) => {
     const handleBookPosts = () => {
  
         if (bookPosts) {
-            const posts = bookPosts.map((post, idx) => {
+            if (bookPosts.length === 0) {
                 return (
-                    <OtherUserBookPost
-                        user={otherUser}
-                        key={idx}
-                        post={post}
-                    />
-                );
-            });
-            return posts
+                <div id="no-posts-container">
+                    <h1 id="no-posts-yet">No Posts Yet</h1>
+                </div>
+                
+                )
+            } else {
+                const posts = bookPosts.map((post, idx) => {
+                    return (
+                        <OtherUserBookPost
+                            user={otherUser}
+                            key={idx}
+                            post={post}
+                        />
+                    );
+                });
+                return posts
+            }
         }
     }
 

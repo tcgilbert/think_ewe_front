@@ -372,4 +372,15 @@ h2, h3, p {
     font-size: 20px;
 }
 
+#no-posts-yet {
+    font-size: 50px;
+    color: #c8c8c8;
+    margin-top: 70px;
+}
+
+#no-posts-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 
