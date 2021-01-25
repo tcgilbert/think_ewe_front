@@ -22,6 +22,7 @@ const Navigation = (props) => {
     const handleRedirect = (username) => {
         history.push(`/user/${username}`)
         setSearchFocus(false);
+        setSearch("")
     };
 
     const handleSearch = async () => {
