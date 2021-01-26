@@ -16,6 +16,26 @@ const UserBookPost = (props) => {
     };
 
     return (
+        // <div className="book-post-container">
+        //     <div className="cover-info-container-post">
+        //         <img className="cover-img" src={props.post.cover_url} alt="" />
+        //         <div id="title-rating-author">
+        //             <div>
+        //                 <h4 id="book-title">{props.post.title}</h4>
+        //                 <p id="by-author">By: {props.post.authors}</p>
+        //             </div>
+        //             <div className="book-post-rating">{postRating()}</div>
+        //         </div>
+        //     </div>
+        //     <div className="post-social-content">
+        //         <p>
+        //             @{props.user.username}: {props.post.blurb}
+        //         </p>
+        // <div className="post-actions">
+        // 	<button onClick={() => props.handleModal(props.post)} className="action-button">Edit</button>
+        // </div>
+        //     </div>
+        // </div>
         <div className="book-post-container">
             <div className="cover-info-container-post">
                 <img className="cover-img" src={props.post.cover_url} alt="" />
@@ -28,11 +48,29 @@ const UserBookPost = (props) => {
                 </div>
             </div>
             <div className="post-social-content">
-                <p>
-                    @{props.user.username}: {props.post.blurb}
-                </p>
+                <div>
+                    <p>
+                        <a
+                            className="username-link"
+                            href={`/user/${props.user.username}`}
+                        >
+                            <img
+                                className="tiny-avatar"
+                                src={`${process.env.PUBLIC_URL}${props.user.avatar}`}
+                                alt="avatar"
+                            />
+                            @{props.user.username}
+                        </a>
+                    </p>
+                    <p className="post-blurb">{props.post.blurb}</p>
+                </div>
                 <div className="post-actions">
-                	<button onClick={() => props.handleModal(props.post)} className="action-button">Edit</button>
+                    <button
+                        onClick={() => props.handleModal(props.post)}
+                        className="action-button"
+                    >
+                        Edit
+                    </button>
                 </div>
             </div>
         </div>

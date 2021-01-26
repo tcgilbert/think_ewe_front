@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios'
+import axios from "axios";
 
 const FeedBookPost = (props) => {
-
-    const [username, setUserName] = useState("")
+    const [username, setUserName] = useState("");
+    const [userAvatar, setUserAvatar] = useState("");
     const SERVER = process.env.REACT_APP_SERVER;
 
     useEffect(() => {
         if (username === "") {
-            getUserInfo()
+            getUserInfo();
         }
-    }, [])
+    }, []);
 
     const getUserInfo = async () => {
-        let apiRes = await axios.get(`${SERVER}/users/current/${props.post.user_id}`)
-        let userData = await apiRes.data.requestedUser
-        setUserName(userData.username)
-    }
-
+        let apiRes = await axios.get(
+            `${SERVER}/users/current/${props.post.user_id}`
+        );
+        let userData = await apiRes.data.requestedUser;
+        setUserName(userData.username);
+        setUserAvatar(userData.avatar);
+    };
 
     const postRating = () => {
         let stars = [];
@@ -46,12 +48,20 @@ const FeedBookPost = (props) => {
                 </div>
             </div>
             <div className="post-social-content">
-                <p>
-                    <a href={`/user/${username}`}>@{username}</a>: {props.post.blurb}
-                </p>
-                <div className="post-actions">
-    
+                <div>
+                    <p>
+                        <a className="username-link" href={`/user/${username}`}>
+                            <img
+                                className="tiny-avatar"
+                                src={`${process.env.PUBLIC_URL}${userAvatar}`}
+                                alt="avatar"
+                            />
+                            @{username}
+                        </a>
+                    </p>
+                    <p className="post-blurb">{props.post.blurb}</p>
                 </div>
+                <div className="post-actions"></div>
             </div>
         </div>
     );

@@ -137,7 +137,7 @@ h2, h3, p {
     margin: 30px 50px 50px;
     border: solid 2px gray;
     border-radius: 10px;
-    background-color: whitesmoke;
+    background-color: gainsboro;
     box-shadow: 0px 1px 15px 1px rgba(0,0,0,0.15);
     display: flex;
     flex-direction: row;
@@ -194,9 +194,9 @@ h2, h3, p {
 }
 
 .post-social-content {
-    background-color: lightgray;
+    background-color: white;
     border-radius: 5px;
-    padding: 5px 8px;
+    border: 2px solid rgb(179, 179, 179);
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -204,14 +204,28 @@ h2, h3, p {
     margin-right: 10px;
 }
 
+.post-blurb {
+    padding: 5px;
+}
+
 .post-actions {
     margin-left: auto;
+    margin-bottom: 5px;
+    margin-right: 5px;
 }
 
 .action-button {
     border: none;
     border-radius: 3px;
-    background-color: whitesmoke;
+    background-color: gray;
+    font-weight: bold;
+    color: white;
+    outline: none;
+}
+
+.action-button:hover {
+    cursor: pointer;
+    background-color: rgb(167, 167, 167);
 }
 
 .cover-img {
@@ -294,10 +308,28 @@ h2, h3, p {
 
 .tiny-avatar {
     border: solid 1px #28262c;
+    /* border: solid 1px #4b4b4b; */
     background-color: antiquewhite;
     border-radius: 3px;
     width: 25px;
     height: 25px;
+    margin-right: 5px;
+}
+
+.username-link {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    background-color: rgb(179, 179, 179);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+}
+
+.username-link:hover {
+    text-decoration: underline;
+    color: black;
 }
 
 .search-wrapper {

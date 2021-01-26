@@ -37,7 +37,7 @@ export default function CenteredTabs(props) {
                 className="tab-container"
                 value={value}
                 onChange={handleChange}
-                indicatorColor="primary"
+                indicatorColor="secondary"
                 variant="fullWidth"
             >
                 <Tab

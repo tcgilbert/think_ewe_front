@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, fade } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
@@ -14,17 +14,25 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     width: "auto",
+    backgroundColor: "#4b4b4b",
+    "&:hover": {
+      backgroundColor: fade("#4b4b4b", 0.9),
+  }
   },
+  
   input: {
     marginLeft: theme.spacing(1),
     flex: 1,
+    color: "white"
   },
   iconButton: {
     padding: 10,
+    color: "white"
   },
   divider: {
     height: 28,
     margin: 4,
+    backgroundColor: "white"
   },
 }));
 
