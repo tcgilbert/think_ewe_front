@@ -58,7 +58,7 @@ const Login = (props) => {
                         label="Username/Email"
                         name="identifier"
                         error={errorPresent}
-                        helperText={errorPresent ? "No user found" : ' ' }
+                        helperText={errorPresent ? "No user found" : null }
                         value={props.identifier}
                         onChange={(e) => props.setIdentifier(e.target.value)}
                     />
@@ -72,7 +72,7 @@ const Login = (props) => {
                         type="password"
                         name="password"
                         error={passwordError}
-                        helperText={passwordError ? "Password incorrect" : ' ' }
+                        helperText={passwordError ? "Password incorrect" : null }
                         value={props.password}
                         onChange={(e) => props.setPassword(e.target.value)}
                     />
@@ -81,6 +81,12 @@ const Login = (props) => {
                     variant="contained"
                     type="submit"
                     onClick={handleSubmit}
+                    style={{
+                        backgroundColor: "#818AA3",
+                        fontWeight: "bold",
+                        color: "whitesmoke",
+                        marginTop: "10px"
+                    }}
                 >
                     Login
                 </Button>

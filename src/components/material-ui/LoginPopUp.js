@@ -4,13 +4,17 @@ import Login from "../Login";
 import { makeStyles } from "@material-ui/core/styles";
 import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const useStyles = makeStyles((theme) => ({
     typography: {
         padding: theme.spacing(2),
     },
+    icon: {
+        margin: "0 5px 2px 0",
+        width: "20px",
+    }
 }));
-
 
 export default function LoginPopUp(props) {
     const classes = useStyles();
@@ -19,21 +23,20 @@ export default function LoginPopUp(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     useEffect(() => {
-        const button = document.getElementById("login-btn")
+        const button = document.getElementById("login-btn");
         if (props.logLink) {
-            setAnchorEl(button)
+            setAnchorEl(button);
         }
-
-    }, [props.logLink])
+    }, [props.logLink]);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
 
     const handleClose = () => {
-        setIdentifier("")
-        setPassword("")
-        props.setLogLink(false)
+        setIdentifier("");
+        setPassword("");
+        props.setLogLink(false);
         setAnchorEl(null);
     };
 
@@ -41,13 +44,16 @@ export default function LoginPopUp(props) {
     const id = open ? "simple-popover" : undefined;
     return (
         <div>
-            <Button
-                id="login-btn"
-                aria-describedby={id}
-                onClick={handleClick}
-            >
-                Log In
-            </Button>
+            <div>
+                <Button
+                    id="login-btn"
+                    aria-describedby={id}
+                    onClick={handleClick}
+                >
+                <ExitToAppIcon className={classes.icon}/>
+                    Log In
+                </Button>
+            </div>
             <Popover
                 id={id}
                 open={open}

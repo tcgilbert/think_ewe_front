@@ -20,7 +20,7 @@ const Signup = (props) => {
     }
 
     return (
-        <>
+        <div className="signup-form">
             <FormControl fullWidth="true">
                 <Box mb={1.5}>
                     <TextField
@@ -82,11 +82,17 @@ const Signup = (props) => {
                     variant="contained"
                     type="submit"
                     onClick={() => props.handleSignup(values)}
+                    style={{
+                        backgroundColor: "#818AA3",
+                        fontWeight: "bold",
+                        color: "whitesmoke",
+                        marginTop: "10px"
+                    }}
                 >
                     Create Account
                 </Button>
             </FormControl>
-        </>
+        </div>
     );
 };
 

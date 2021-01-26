@@ -20,9 +20,9 @@ const Navigation = (props) => {
     }, [search]);
 
     const handleRedirect = (username) => {
-        history.push(`/user/${username}`)
+        history.push(`/user/${username}`);
         setSearchFocus(false);
-        setSearch("")
+        setSearch("");
     };
 
     const handleSearch = async () => {
@@ -68,7 +68,10 @@ const Navigation = (props) => {
     const handleSearchResults = () => {
         if (searchResults.length === 0 && searchFocus) {
             return (
-                <div onClick={() => setSearchFocus(false)} className="absolute-child">
+                <div
+                    onClick={() => setSearchFocus(false)}
+                    className="absolute-child"
+                >
                     <div className="search-wrapper-parent">
                         <div className="search-wrapper">
                             <div>
@@ -83,7 +86,7 @@ const Navigation = (props) => {
         } else if (searchFocus) {
             return <div className="absolute-child">{searchDisplayed}</div>;
         } else {
-            return 
+            return;
         }
     };
 
@@ -103,7 +106,16 @@ const Navigation = (props) => {
         } else {
             return (
                 <div className="nav-bar">
-                    <h1 id="title">Think Ewe</h1>
+                    <div className="logo-title-container">
+                        <img
+                            id="nav-logo"
+                            src={
+                                process.env.PUBLIC_URL + "/images/logo-white.png"
+                            }
+                            alt=""
+                        />
+                        <h1 id="title">Think Ewe</h1>
+                    </div>
                     <LoginPopUp
                         isAuthenticated={props.isAuthenticated}
                         logLink={props.logLink}

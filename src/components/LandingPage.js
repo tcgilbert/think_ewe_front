@@ -3,6 +3,7 @@ import Signup from "./Signup";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import Box from "@material-ui/core/Box";
+import Divider from "@material-ui/core/Divider";
 
 const LandingPage = (props) => {
     const SERVER = process.env.REACT_APP_SERVER;
@@ -89,9 +90,11 @@ const LandingPage = (props) => {
                                     A Novel approach to Social Media
                                 </p>
                             </Box>
-                            <Box>
-                                <Box mb={3}>
-                                    <span>Already have an account?</span>
+                            <Box className="signup-form-container">
+                                <div className="already-have-account">
+                                    <span id="already-text">
+                                        Already have an account?
+                                    </span>
                                     <button
                                         id="log-link-btn"
                                         onClick={() => {
@@ -100,8 +103,15 @@ const LandingPage = (props) => {
                                     >
                                         Login
                                     </button>
-                                    <hr />
-                                </Box>
+                                    <Divider
+                                        style={{
+                                            width: "100%",
+                                            backgroundColor: "gray",
+                                            margin: "5px auto"
+                                        }}
+                                        orientation="horizontal"
+                                    />
+                                </div>
                                 <Signup
                                     emptyEmail={emptyEmail}
                                     emptyName={emptyName}
@@ -119,7 +129,7 @@ const LandingPage = (props) => {
         }
     };
 
-    return <div>{Redirections()}</div>;
+    return <div className="login-signup-parent">{Redirections()}</div>;
 };
 
 export default LandingPage;
