@@ -4,6 +4,8 @@ import NavTabs from './material-ui/NavTabs'
 import SearchBooks from './SearchBooks'
 import MyPosts from './MyPosts'
 import MyFeed from './MyFeed'
+import Box from "@material-ui/core/Box";
+
 
 
 
@@ -44,8 +46,9 @@ const DynamicContent = (props) => {
     return (
         <div className="dynamic-content">
             <NavTabs shownContent={shownContent} setShownContent={setShownContent}/>
-            {handleContent()}
-           
+            <Box style={{maxHeight: "600px", minHeight: "600px"}} overflow="auto">
+                {handleContent()}
+            </Box>
         </div>
     )
 }

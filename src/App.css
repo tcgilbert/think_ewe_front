@@ -141,18 +141,25 @@ h2, h3, p {
 }
 
 .user-info {
-    width: 22%;
     border: solid 2px gray;
     box-shadow: 0px 1px 15px 1px rgba(0,0,0,0.15);
     border-radius: 10px;
     background-color: #f7f7f7;
-    margin: 10px;
     padding: 10px;
+    max-height: 100%;
+}
+
+.user-info-container {
+    width: 22%;
+    margin: 10px 0 0 10px;
 }
 
 .dynamic-content {
-    width: 70%;
-    border: solid 2px dodgerblue;
+    width: 88%;
+    /* border: solid 2px gray; */
+    box-shadow: 0px 1px 15px 1px rgba(0,0,0,0.15);
+    border-radius: 10px;
+    background-color: #f7f7f7;
     margin: 10px;
 }
 
@@ -170,14 +177,17 @@ h2, h3, p {
 
 .book-post-container {
     width: auto;
-    background: white;
-    margin: 5px;
-    padding: 5px;
-    border: solid 1px gray;
-    border-radius: 5px;
+    background: #f7f7f7;
+    /* margin: 5px 0 5px; */
+    padding: 5px 0 10px;
+    border-bottom: solid 1px gray;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.book-post-container:hover {
+    background: white;
 }
 
 .post-social-content {
@@ -188,6 +198,7 @@ h2, h3, p {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-right: 10px;
 }
 
 .post-actions {
@@ -215,6 +226,7 @@ h2, h3, p {
     display: flex;
     flex-direction: row;
     width: 65%;
+    margin-left: 10px;
 }
 
 .new-post-form {

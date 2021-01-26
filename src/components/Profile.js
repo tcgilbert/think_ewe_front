@@ -63,14 +63,16 @@ const Profile = (props) => {
     return (
         <>
             <div className="profile-container">
-                <UserInfo
-                    setOpenModal={setOpenModal}
-                    setOpenFollowsModal={setOpenFollowsModal}
-                    setContent={setFollowsModalContent}
-                    followers={followers}
-                    following={following}
-                    user={props.user}
-                />
+                <div className="user-info-container">
+                    <UserInfo
+                        setOpenModal={setOpenModal}
+                        setOpenFollowsModal={setOpenFollowsModal}
+                        setContent={setFollowsModalContent}
+                        followers={followers}
+                        following={following}
+                        user={props.user}
+                    />
+                </div>
                 <DynamicContent feed={feed} user={props.user} />
             </div>
             <EditProfileModal

@@ -3,6 +3,7 @@ import axios from "axios";
 import OtherUserInfo from "../components/OtherUserInfo";
 import OtherNavTabs from "./material-ui/OtherNavTabs";
 import OtherUserBookPost from "./OtherUserBookPost";
+import Box from "@material-ui/core/Box";
 
 const OtherUserProfile = (props) => {
     const [otherUser, setOtherUser] = useState(null);
@@ -39,7 +40,9 @@ const OtherUserProfile = (props) => {
 
     const fetchPosts = async () => {
         try {
-            let apiRes = await axios.get(`${SERVER}/book-post/user/${otherUser.id}`);
+            let apiRes = await axios.get(
+                `${SERVER}/book-post/user/${otherUser.id}`
+            );
             let usersPosts = await apiRes.data.posts;
             setBookPosts(usersPosts);
         } catch (error) {
@@ -122,10 +125,15 @@ const OtherUserProfile = (props) => {
 
     return (
         <div className="profile-container">
-            {handleContent()}
+            <div className="user-info-container">{handleContent()}</div>
             <div className="dynamic-content">
                 <OtherNavTabs />
-                <div>{handleBookPosts()}</div>
+                <Box
+                    style={{ maxHeight: "600px", minHeight: "600px" }}
+                    overflow="auto"
+                >
+                    {handleBookPosts()}
+                </Box>
             </div>
         </div>
     );
