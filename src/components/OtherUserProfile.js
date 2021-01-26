@@ -5,6 +5,7 @@ import OtherNavTabs from "./material-ui/OtherNavTabs";
 import OtherUserBookPost from "./OtherUserBookPost";
 import Box from "@material-ui/core/Box";
 import FollowsModal from "./material-ui/FollowsModal";
+import { useHistory } from 'react-router-dom'
 
 const OtherUserProfile = (props) => {
     const [otherUser, setOtherUser] = useState(null);
@@ -15,6 +16,13 @@ const OtherUserProfile = (props) => {
     const [followsModalContent, setFollowsModalContent] = useState(null);
     const SERVER = process.env.REACT_APP_SERVER;
     const usernameFromPath = props.match.params.username;
+    const history = useHistory()
+
+    useEffect(() => {
+        if (usernameFromPath === props.user.username) {
+            history.push("/profile")
+        }
+    }, [props.match.params.username])
 
     useEffect(() => {
         if (!otherUser || otherUser.username !== usernameFromPath) {
