@@ -1,7 +1,7 @@
 /* Document */
 
 html {
-    background-color: whitesmoke;
+    background-color: antiquewhite;
 }
 
 h2, h3, p {
@@ -10,6 +10,21 @@ h2, h3, p {
 }
 
 /* Classes */
+
+.follows-modal-container {
+    background-color: white;
+    width: 100%;
+    height: 500px;
+}
+
+.follows-modal-child {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.follows-display {
+    border-bottom: 1px solid lightgray;
+}
 
 .edit-profile-modal {
     width: 100%;
@@ -267,7 +282,41 @@ h2, h3, p {
     flex-direction: row;
     align-items: center;
 }
+
+.follows-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.following-hover:hover {
+    cursor: pointer;
+    color: blue;
+}
+
+.followers-hover:hover {
+    cursor: pointer;
+    color: blue;
+}
+
+.followers-hover {
+    width: 103px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
 /* Elements */
+
+#following-margin {
+    margin-left: 5px;
+}
+
+#bullet-point {
+    margin: 0 5px;
+}
 
 #search-username {
     display: inline-block;

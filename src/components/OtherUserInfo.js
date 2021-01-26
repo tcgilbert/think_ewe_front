@@ -7,7 +7,7 @@ const OtherUserInfo = (props) => {
     const handleFollowButtons = () => {
         let isFollowing = false
         props.followers.forEach((follower) => {
-            if (follower.follower_id === props.currentUserId) {
+            if (follower.id === props.currentUserId) {
                 isFollowing = true
             }
         })

@@ -3,11 +3,14 @@ import UserInfo from "../components/UserInfo";
 import DynamicContent from "../components/DynamicContent";
 import axios from "axios";
 import EditProfileModal from "./material-ui/EditProfileModal";
+import FollowsModal from "./material-ui/FollowsModal";
 
 const Profile = (props) => {
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
     const [openModal, setOpenModal] = useState(false);
+    const [openFollowsModal, setOpenFollowsModal] = useState(false);
+    const [followsModalContent, setFollowsModalContent] = useState(null);
     const [feed, setFeed] = useState([]);
     const SERVER = process.env.REACT_APP_SERVER;
 
@@ -42,12 +45,10 @@ const Profile = (props) => {
     };
 
     const fetchFeed = async () => {
-        console.log("skadjgfasdjghkk");
         let accountIds = [];
         following.forEach((ele) => {
-            accountIds.push(ele.following_id);
+            accountIds.push(ele.id);
         });
-        console.log(accountIds);
         try {
             let apiRes = await axios.post(`${SERVER}/book-post/feed`, {
                 accountIds: accountIds,
@@ -64,6 +65,8 @@ const Profile = (props) => {
             <div className="profile-container">
                 <UserInfo
                     setOpenModal={setOpenModal}
+                    setOpenFollowsModal={setOpenFollowsModal}
+                    setContent={setFollowsModalContent}
                     followers={followers}
                     following={following}
                     user={props.user}
@@ -75,6 +78,13 @@ const Profile = (props) => {
                 user={props.user}
                 openModal={openModal}
                 setOpenModal={setOpenModal}
+            />
+            <FollowsModal
+                followers={followers}
+                following={following}
+                openFollowsModal={openFollowsModal}
+                setOpenFollowsModal={setOpenFollowsModal}
+                content={followsModalContent}
             />
         </>
     );
