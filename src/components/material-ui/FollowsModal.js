@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
+        borderRadius: "100px",
     },
     paper: {
         backgroundColor: theme.palette.background.paper,
@@ -76,21 +77,24 @@ export default function FollowsModal(props) {
     const followersDisplayed = props.followers.map((user, idx) => {
         return (
             <div className="follows-modal-child">
-                    <div className="search-wrapper">
-                        <div>
-                            <div className="avatar-username">
+                <div className="search-wrapper">
+                    <div>
+                        <div className="avatar-username">
+                            <a
+                                className="username-link-modal"
+                                href={`/user/${user.username}`}
+                            >
                                 <img
                                     className="tiny-avatar"
                                     src={`${process.env.PUBLIC_URL}${user.avatar}`}
                                     alt="avatar"
                                 />
-                                <p id="search-username">
-                                    <strong>@{user.username}</strong>
-                                </p>
-                            </div>
+                                @{user.username}
+                            </a>
                         </div>
-                        {user.name}
                     </div>
+                    {user.name}
+                </div>
             </div>
         );
     });
@@ -98,30 +102,44 @@ export default function FollowsModal(props) {
     const followingDisplayed = props.following.map((user, idx) => {
         return (
             <div className="follows-modal-child">
-                    <div className="search-wrapper">
-                        <div>
-                            <div className="avatar-username">
+                <div className="search-wrapper">
+                    <div>
+                        <div className="avatar-username">
+                            <a
+                                className="username-link-modal"
+                                href={`/user/${user.username}`}
+                            >
                                 <img
                                     className="tiny-avatar"
                                     src={`${process.env.PUBLIC_URL}${user.avatar}`}
                                     alt="avatar"
                                 />
-                                <p id="search-username">
-                                    <strong>@{user.username}</strong>
-                                </p>
-                            </div>
+                                @{user.username}
+                            </a>
                         </div>
-                        {user.name}
                     </div>
+                    {user.name}
+                </div>
             </div>
         );
     });
 
     const handleContent = () => {
         if (props.content === "followers") {
-            return followersDisplayed;
+            return (
+                <div>
+                    <h3 className="follows-modal-title">Followers</h3>
+                    {followersDisplayed}
+                </div>
+            )
+            
         } else if (props.content === "following") {
-            return followingDisplayed;
+            return (
+                <div>
+                    <h3 className="follows-modal-title">Following</h3>
+                    {followingDisplayed}
+                </div>
+            )
         }
     };
 
@@ -139,7 +157,7 @@ export default function FollowsModal(props) {
                     timeout: 500,
                 }}
             >
-                <Fade id="remove-modal-border" in={open}>
+                <Fade in={open}>
                     <div className="follows-modal-container">
                         {handleContent()}
                     </div>
