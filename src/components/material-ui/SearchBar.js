@@ -14,9 +14,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     width: "auto",
-    backgroundColor: "#4b4b4b",
+    backgroundColor: "#767676",
     "&:hover": {
-      backgroundColor: fade("#4b4b4b", 0.9),
+      backgroundColor: fade("#767676", 0.9),
   }
   },
   

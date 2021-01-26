@@ -286,11 +286,13 @@ h2, h3, p {
     flex-direction: row;
 }
 
+
 .relative-parent {
     position: relative;
     width: 0;
     height: 0;
     z-index: 2;
+    margin-left: auto;
 }
 
 .absolute-child {
@@ -298,9 +300,9 @@ h2, h3, p {
     box-shadow: 0px 5px 15px 5px rgba(0,0,0,0.15);
     border: solid 1px lightgray;
     border-radius: 3px;
-    position: absolute; 
-    left: 215px; 
-    top: -13px;
+    position:relative; 
+    left: -478px;
+    top: -12px;
     width: 400px;
     display: flex;
     flex-direction: column;
@@ -308,7 +310,6 @@ h2, h3, p {
 
 .tiny-avatar {
     border: solid 1px #28262c;
-    /* border: solid 1px #4b4b4b; */
     background-color: antiquewhite;
     border-radius: 3px;
     width: 25px;

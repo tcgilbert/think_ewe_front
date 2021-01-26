@@ -134,6 +134,34 @@ export default function PrimarySearchAppBar(props) {
                         <h1 id="title">Think Ewe</h1>
                     </div>
                     </Typography>
+                    {/* <div className={classes.search}>
+                        <div className={classes.searchIcon}>
+                            <SearchIcon />
+                        </div>
+                        <InputBase
+                            placeholder="Search Users"
+                            value={props.search}
+                            onChange={(e) => props.setSearch(e.target.value)}
+                            onFocus={() => handleSearchMenu()}
+                            classes={{
+                                root: classes.inputRoot,
+                                input: classes.inputInput,
+                            }}
+                            inputProps={{ "aria-label": "search" }}
+                        />
+                        <Divider
+                            className={classes.divider}
+                            orientation="vertical"
+                        />
+                        <IconButton
+                            onClick={() => cancelSearch()}
+                            className={classes.iconButton}
+                            aria-label="directions"
+                        >
+                            <ClearIcon />
+                        </IconButton>
+                    </div> */}
+                    <div className={classes.grow} />
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />
@@ -161,8 +189,8 @@ export default function PrimarySearchAppBar(props) {
                             <ClearIcon />
                         </IconButton>
                     </div>
-                    <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
+                        
                         <IconButton
                             edge="end"
                             aria-label="account of current user"
