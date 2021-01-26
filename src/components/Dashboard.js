@@ -4,17 +4,21 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { TextField, Button, FormControl } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
+import Divider from "@material-ui/core/Divider";
 
 const Dashboard = (props) => {
-    const [values, handleChange] = useForm({ username: null, bio: "" });
+    const [values, handleChange] = useForm({ username: "", bio: "" });
     const [avatar, setAvatar] = useState(null);
+    const [usernameEmpty, setUsernameEmpty] = useState(false)
+    const [usernameTaken, setUsernameTaken] = useState(false)
+    const [avatarTextColor, setAvatarTextColor] = useState("green")
     const [avatarPath, setAvatarPath] = useState(null);
     const SERVER = process.env.REACT_APP_SERVER;
-    const history = useHistory()
+    const history = useHistory();
 
     useEffect(() => {
         if (props.user.registered) {
-            history.push("/profile")
+            history.push("/profile");
         }
         // get avatars from DOM once page is mounted
         const llama = document.getElementById("llama");
@@ -94,10 +98,50 @@ const Dashboard = (props) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    const findIdentifier = async () => {
+        try {
+            let apiRes = await axios.get(`${SERVER}/users/other-user/${values.username}`)
+            if (apiRes.data.requestedUser) {
+                return true
+            } else {
+                return false
+            }
+        } catch (error) {
+            console.log(error);
+            return error
+        }
+    }
+
+    const handleTextfieldError = () => {
+        if (usernameEmpty || usernameTaken) {
+            return true
+        }
+    }
+
+    const validateUsername = () => {
+        let errorPresent = false
+        if (values.username === "") {
+            setUsernameEmpty(true)
+            errorPresent = true
+        } else {
+            setUsernameEmpty(false)
+        }
+        if (findIdentifier() === true) {
+            setUsernameTaken(true)
+            errorPresent = true
+        } else {
+            setUsernameTaken(false)
+        }
+        if (!avatarPath) {
+            errorPresent = true
+            setAvatar("Avatar selection required!")
+        }
+        return errorPresent
+    }
+
     const handleSubmit = async () => {
-        if (!values.username) {
-            console.log("Username is required");
-            return;
+        if (validateUsername()) {
+            return
         }
         // update the user
         try {
@@ -107,10 +151,12 @@ const Dashboard = (props) => {
                 avatar: avatarPath,
                 id: props.user.id,
             });
-            let apiRes = await axios.get(`${SERVER}/users/current/${props.user.id}`);
+            let apiRes = await axios.get(
+                `${SERVER}/users/current/${props.user.id}`
+            );
             const updatedUser = await apiRes.data.requestedUser;
             props.setUser(updatedUser);
-            history.push("/profile")
+            history.push("/profile");
         } catch (error) {
             console.log(`UPDATE ERROR: ${error}`);
         }
@@ -118,7 +164,15 @@ const Dashboard = (props) => {
 
     return (
         <div className="dashboard-container">
-            <h3>Welcome, {props.user.name}!</h3>
+            <h3 id="dashboard-welcome">Welcome, {props.user.name}!</h3>
+            <Divider
+                style={{
+                    width: "90%",
+                    backgroundColor: "lightgray",
+                    margin: "10px auto 20px",
+                }}
+                orientation="horizontal"
+            />
             <FormControl>
                 <h3>Select an avatar: {avatar}</h3>
                 <div className="avatar-container">
@@ -167,7 +221,7 @@ const Dashboard = (props) => {
                     {/* prettier-ignore */}
                     <img id="zebra" className="avatar-img" src={process.env.PUBLIC_URL + "/images/avatars/025-zebra.svg"} alt="/images/avatars/025-zebra.svg"/>
                 </div>
-                <span>Select a username</span>
+                <h3>Select a username</h3>
                 <Box mb={2} mt={1}>
                     <TextField
                         required="true"
@@ -177,6 +231,8 @@ const Dashboard = (props) => {
                         variant="outlined"
                         size="small"
                         name="username"
+                        error={handleTextfieldError()}
+                        helperText={usernameEmpty ? "Username is required" : usernameTaken ? "Username not availible" : null}
                         value={values.username}
                         onChange={handleChange}
                     />
@@ -199,6 +255,11 @@ const Dashboard = (props) => {
                     variant="contained"
                     type="submit"
                     onClick={handleSubmit}
+                    style={{
+                        backgroundColor: "#818AA3",
+                        fontWeight: "bold",
+                        color: "whitesmoke",
+                    }}
                 >
                     Submit
                 </Button>

@@ -62,7 +62,7 @@ h2, h3, p {
     border-radius: 10px;
     box-shadow: 0px 5px 15px 5px rgba(0,0,0,0.15);
     width: 45%;
-    height: 400px;
+    height: 100%;
     margin: 100px auto;
     padding: 10px;
     display: flex;
@@ -83,6 +83,7 @@ h2, h3, p {
 .already-have-account {
     width: 100%;
     margin: 0 0 10px;
+    text-align: center;
 }
 
 .dashboard-container {
@@ -128,7 +129,7 @@ h2, h3, p {
 }
 
 .avatar-selection {
-    border: solid 3px royalblue;
+    border: solid 3px dodgerblue;
     border-radius: 10px;
 }
 
@@ -330,6 +331,7 @@ h2, h3, p {
     padding: 20px;
     border-radius: 5px;
     width: 100%;
+    min-width: 280px;
 }
 
 .logo-title-container {
@@ -340,6 +342,11 @@ h2, h3, p {
 
 
 /* Elements */
+
+#dashboard-welcome {
+    text-align: center;
+    font-size: 30px;
+}
 
 #nav-logo {
     width: 35px;

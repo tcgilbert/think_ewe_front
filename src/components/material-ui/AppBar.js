@@ -123,7 +123,16 @@ export default function PrimarySearchAppBar(props) {
             <AppBar className={classes.appBar} position="static">
                 <Toolbar>
                     <Typography className={classes.title} variant="h6" noWrap>
-                        Think Ewe
+                    <div className="logo-title-container">
+                        <img
+                            id="nav-logo"
+                            src={
+                                process.env.PUBLIC_URL + "/images/logo-white.png"
+                            }
+                            alt=""
+                        />
+                        <h1 id="title">Think Ewe</h1>
+                    </div>
                     </Typography>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
