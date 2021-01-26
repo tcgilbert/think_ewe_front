@@ -4,6 +4,18 @@ import { Button } from "@material-ui/core";
 import PeopleAltOutlinedIcon from "@material-ui/icons/PeopleAltOutlined";
 
 const OtherUserInfo = (props) => {
+
+
+    const handleFollowerModal = () => {
+        props.setContent("followers");
+        props.setOpenFollowsModal(true);
+    };
+
+    const handleFollowingModal = () => {
+        props.setContent("following");
+        props.setOpenFollowsModal(true);
+    };
+
     const handleFollowButtons = () => {
         let isFollowing = false;
         props.followers.forEach((follower) => {
@@ -81,14 +93,14 @@ const OtherUserInfo = (props) => {
             </Box>
             <div className="follows-container">
                 <p
-                    // onClick={() => handleFollowerModal()}
+                    onClick={() => handleFollowerModal()}
                     className="followers-hover"
                 >
                     <PeopleAltOutlinedIcon />
                     <strong> {props.followers.length}</strong> followers{" "}
                 </p>
                 <p
-                    // onClick={() => handleFollowingModal()}
+                    onClick={() => handleFollowingModal()}
                     className="following-hover"
                 >
                     <span id="bullet-point">{"\u0081"}</span>

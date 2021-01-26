@@ -334,6 +334,17 @@ h2, h3, p {
     padding: 5px;
 }
 
+.username-link-other {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    background-color: rgb(179, 179, 179);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+}
+
 .username-link-modal {
     text-decoration: none;
     color: black;

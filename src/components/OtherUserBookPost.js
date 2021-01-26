@@ -16,26 +16,54 @@ const UserBookPost = (props) => {
     };
 
     return (
-        <div className="book-post-container">
-            <div className="cover-info-container-post">
-                <img className="cover-img" src={props.post.cover_url} alt="" />
-                <div id="title-rating-author">
-                    <div>
-                        <h4 id="book-title">{props.post.title}</h4>
-                        <p id="by-author">By: {props.post.authors}</p>
-                    </div>
-                    <div className="book-post-rating">{postRating()}</div>
-                </div>
-            </div>
-            <div className="post-social-content">
-                <p>
-                    @{props.user.username}: {props.post.blurb}
-                </p>
-                <div className="post-actions">
+        // <div className="book-post-container">
+        //     <div className="cover-info-container-post">
+        //         <img className="cover-img" src={props.post.cover_url} alt="" />
+        //         <div id="title-rating-author">
+        //             <div>
+        //                 <h4 id="book-title">{props.post.title}</h4>
+        //                 <p id="by-author">By: {props.post.authors}</p>
+        //             </div>
+        //             <div className="book-post-rating">{postRating()}</div>
+        //         </div>
+        //     </div>
+        //     <div className="post-social-content">
+        //         <p>
+        //             @{props.user.username}: {props.post.blurb}
+        //         </p>
+        //         <div className="post-actions">
     
+        //         </div>
+        //     </div>
+        // </div>
+        <div className="book-post-container">
+        <div className="cover-info-container-post">
+            <img className="cover-img" src={props.post.cover_url} alt="" />
+            <div id="title-rating-author">
+                <div>
+                    <h4 id="book-title">{props.post.title}</h4>
+                    <p id="by-author">By: {props.post.authors}</p>
                 </div>
+                <div className="book-post-rating">{postRating()}</div>
             </div>
         </div>
+        <div className="post-social-content">
+            <div>
+                <p>
+                    <p className="username-link-other">
+                        <img
+                            className="tiny-avatar"
+                            src={`${process.env.PUBLIC_URL}${props.user.avatar}`}
+                            alt="avatar"
+                        />
+                        @{props.user.username}
+                    </p>
+                </p>
+                <p className="post-blurb">{props.post.blurb}</p>
+            </div>
+            <div className="post-actions"></div>
+        </div>
+    </div>
     );
 };
 

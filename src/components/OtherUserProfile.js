@@ -4,12 +4,15 @@ import OtherUserInfo from "../components/OtherUserInfo";
 import OtherNavTabs from "./material-ui/OtherNavTabs";
 import OtherUserBookPost from "./OtherUserBookPost";
 import Box from "@material-ui/core/Box";
+import FollowsModal from "./material-ui/FollowsModal";
 
 const OtherUserProfile = (props) => {
     const [otherUser, setOtherUser] = useState(null);
     const [bookPosts, setBookPosts] = useState(null);
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
+    const [openFollowsModal, setOpenFollowsModal] = useState(false);
+    const [followsModalContent, setFollowsModalContent] = useState(null);
     const SERVER = process.env.REACT_APP_SERVER;
     const usernameFromPath = props.match.params.username;
 
@@ -87,6 +90,8 @@ const OtherUserProfile = (props) => {
         if (otherUser) {
             return (
                 <OtherUserInfo
+                    setOpenFollowsModal={setOpenFollowsModal}
+                    setContent={setFollowsModalContent}
                     currentUserId={props.user.id}
                     followers={followers}
                     following={following}
@@ -135,6 +140,13 @@ const OtherUserProfile = (props) => {
                     {handleBookPosts()}
                 </Box>
             </div>
+            <FollowsModal
+                followers={followers}
+                following={following}
+                openFollowsModal={openFollowsModal}
+                setOpenFollowsModal={setOpenFollowsModal}
+                content={followsModalContent}
+            />
         </div>
     );
 };
