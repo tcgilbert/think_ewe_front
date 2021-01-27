@@ -19,6 +19,7 @@ const LandingPage = (props) => {
         console.log(SERVER + "/users/signup");
         try {
             if (validateFields(values)) {
+                console.log("validation messed up");
                 return;
             }
             const newUser = await axios.post(SERVER + "/users/signup", {
