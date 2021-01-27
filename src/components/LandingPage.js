@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Signup from "./SignUp";
+import Signup from "./Signup";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import Box from "@material-ui/core/Box";
