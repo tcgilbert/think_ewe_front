@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Signup from "src/components/Signup.js";
+// import Signup from "./Signup";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import Box from "@material-ui/core/Box";
@@ -114,7 +114,7 @@ const LandingPage = (props) => {
                                         orientation="horizontal"
                                     />
                                 </div>
-                                <Signup
+                                {/* <Signup
                                     emptyEmail={emptyEmail}
                                     emptyName={emptyName}
                                     emailAlreadyUsed={emailAlreadyUsed}
@@ -123,7 +123,7 @@ const LandingPage = (props) => {
                                     handleSignup={handleSignUp}
                                     setUser={props.setUser}
                                     setAuth={props.setAuth}
-                                />
+                                /> */}
                             </Box>
                         </div>
                     </Box>
