@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Signup from "./Signup";
+import Signup from "/Users/tcgilbert/Documents/Personal-Projects/think-ewe2/think_ewe_front/src/components/Signup.js";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import Box from "@material-ui/core/Box";
@@ -33,7 +33,7 @@ const LandingPage = (props) => {
             }
         } catch (error) {
             console.log(`SIGNUP ERROR: ${error.data}`);
-            setEmailAlreadyUsed(true)
+            setEmailAlreadyUsed(true);
         }
     };
 
@@ -109,7 +109,7 @@ const LandingPage = (props) => {
                                         style={{
                                             width: "100%",
                                             backgroundColor: "gray",
-                                            margin: "5px auto"
+                                            margin: "5px auto",
                                         }}
                                         orientation="horizontal"
                                     />
