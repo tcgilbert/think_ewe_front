@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import LoginPopUp from "./material-ui/LoginPopUp";
 import AppBar from "./material-ui/AppBar";
 import axios from "axios";
-import { useHistory, Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Navigation = (props) => {
     const [search, setSearch] = useState("");
@@ -10,11 +10,12 @@ const Navigation = (props) => {
     const [searchFocus, setSearchFocus] = useState(false);
     const SERVER = process.env.REACT_APP_SERVER;
     const history = useHistory();
+    const handleSearch = useRef(() => {})
 
     useEffect(() => {
         if (search !== "") {
-            handleSearch();
-        } else if (search == "") {
+            handleSearch.current();
+        } else if (search === "") {
             setSearchResults([]);
         }
     }, [search]);
@@ -25,7 +26,7 @@ const Navigation = (props) => {
         setSearch("");
     };
 
-    const handleSearch = async () => {
+    handleSearch.current = async () => {
         try {
             let apiRes = await axios.get(`${SERVER}/users/find/${search}`);
             let matches = await apiRes.data.matchesPayload;
@@ -61,7 +62,7 @@ const Navigation = (props) => {
                 </div>
             );
         } else {
-            return;
+            return <div></div>;
         }
     });
 

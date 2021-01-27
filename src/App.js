@@ -1,6 +1,6 @@
 // imports
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Route, Redirect, useHistory, Switch } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
@@ -23,7 +23,7 @@ function App() {
         identifier: "tcgilbert94@gmail.com",
         password: "00000000",
     };
-
+    const handleLogout = useRef(() => {})
     // Private Route
     const PrivateRoute = ({ component: Component, ...rest }) => {
         const user = localStorage.getItem("jwtToken");
@@ -42,7 +42,6 @@ function App() {
     };
     // handle log in
     const handleLogin = async (values) => {
-        console.log(values);
         try {
             console.log("logging in");
             // look for user
@@ -68,9 +67,19 @@ function App() {
             setIsAuthenticated(true);
         } catch (error) {
             return await error
-            console.log(`LOGIN ERROR: ${error.data}`);
         }
     };
+
+
+    handleLogout.current = () => {
+        setCurrentUser(null);
+        setIsAuthenticated(false);
+        history.push("/");
+        if (localStorage.getItem("jwtToken")) {
+            localStorage.removeItem("jwtToken");
+        }
+    };
+
 
     // send token to backend to check for user
     useEffect(() => {
@@ -88,10 +97,10 @@ function App() {
                     setIsAuthenticated(true);
                     setAuthToken(token);
                 } else {
-                    handleLogout();
+                    handleLogout.current();
                 }
             } catch (error) {
-                handleLogout();
+                handleLogout.current();
             }
         };
 
@@ -99,16 +108,9 @@ function App() {
         if (token) {
             checkToken(token);
         }
-    }, [SERVER]);
+    }, [SERVER, handleLogout]);
 
-    const handleLogout = () => {
-        setCurrentUser(null);
-        setIsAuthenticated(false);
-        history.push("/");
-        if (localStorage.getItem("jwtToken")) {
-            localStorage.removeItem("jwtToken");
-        }
-    };
+
 
     return (
         <div>
@@ -116,7 +118,7 @@ function App() {
                 logLink={logLink}
                 setLogLink={setLogLink}
                 handleLogin={handleLogin}
-                handleLogout={handleLogout}
+                handleLogout={handleLogout.current}
                 isAuthenticated={isAuthenticated}
             />
             <div className="app-container">

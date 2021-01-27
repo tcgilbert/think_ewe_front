@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
 const FeedBookPost = (props) => {
     const [username, setUserName] = useState("");
     const [userAvatar, setUserAvatar] = useState("");
     const SERVER = process.env.REACT_APP_SERVER;
+    const getUserInfo = useRef(() => {})
 
     useEffect(() => {
         if (username === "") {
-            getUserInfo();
+            getUserInfo.current();
         }
-    }, []);
+    }, [username]);
 
-    const getUserInfo = async () => {
+    getUserInfo.current = async () => {
         let apiRes = await axios.get(
             `${SERVER}/users/current/${props.post.user_id}`
         );

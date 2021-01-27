@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import SearchBar from "./material-ui/SearchBar";
 import BookDisplayed from "./BookDisplayed";
 import BookPostModal from "./material-ui/BookPostModal";
@@ -15,6 +15,7 @@ const SearchBooks = (props) => {
     const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
     const SERVER = process.env.REACT_APP_SERVER;
     const searchDebounced = useDebounce(search, 500);
+    const handleSearch = useRef(() => {})
 
     const handleModal = (book) => {
         console.log(book);
@@ -36,7 +37,7 @@ const SearchBooks = (props) => {
     // handles book search
     useEffect(() => {
         if (searchDebounced) {
-            handleSearch();
+            handleSearch.current();
         }
     }, [searchDebounced]);
 
@@ -49,7 +50,7 @@ const SearchBooks = (props) => {
         }
     }, [search]);
 
-    const handleSearch = async () => {
+    handleSearch.current = async () => {
         let books = [];
         try {
             let axiosRes = await axios.get(
@@ -105,7 +106,7 @@ const SearchBooks = (props) => {
     return (
         <div>
             <SearchBar
-                handleSearch={handleSearch}
+                handleSearch={handleSearch.current}
                 search={search}
                 setSearch={setSearch}
             />

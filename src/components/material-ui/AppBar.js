@@ -5,12 +5,10 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
-import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import ClearIcon from "@material-ui/icons/Clear";
 import Divider from "@material-ui/core/Divider";
 import { useHistory } from "react-router-dom";
@@ -69,8 +67,8 @@ const useStyles = makeStyles((theme) => ({
         color: "white",
     },
     appBar: {
-        backgroundColor: "#28262c"
-    } 
+        backgroundColor: "#28262c",
+    },
 }));
 
 export default function PrimarySearchAppBar(props) {
@@ -98,9 +96,9 @@ export default function PrimarySearchAppBar(props) {
     };
 
     const cancelSearch = () => {
-        props.setSearch("")
+        props.setSearch("");
         props.setSearchFocus(false);
-    }
+    };
 
     const menuId = "primary-search-account-menu";
     const renderMenu = (
@@ -123,44 +121,18 @@ export default function PrimarySearchAppBar(props) {
             <AppBar className={classes.appBar} position="static">
                 <Toolbar>
                     <Typography className={classes.title} variant="h6" noWrap>
-                    <div className="logo-title-container">
-                        <img
-                            id="nav-logo"
-                            src={
-                                process.env.PUBLIC_URL + "/images/logo-white.png"
-                            }
-                            alt=""
-                        />
-                        <h1 id="title">Think Ewe</h1>
-                    </div>
-                    </Typography>
-                    {/* <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon />
+                        <div className="logo-title-container">
+                            <img
+                                id="nav-logo"
+                                src={
+                                    process.env.PUBLIC_URL +
+                                    "/images/logo-white.png"
+                                }
+                                alt=""
+                            />
+                            <h1 id="title">Think Ewe</h1>
                         </div>
-                        <InputBase
-                            placeholder="Search Users"
-                            value={props.search}
-                            onChange={(e) => props.setSearch(e.target.value)}
-                            onFocus={() => handleSearchMenu()}
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                            inputProps={{ "aria-label": "search" }}
-                        />
-                        <Divider
-                            className={classes.divider}
-                            orientation="vertical"
-                        />
-                        <IconButton
-                            onClick={() => cancelSearch()}
-                            className={classes.iconButton}
-                            aria-label="directions"
-                        >
-                            <ClearIcon />
-                        </IconButton>
-                    </div> */}
+                    </Typography>
                     <div className={classes.grow} />
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
@@ -190,7 +162,6 @@ export default function PrimarySearchAppBar(props) {
                         </IconButton>
                     </div>
                     <div className={classes.sectionDesktop}>
-                        
                         <IconButton
                             edge="end"
                             aria-label="account of current user"

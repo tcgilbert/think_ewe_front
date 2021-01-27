@@ -23,7 +23,7 @@ export default function CenteredTabs(props) {
         if (value !== 1 && props.shownContent === "myPosts") {
             handleChange(null, 1);
         }
-    }, [props.shownContent]);
+    }, [props.shownContent, value]);
 
     const handleChange = (event, newValue) => {
         console.log(newValue);

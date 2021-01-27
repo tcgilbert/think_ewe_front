@@ -1,6 +1,6 @@
 import UserBookPost from "./UserBookPost";
 import PostEditModal from "./material-ui/PostEditModal";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const MyPosts = (props) => {

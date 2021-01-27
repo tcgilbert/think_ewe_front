@@ -15,17 +15,53 @@ const Profile = (props) => {
     const SERVER = process.env.REACT_APP_SERVER;
 
     useEffect(() => {
+
         if (props.user) {
             fetchSocials();
             fetchFeed();
         }
-    }, []);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [SERVER, props.user]);
 
     useEffect(() => {
+
+        const fetchFeed = async () => {
+            let accountIds = [];
+            following.forEach((ele) => {
+                accountIds.push(ele.id);
+            });
+            try {
+                let apiRes = await axios.post(`${SERVER}/book-post/feed`, {
+                    accountIds: accountIds,
+                });
+                let feedData = await apiRes.data.posts;
+                setFeed(feedData);
+            } catch (error) {
+                console.log(`FEED FETCHING ERROR: ${error}`);
+            }
+        };
+
         if (props.user) {
             fetchFeed();
         }
-    }, [following]);
+    }, [following, SERVER, props.user]);
+
+    const fetchFeed = async () => {
+        let accountIds = [];
+        following.forEach((ele) => {
+            accountIds.push(ele.id);
+        });
+        try {
+            let apiRes = await axios.post(`${SERVER}/book-post/feed`, {
+                accountIds: accountIds,
+            });
+            let feedData = await apiRes.data.posts;
+            setFeed(feedData);
+        } catch (error) {
+            console.log(`FEED FETCHING ERROR: ${error}`);
+        }
+    };
 
     const fetchSocials = async () => {
         try {
@@ -44,21 +80,6 @@ const Profile = (props) => {
         }
     };
 
-    const fetchFeed = async () => {
-        let accountIds = [];
-        following.forEach((ele) => {
-            accountIds.push(ele.id);
-        });
-        try {
-            let apiRes = await axios.post(`${SERVER}/book-post/feed`, {
-                accountIds: accountIds,
-            });
-            let feedData = await apiRes.data.posts;
-            setFeed(feedData);
-        } catch (error) {
-            console.log(`FEED FETCHING ERROR: ${error}`);
-        }
-    };
 
     return (
         <>

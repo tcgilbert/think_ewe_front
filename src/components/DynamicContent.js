@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import NavTabs from './material-ui/NavTabs'
 import SearchBooks from './SearchBooks'
 import MyPosts from './MyPosts'
@@ -15,18 +15,18 @@ const DynamicContent = (props) => {
     const [myBookPosts, setMyBookPosts] = useState([])
     const [loadingFeed, setLoadingFeed] = useState(false)
     const SERVER = process.env.REACT_APP_SERVER;
-
+    const fetchBookPosts = useRef(() => {})
     // load book posts on state switch
     useEffect(() => {
 
         if (shownContent === "myPosts") {
             // function to get books
-            fetchBookPosts()
+            fetchBookPosts.current()
         }
 
     }, [shownContent])
 
-    const fetchBookPosts = async () => {
+    fetchBookPosts.current = async () => {
         let apiRes = await axios.get(`${SERVER}/book-post/user/${props.user.id}`)
         let usersPosts = await apiRes.data.posts
         setMyBookPosts(usersPosts)
@@ -36,14 +36,14 @@ const DynamicContent = (props) => {
     const handleRefresh = () => {
         setLoadingFeed(true)
         setTimeout(() => {
-            fetchBookPosts()
+            fetchBookPosts.current()
         }, 1000)
     }
 
     // returns selected component
     const handleContent = () => {
         if (shownContent === "myPosts") {
-            return <MyPosts fetchBookPosts={fetchBookPosts} myBookPosts={myBookPosts} user={props.user}/>
+            return <MyPosts fetchBookPosts={fetchBookPosts.current} myBookPosts={myBookPosts} user={props.user}/>
         } else if (shownContent === "searchBooks") {
             return <SearchBooks setShownContent={setShownContent} user={props.user}/>
         } else {

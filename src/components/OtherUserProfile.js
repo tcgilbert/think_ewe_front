@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import OtherUserInfo from "../components/OtherUserInfo";
 import OtherNavTabs from "./material-ui/OtherNavTabs";
 import OtherUserBookPost from "./OtherUserBookPost";
 import Box from "@material-ui/core/Box";
 import FollowsModal from "./material-ui/FollowsModal";
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 const OtherUserProfile = (props) => {
     const [otherUser, setOtherUser] = useState(null);
@@ -16,52 +16,10 @@ const OtherUserProfile = (props) => {
     const [followsModalContent, setFollowsModalContent] = useState(null);
     const SERVER = process.env.REACT_APP_SERVER;
     const usernameFromPath = props.match.params.username;
-    const history = useHistory()
+    const history = useHistory();
+    const fetchSocials = useRef(() => {});
 
-    useEffect(() => {
-        if (usernameFromPath === props.user.username) {
-            history.push("/profile")
-        }
-    }, [props.match.params.username])
-
-    useEffect(() => {
-        if (!otherUser || otherUser.username !== usernameFromPath) {
-            fetchUser();
-        }
-    }, [props.match.params.username]);
-
-    useEffect(() => {
-        if (otherUser) {
-            fetchPosts();
-            fetchSocials();
-        }
-    }, [otherUser]);
-
-    const fetchUser = async () => {
-        try {
-            let apiRes = await axios.get(
-                `${SERVER}/users/other-user/${usernameFromPath}`
-            );
-            let userData = await apiRes.data.requestedUser;
-            setOtherUser(userData);
-        } catch (error) {
-            console.log(`ERROR FETCHING OTHER USER: ${error}`);
-        }
-    };
-
-    const fetchPosts = async () => {
-        try {
-            let apiRes = await axios.get(
-                `${SERVER}/book-post/user/${otherUser.id}`
-            );
-            let usersPosts = await apiRes.data.posts;
-            setBookPosts(usersPosts);
-        } catch (error) {
-            console.log(`ERROR FETCHING POSTS: ${error}`);
-        }
-    };
-
-    const fetchSocials = async () => {
+    fetchSocials.current = async () => {
         try {
             let apiResFollowers = await axios.get(
                 `${SERVER}/social/followers/${otherUser.id}`
@@ -78,12 +36,54 @@ const OtherUserProfile = (props) => {
         }
     };
 
+    useEffect(() => {
+        if (usernameFromPath === props.user.username) {
+            history.push("/profile");
+        }
+    }, [usernameFromPath, history, props.user.username]);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                let apiRes = await axios.get(
+                    `${SERVER}/users/other-user/${usernameFromPath}`
+                );
+                let userData = await apiRes.data.requestedUser;
+                setOtherUser(userData);
+            } catch (error) {
+                console.log(`ERROR FETCHING OTHER USER: ${error}`);
+            }
+        };
+        if (!otherUser || otherUser.username !== usernameFromPath) {
+            fetchUser();
+        }
+    }, [props.match.params.username, SERVER, otherUser, usernameFromPath]);
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                let apiRes = await axios.get(
+                    `${SERVER}/book-post/user/${otherUser.id}`
+                );
+                let usersPosts = await apiRes.data.posts;
+                setBookPosts(usersPosts);
+            } catch (error) {
+                console.log(`ERROR FETCHING POSTS: ${error}`);
+            }
+        };
+
+        if (otherUser) {
+            fetchPosts();
+            fetchSocials.current();
+        }
+    }, [otherUser, SERVER]);
+
     const handleFollow = async () => {
         await axios.post(`${SERVER}/social/follow/create`, {
             follower_id: props.user.id,
             following_id: otherUser.id,
         });
-        fetchSocials();
+        fetchSocials.current();
     };
 
     const handleUnfollow = async () => {
@@ -91,7 +91,7 @@ const OtherUserProfile = (props) => {
             follower_id: props.user.id,
             following_id: otherUser.id,
         });
-        fetchSocials();
+        fetchSocials.current();
     };
 
     const handleContent = () => {

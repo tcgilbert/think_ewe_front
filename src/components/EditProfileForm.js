@@ -79,7 +79,6 @@ const EditProfileForm = (props) => {
 
         // set already selected values
         setAvatarPath(props.user.avatar);
-        let previousAvatar;
         avatars.forEach((avatar) => {
             if (props.user.avatar === avatar.alt) {
                 selectAvatar(avatar);
@@ -100,7 +99,7 @@ const EditProfileForm = (props) => {
                 });
             });
         });
-    }, []);
+    }, [props.user.avatar]);
 
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -108,53 +107,54 @@ const EditProfileForm = (props) => {
 
     const findIdentifier = async () => {
         try {
-            let apiRes = await axios.get(`${SERVER}/users/other-user/${values.username}`)
-            let user = await apiRes.data.requestedUser
+            let apiRes = await axios.get(
+                `${SERVER}/users/other-user/${values.username}`
+            );
+            let user = await apiRes.data.requestedUser;
             if (user) {
-                return true
+                return true;
             } else {
-                return false
+                return false;
             }
         } catch (error) {
             console.log(error);
-            return error
+            return error;
         }
-    }
-
+    };
 
     const handleTextfieldError = () => {
         if (usernameEmpty || usernameTaken) {
-            return true
+            return true;
         }
-    }
+    };
 
     const validateUsername = async () => {
-        let errorPresent = false
+        let errorPresent = false;
         if (values.username === "") {
-            setUsernameEmpty(true)
-            errorPresent = true
+            setUsernameEmpty(true);
+            errorPresent = true;
         } else {
-            setUsernameEmpty(false)
+            setUsernameEmpty(false);
         }
-        if (await findIdentifier() === true) {
+        if ((await findIdentifier()) === true) {
             if (values.username !== props.user.username) {
-                setUsernameTaken(true)
-                errorPresent = true
+                setUsernameTaken(true);
+                errorPresent = true;
             }
         } else {
-            setUsernameTaken(false)
+            setUsernameTaken(false);
         }
         if (!avatarPath) {
-            errorPresent = true
-            setAvatar("Avatar selection required!")
+            errorPresent = true;
+            setAvatar("Avatar selection required!");
         }
         console.log(errorPresent);
-        return errorPresent
-    }
+        return errorPresent;
+    };
 
     const handleSubmit = async () => {
         if (await validateUsername()) {
-            return
+            return;
         }
         // update the user
         try {
@@ -237,7 +237,13 @@ const EditProfileForm = (props) => {
                         size="small"
                         name="username"
                         error={handleTextfieldError()}
-                        helperText={usernameEmpty ? "Username is required" : usernameTaken ? "Username not availible" : null}
+                        helperText={
+                            usernameEmpty
+                                ? "Username is required"
+                                : usernameTaken
+                                ? "Username not availible"
+                                : null
+                        }
                         value={values.username}
                         onChange={handleChange}
                     />
