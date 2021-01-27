@@ -4,16 +4,17 @@ import BookDisplayed from "./BookDisplayed";
 import BookPostModal from "./material-ui/BookPostModal";
 import axios from "axios";
 import useDebounce from "../utilities/useDebounce";
+import LoadingCircle from "./material-ui/LoadingCircle";
 
 const SearchBooks = (props) => {
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [createPostBook, setCreatePostBook] = useState(null);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
     const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
     const SERVER = process.env.REACT_APP_SERVER;
-    const searchDebounced = useDebounce(search, 2000)
+    const searchDebounced = useDebounce(search, 1000);
 
     const handleModal = (book) => {
         console.log(book);
@@ -36,17 +37,17 @@ const SearchBooks = (props) => {
     useEffect(() => {
         if (searchDebounced) {
             handleSearch();
-        } 
+        }
     }, [searchDebounced]);
 
     useEffect(() => {
         if (search === "") {
             setSearchResults([]);
-            setLoading(false)
+            setLoading(false);
         } else {
-            setLoading(true)
+            setLoading(true);
         }
-    }, [search])
+    }, [search]);
 
     const handleSearch = async () => {
         let books = [];
@@ -76,7 +77,7 @@ const SearchBooks = (props) => {
                 });
             }
             setSearchResults(books);
-            setLoading(false)
+            setLoading(false);
         } catch (error) {
             console.log(error);
         }
@@ -90,12 +91,16 @@ const SearchBooks = (props) => {
 
     const handleResultsDisplayed = () => {
         if (loading) {
-            return <div>Loading..</div>
+            return (
+                <div className="loading-div">
+                    <LoadingCircle />
+                    <p id="loading-text">Loading Books...</p>
+                </div>
+            );
         } else {
-            return resultsDisplayed
+            return resultsDisplayed;
         }
-    }
-
+    };
 
     return (
         <div>
