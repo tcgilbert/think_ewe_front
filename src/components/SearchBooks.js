@@ -14,7 +14,7 @@ const SearchBooks = (props) => {
     const [loading, setLoading] = useState(false);
     const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
     const SERVER = process.env.REACT_APP_SERVER;
-    const searchDebounced = useDebounce(search, 1000);
+    const searchDebounced = useDebounce(search, 500);
 
     const handleModal = (book) => {
         console.log(book);
