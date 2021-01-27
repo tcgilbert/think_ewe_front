@@ -432,6 +432,11 @@ h2, h3, p {
     align-items: center;
 }
 
+.refresh-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 /* Elements */
 
 #profile-username {

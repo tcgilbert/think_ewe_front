@@ -11,9 +11,9 @@ import Box from "@material-ui/core/Box";
 
 const DynamicContent = (props) => {
 
-
     const [shownContent, setShownContent] = useState("myFeed")
     const [myBookPosts, setMyBookPosts] = useState([])
+    const [loadingFeed, setLoadingFeed] = useState(false)
     const SERVER = process.env.REACT_APP_SERVER;
 
     // load book posts on state switch
@@ -30,6 +30,14 @@ const DynamicContent = (props) => {
         let apiRes = await axios.get(`${SERVER}/book-post/user/${props.user.id}`)
         let usersPosts = await apiRes.data.posts
         setMyBookPosts(usersPosts)
+        setLoadingFeed(false)
+    }
+
+    const handleRefresh = () => {
+        setLoadingFeed(true)
+        setTimeout(() => {
+            fetchBookPosts()
+        }, 1000)
     }
 
     // returns selected component
@@ -39,7 +47,7 @@ const DynamicContent = (props) => {
         } else if (shownContent === "searchBooks") {
             return <SearchBooks setShownContent={setShownContent} user={props.user}/>
         } else {
-            return <MyFeed feed={props.feed} />
+            return <MyFeed loadingFeed={loadingFeed} handleRefresh={handleRefresh} setLoadingFeed={setLoadingFeed} feed={props.feed} />
         }
     }
 
