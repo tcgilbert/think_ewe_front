@@ -19,10 +19,6 @@ function App() {
     const [logLink, setLogLink] = useState(false);
     const SERVER = process.env.REACT_APP_SERVER;
     const history = useHistory();
-    const autoLoginValues = {
-        identifier: "tcgilbert94@gmail.com",
-        password: "00000000",
-    };
     const handleLogout = useRef(() => {})
     // Private Route
     const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -161,12 +157,6 @@ function App() {
                         setUser={setCurrentUser}
                     />
                 </Switch>
-                <button
-                    type="submit"
-                    onClick={() => handleLogin(autoLoginValues)}
-                >
-                    Auto Login
-                </button>
             </div>
         </div>
     );
