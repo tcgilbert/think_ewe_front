@@ -19,6 +19,12 @@ const Signup = (props) => {
         }
     }
 
+    const emailError = () => {
+        if (props.emailAlreadyUsed || props.emailEmpty) {
+            return true
+        }
+    }
+
     return (
         <div className="signup-form">
             <FormControl fullWidth="true">
@@ -32,8 +38,8 @@ const Signup = (props) => {
                         name="email"
                         value={values.email}
                         onChange={handleChange}
-                        error={props.emptyEmail}
-                        helperText={props.emptyEmail ? "Email is required" : null}
+                        error={emailError()}
+                        helperText={props.emptyEmail ? "Email is required" : props.emailAlreadyUsed ? "Email already used" : null }
                     />
                 </Box>
                 <Box mb={1.5}>

@@ -10,6 +10,7 @@ const LandingPage = (props) => {
 
     const [passwordsDontMatch, setPasswordsDontMatch] = useState(false);
     const [emptyEmail, setEmptyEmail] = useState(false);
+    const [emailAlreadyUsed, setEmailAlreadyUsed] = useState(false);
     const [emptyName, setEmptyName] = useState(false);
     const [passwordLengthWrong, setPasswordLengthWrong] = useState(false);
 
@@ -32,6 +33,7 @@ const LandingPage = (props) => {
             }
         } catch (error) {
             console.log(`SIGNUP ERROR: ${error.data}`);
+            setEmailAlreadyUsed(true)
         }
     };
 
@@ -115,6 +117,7 @@ const LandingPage = (props) => {
                                 <Signup
                                     emptyEmail={emptyEmail}
                                     emptyName={emptyName}
+                                    emailAlreadyUsed={emailAlreadyUsed}
                                     passwordLengthWrong={passwordLengthWrong}
                                     passwordsDontMatch={passwordsDontMatch}
                                     handleSignup={handleSignUp}
