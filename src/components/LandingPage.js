@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Signup from "/Users/tcgilbert/Documents/Personal-Projects/think-ewe2/think_ewe_front/src/components/Signup.js";
+import Signup from "src/components/Signup.js";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import Box from "@material-ui/core/Box";
