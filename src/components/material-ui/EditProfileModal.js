@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        width: "100%"
+        width: "50%",
+        margin: "0 auto"
     },
     paper: {
         backgroundColor: theme.palette.background.paper,
@@ -87,7 +88,7 @@ export default function EditProfileModal(props) {
                     timeout: 500,
                 }}
             >
-                <Fade id="remove-modal-border" in={open}>
+                <Fade in={open}>
                         <EditProfileForm setUser={props.setUser} user={props.user}/>
                 </Fade>
             </Modal>

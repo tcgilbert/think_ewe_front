@@ -1,41 +1,52 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "./material-ui/SearchBar";
 import BookDisplayed from "./BookDisplayed";
-import BookPostModal from './material-ui/BookPostModal'
+import BookPostModal from "./material-ui/BookPostModal";
 import axios from "axios";
-
+import useDebounce from "../utilities/useDebounce";
 
 const SearchBooks = (props) => {
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState([]);
-    const [openModal, setOpenModal] = useState(false)
-    const [createPostBook, setCreatePostBook] = useState(null)
+    const [openModal, setOpenModal] = useState(false);
+    const [createPostBook, setCreatePostBook] = useState(null);
+    const [loading, setLoading] = useState(false)
     const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
     const SERVER = process.env.REACT_APP_SERVER;
+    const searchDebounced = useDebounce(search, 2000)
 
     const handleModal = (book) => {
         console.log(book);
-        setOpenModal(true)
-        setCreatePostBook(book)
-    }
+        setOpenModal(true);
+        setCreatePostBook(book);
+    };
 
     const handleBookPostSubmit = async (book_post) => {
-        setOpenModal(false)
-        book_post.user_id = props.user.id
+        setOpenModal(false);
+        book_post.user_id = props.user.id;
         try {
-            await axios.post(`${SERVER}/book-post/create`, book_post)
-            props.setShownContent("myPosts")
+            await axios.post(`${SERVER}/book-post/create`, book_post);
+            props.setShownContent("myPosts");
         } catch (error) {
             console.log(`ERROR CREATING POST: ${error}`);
         }
-    }
+    };
+
+    // handles book search
+    useEffect(() => {
+        if (searchDebounced) {
+            handleSearch();
+        } 
+    }, [searchDebounced]);
 
     useEffect(() => {
         if (search === "") {
             setSearchResults([]);
+            setLoading(false)
+        } else {
+            setLoading(true)
         }
-        handleSearch();
-    }, [search]);
+    }, [search])
 
     const handleSearch = async () => {
         let books = [];
@@ -65,14 +76,25 @@ const SearchBooks = (props) => {
                 });
             }
             setSearchResults(books);
+            setLoading(false)
         } catch (error) {
             console.log(error);
         }
     };
 
     const resultsDisplayed = searchResults.map((book, idx) => {
-        return <BookDisplayed handleModal={handleModal} key={idx} book={book} />;
+        return (
+            <BookDisplayed handleModal={handleModal} key={idx} book={book} />
+        );
     });
+
+    const handleResultsDisplayed = () => {
+        if (loading) {
+            return <div>Loading..</div>
+        } else {
+            return resultsDisplayed
+        }
+    }
 
 
     return (
@@ -82,8 +104,14 @@ const SearchBooks = (props) => {
                 search={search}
                 setSearch={setSearch}
             />
-            {resultsDisplayed}
-            <BookPostModal setShownContent={props.setShownContent} handleBookPostSubmit={handleBookPostSubmit} book={createPostBook} setOpenModal={setOpenModal} openModal={openModal}/>
+            {handleResultsDisplayed()}
+            <BookPostModal
+                setShownContent={props.setShownContent}
+                handleBookPostSubmit={handleBookPostSubmit}
+                book={createPostBook}
+                setOpenModal={setOpenModal}
+                openModal={openModal}
+            />
         </div>
     );
 };

@@ -64,7 +64,6 @@ export default function FollowsModal(props) {
 
     useEffect(() => {
         if (props.openFollowsModal) {
-            console.log("alskdjfgasoiu");
             setOpen(true);
         }
     }, [props.openFollowsModal]);

@@ -11,7 +11,6 @@ const Dashboard = (props) => {
     const [avatar, setAvatar] = useState(null);
     const [usernameEmpty, setUsernameEmpty] = useState(false)
     const [usernameTaken, setUsernameTaken] = useState(false)
-    const [avatarTextColor, setAvatarTextColor] = useState("green")
     const [avatarPath, setAvatarPath] = useState(null);
     const SERVER = process.env.REACT_APP_SERVER;
     const history = useHistory();
@@ -101,7 +100,8 @@ const Dashboard = (props) => {
     const findIdentifier = async () => {
         try {
             let apiRes = await axios.get(`${SERVER}/users/other-user/${values.username}`)
-            if (apiRes.data.requestedUser) {
+            let user = await apiRes.data.requestedUser
+            if (user) {
                 return true
             } else {
                 return false
@@ -118,7 +118,7 @@ const Dashboard = (props) => {
         }
     }
 
-    const validateUsername = () => {
+    const validateUsername = async () => {
         let errorPresent = false
         if (values.username === "") {
             setUsernameEmpty(true)
@@ -126,7 +126,7 @@ const Dashboard = (props) => {
         } else {
             setUsernameEmpty(false)
         }
-        if (findIdentifier() === true) {
+        if (await findIdentifier() === true) {
             setUsernameTaken(true)
             errorPresent = true
         } else {
@@ -140,7 +140,7 @@ const Dashboard = (props) => {
     }
 
     const handleSubmit = async () => {
-        if (validateUsername()) {
+        if (await validateUsername()) {
             return
         }
         // update the user

@@ -5,13 +5,17 @@ import PeopleAltOutlinedIcon from "@material-ui/icons/PeopleAltOutlined";
 
 const UserInfo = (props) => {
     const handleFollowerModal = () => {
-        props.setContent("followers");
-        props.setOpenFollowsModal(true);
+        if (props.followers.length !== 0) {
+            props.setContent("followers");
+            props.setOpenFollowsModal(true);
+        }
     };
 
     const handleFollowingModal = () => {
-        props.setContent("following");
-        props.setOpenFollowsModal(true);
+        if (props.following.length !== 0) {
+            props.setContent("following");
+            props.setOpenFollowsModal(true);
+        }
     };
 
     return (
@@ -44,21 +48,20 @@ const UserInfo = (props) => {
                     <strong>{props.following.length}</strong> following
                 </p>
             </div>
-            
-                <Button
-                    onClick={() => props.setOpenModal(true)}
-                    fullWidth="true"
-                    variant="outlined"
-                    style={{
-                        backgroundColor: "rgb(59,59,59)",
-                        fontWeight: "bold",
-                        color: "whitesmoke",
-                        marginTop: "5px",
-                    }}
-                >
-                    Edit Profile
-                </Button>
-       
+
+            <Button
+                onClick={() => props.setOpenModal(true)}
+                fullWidth="true"
+                variant="outlined"
+                style={{
+                    backgroundColor: "rgb(59,59,59)",
+                    fontWeight: "bold",
+                    color: "whitesmoke",
+                    marginTop: "5px",
+                }}
+            >
+                Edit Profile
+            </Button>
         </div>
     );
 };

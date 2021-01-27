@@ -6,9 +6,14 @@ import { TextField, Button, FormControl } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 
 const EditProfileForm = (props) => {
-    const [values, handleChange] = useForm({ username: props.user.username, bio: props.user.bio });
+    const [values, handleChange] = useForm({
+        username: props.user.username,
+        bio: props.user.bio,
+    });
     const [avatar, setAvatar] = useState(null);
     const [avatarPath, setAvatarPath] = useState(null);
+    const [usernameEmpty, setUsernameEmpty] = useState(false);
+    const [usernameTaken, setUsernameTaken] = useState(false);
     const SERVER = process.env.REACT_APP_SERVER;
     const history = useHistory();
 
@@ -78,7 +83,7 @@ const EditProfileForm = (props) => {
         avatars.forEach((avatar) => {
             if (props.user.avatar === avatar.alt) {
                 selectAvatar(avatar);
-                avatar.classList.add("avatar-selection")
+                avatar.classList.add("avatar-selection");
             }
         });
 
@@ -101,10 +106,55 @@ const EditProfileForm = (props) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    const findIdentifier = async () => {
+        try {
+            let apiRes = await axios.get(`${SERVER}/users/other-user/${values.username}`)
+            let user = await apiRes.data.requestedUser
+            if (user) {
+                return true
+            } else {
+                return false
+            }
+        } catch (error) {
+            console.log(error);
+            return error
+        }
+    }
+
+
+    const handleTextfieldError = () => {
+        if (usernameEmpty || usernameTaken) {
+            return true
+        }
+    }
+
+    const validateUsername = async () => {
+        let errorPresent = false
+        if (values.username === "") {
+            setUsernameEmpty(true)
+            errorPresent = true
+        } else {
+            setUsernameEmpty(false)
+        }
+        if (await findIdentifier() === true) {
+            if (values.username !== props.user.username) {
+                setUsernameTaken(true)
+                errorPresent = true
+            }
+        } else {
+            setUsernameTaken(false)
+        }
+        if (!avatarPath) {
+            errorPresent = true
+            setAvatar("Avatar selection required!")
+        }
+        console.log(errorPresent);
+        return errorPresent
+    }
+
     const handleSubmit = async () => {
-        if (!values.username) {
-            console.log("Username is required");
-            return;
+        if (await validateUsername()) {
+            return
         }
         // update the user
         try {
@@ -186,6 +236,8 @@ const EditProfileForm = (props) => {
                         variant="outlined"
                         size="small"
                         name="username"
+                        error={handleTextfieldError()}
+                        helperText={usernameEmpty ? "Username is required" : usernameTaken ? "Username not availible" : null}
                         value={values.username}
                         onChange={handleChange}
                     />
