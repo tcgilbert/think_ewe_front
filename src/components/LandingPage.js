@@ -19,7 +19,7 @@ const LandingPage = (props) => {
             if (validateFields(values)) {
                 return;
             }
-            const newUser = await axios.post(`${SERVER}/users/signup`, {
+            const newUser = await axios.post(SERVER + "/users/signup", {
                 email: values.email,
                 name: values.name,
                 password: values.password,
