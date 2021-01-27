@@ -15,6 +15,8 @@ const LandingPage = (props) => {
     const [passwordLengthWrong, setPasswordLengthWrong] = useState(false);
 
     const handleSignUp = async (values) => {
+        console.log(SERVER);
+        console.log(SERVER + "/users/signup");
         try {
             if (validateFields(values)) {
                 return;
