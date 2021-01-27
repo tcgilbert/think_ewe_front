@@ -27,7 +27,7 @@ const MyPosts = (props) => {
     const handleBookPostDelete = async (postId) => {
         try {
             await axios.delete(`${SERVER}/book-post/delete/${postId}`);
-            props.fetchBookPosts();
+            await props.fetchBookPosts();
         } catch (error) {
             console.log(`DELETE POST ERROR: ${error}`);
         }

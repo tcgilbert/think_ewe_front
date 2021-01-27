@@ -177,7 +177,7 @@ const EditProfileForm = (props) => {
 
     return (
         <div className="edit-profile-modal">
-            <h3>Edit Profile</h3>
+            <h3 className="dashboard-welcome">Edit Profile</h3>
             <FormControl>
                 <h3>Change Avatar: {avatar}</h3>
                 <div className="avatar-container">
@@ -226,7 +226,7 @@ const EditProfileForm = (props) => {
                     {/* prettier-ignore */}
                     <img id="zebra" className="avatar-img" src={process.env.PUBLIC_URL + "/images/avatars/025-zebra.svg"} alt="/images/avatars/025-zebra.svg"/>
                 </div>
-                <span>Change username</span>
+                <h3>Change username</h3>
                 <Box mb={2} mt={1}>
                     <TextField
                         required="true"
@@ -260,6 +260,11 @@ const EditProfileForm = (props) => {
                     variant="contained"
                     type="submit"
                     onClick={handleSubmit}
+                    style={{
+                        backgroundColor: "#818AA3",
+                        fontWeight: "bold",
+                        color: "whitesmoke",
+                    }}
                 >
                     Submit
                 </Button>

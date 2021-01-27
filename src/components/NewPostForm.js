@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { TextField, Button } from "@material-ui/core";
-import Divider from '@material-ui/core/Divider';
+import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
 
 const NewPostForm = (props) => {
     const { authors, imgUrl, title } = props.book;
     const [ratingDisplayed, setRatingDisplayed] = useState("");
     const [rating, setRating] = useState(null);
-    const [blurb, setBlurb] = useState("")
+    const [blurb, setBlurb] = useState("");
 
     const validateSubmission = () => {
         if (!rating) {
             console.log("A rating is required");
-            return
+            return;
         }
         const book_post = {
             authors,
@@ -20,10 +20,10 @@ const NewPostForm = (props) => {
             cover_url: imgUrl,
             rating,
             blurb,
-        }
-        props.handleSubmit(book_post)
-        props.handleClose()
-    }
+        };
+        props.handleSubmit(book_post);
+        props.handleClose();
+    };
 
     useEffect(() => {
         // select the stars from DOM
@@ -238,10 +238,12 @@ const NewPostForm = (props) => {
                     <div>
                         <h2 id="create-post-title">{title}</h2>
                         <p id="create-post-author">By: {authors[0]}</p>
-
                     </div>
                     <div>
-                        <Divider id="new-post-divider" orientation="horizontal" />
+                        <Divider
+                            id="new-post-divider"
+                            orientation="horizontal"
+                        />
                         <h2>Your Rating: {ratingDisplayed}</h2>
                         <div className="stars">
                             <img
@@ -290,7 +292,17 @@ const NewPostForm = (props) => {
                         name="bio"
                     />
                 </Box>
-                <Button onClick={() => validateSubmission()} fullWidth="true" variant="contained" type="submit">
+                <Button
+                    onClick={() => validateSubmission()}
+                    style={{
+                        backgroundColor: "#818AA3",
+                        fontWeight: "bold",
+                        color: "whitesmoke",
+                    }}
+                    fullWidth="true"
+                    variant="contained"
+                    type="submit"
+                >
                     Submit Post
                 </Button>
             </div>

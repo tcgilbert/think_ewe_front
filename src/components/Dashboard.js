@@ -164,7 +164,7 @@ const Dashboard = (props) => {
 
     return (
         <div className="dashboard-container">
-            <h3 id="dashboard-welcome">Welcome, {props.user.name}!</h3>
+            <h3 className="dashboard-welcome">Welcome, {props.user.name}!</h3>
             <Divider
                 style={{
                     width: "90%",

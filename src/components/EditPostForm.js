@@ -9,7 +9,7 @@ const EditPostForm = (props) => {
     const [rating, setRating] = useState(props.post.rating);
     const [blurb, setBlurb] = useState(props.post.blurb);
 
-    const validateSubmission = () => {
+    const validateSubmission = async () => {
         if (!rating) {
             console.log("A rating is required");
             return;
@@ -19,7 +19,7 @@ const EditPostForm = (props) => {
             blurb, 
             rating
         };
-        props.handleSubmit(book_post);
+        await props.handleSubmit(book_post);
         props.handleClose();
     };
 
@@ -340,6 +340,12 @@ const EditPostForm = (props) => {
                         fullWidth="true"
                         variant="contained"
                         type="submit"
+                        style={{
+                            backgroundColor: "#818AA3",
+                            fontWeight: "bold",
+                            color: "whitesmoke",
+                            marginLeft: "5px"
+                        }}
                     >
                         Update Post
                     </Button>
