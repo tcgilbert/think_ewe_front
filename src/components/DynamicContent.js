@@ -27,6 +27,7 @@ const DynamicContent = (props) => {
     }, [shownContent])
 
     fetchBookPosts.current = async () => {
+        console.log(`${SERVER}/book-post/user/${props.user.id}`);
         let apiRes = await axios.get(`${SERVER}/book-post/user/${props.user.id}`)
         let usersPosts = await apiRes.data.posts
         setMyBookPosts(usersPosts)
@@ -47,7 +48,7 @@ const DynamicContent = (props) => {
         } else if (shownContent === "searchBooks") {
             return <SearchBooks setShownContent={setShownContent} user={props.user}/>
         } else {
-            return <MyFeed loadingFeed={loadingFeed} handleRefresh={handleRefresh} setLoadingFeed={setLoadingFeed} feed={props.feed} />
+            return <MyFeed user={props.user} loadingFeed={loadingFeed} handleRefresh={handleRefresh} setLoadingFeed={setLoadingFeed} feed={props.feed} />
         }
     }
 

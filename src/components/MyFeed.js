@@ -6,7 +6,7 @@ import LinearLoading from "./material-ui/LinearLoading"
 const MyFeed = (props) => {
 
     const handleFeed = props.feed.map((post, idx) => {
-        return <FeedBookPost key={idx} post={post} />;
+        return <FeedBookPost user={props.user} key={idx} post={post} />;
     });
 
     const handleLoader = () => {
