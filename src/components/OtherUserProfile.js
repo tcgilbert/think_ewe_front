@@ -125,6 +125,7 @@ const OtherUserProfile = (props) => {
                 const posts = bookPosts.map((post, idx) => {
                     return (
                         <OtherUserBookPost
+                            currentUser={props.user}
                             user={otherUser}
                             key={idx}
                             post={post}

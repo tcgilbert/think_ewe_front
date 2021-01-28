@@ -3,7 +3,6 @@ import axios from "axios";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import LinearLoading from "./material-ui/LinearLoading";
 
 const FeedBookPost = (props) => {
     const [username, setUserName] = useState("");
@@ -92,7 +91,6 @@ const FeedBookPost = (props) => {
     };
 
     const handleUnlike = async () => {
-        console.log("unliking");
         try {
             let apiRes = await axios.delete(`${SERVER}/likes/delete`, {
                 data: {
