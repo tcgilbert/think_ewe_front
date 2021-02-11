@@ -53,10 +53,12 @@ const SearchBooks = (props) => {
     handleSearch.current = async () => {
         let books = [];
         try {
+            console.log(search);
             let axiosRes = await axios.get(
                 `https://www.googleapis.com/books/v1/volumes?q=${search.toLowerCase()}&maxResults=6&key=${API_KEY}`
             );
             let resArray = await axiosRes.data.items;
+            console.log(resArray);
             if (resArray !== "undefined") {
                 resArray.forEach((ele) => {
                     if (
@@ -80,6 +82,7 @@ const SearchBooks = (props) => {
             setSearchResults(books);
             setLoading(false);
         } catch (error) {
+            setLoading(false);
             console.log(error);
         }
     };

@@ -80,7 +80,7 @@ const LandingPage = (props) => {
             return (
                 <div className="login-signup">
                     <Box>
-                        <div class="flex-row">
+                        <div class="home-page-container">
                             <Box>
                                 <img
                                     id="landing-img"

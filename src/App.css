@@ -12,6 +12,13 @@ h2, h3, p {
 
 /* Classes */
 
+.home-page-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+}
+
 .follows-modal-title {
     text-align: center;
     padding: 10px 0 0;
@@ -68,7 +75,7 @@ h2, h3, p {
     border: solid 2px gray;
     border-radius: 10px;
     box-shadow: 0px 5px 15px 5px rgba(0,0,0,0.15);
-    width: 45%;
+    width: 60%;
     height: 100%;
     margin: 100px auto;
     padding: 10px;
@@ -419,7 +426,7 @@ h2, h3, p {
     background-color: #EAECEC;
     padding: 20px;
     border-radius: 5px;
-    width: 100%;
+    width: auto;
     min-width: 280px;
 }
 
@@ -602,4 +609,21 @@ h2, h3, p {
 #loading-text {
     font-size: 30px;
     margin-top: 20px;
+}
+
+@media (max-width: 1060px) {
+
+.home-page-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+}
+
+.login-signup {
+
+    width: 68%;
+
+}
 }
