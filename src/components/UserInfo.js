@@ -27,41 +27,46 @@ const UserInfo = (props) => {
                     alt=""
                 />
             </div>
-            <h2>{props.user.name}</h2>
-            <p id="profile-username">{props.user.username}</p>
-            <Box mt={1} mb={2}>
-                <p>{props.user.bio}</p>
-            </Box>
-            <div className="follows-container">
-                <p
-                    onClick={() => handleFollowerModal()}
-                    className="followers-hover"
-                >
-                    <PeopleAltOutlinedIcon />
-                    <strong> {props.followers.length}</strong> followers{" "}
-                </p>
-                <p
-                    onClick={() => handleFollowingModal()}
-                    className="following-hover"
-                >
-                    <span id="bullet-point">{"\u0081"}</span>
-                    <strong>{props.following.length}</strong> following
-                </p>
+            <div className="user-info-text">
+                <div>
+                    <h2>{props.user.name}</h2>
+                    <p id="profile-username">{props.user.username}</p>
+                    <Box mt={1} mb={2}>
+                        <p>{props.user.bio}</p>
+                    </Box>
+                </div>
+                <div>
+                    <div className="follows-container">
+                        <p
+                            onClick={() => handleFollowerModal()}
+                            className="followers-hover"
+                        >
+                            <PeopleAltOutlinedIcon />
+                            <strong> {props.followers.length}</strong> followers{" "}
+                        </p>
+                        <p
+                            onClick={() => handleFollowingModal()}
+                            className="following-hover"
+                        >
+                            <span id="bullet-point">{"\u0081"}</span>
+                            <strong>{props.following.length}</strong> following
+                        </p>
+                    </div>
+                    <Button
+                        onClick={() => props.setOpenModal(true)}
+                        fullWidth="true"
+                        variant="outlined"
+                        style={{
+                            backgroundColor: "rgb(59,59,59)",
+                            fontWeight: "bold",
+                            color: "whitesmoke",
+                            marginTop: "5px",
+                        }}
+                    >
+                        Edit Profile
+                    </Button>
+                </div>
             </div>
-
-            <Button
-                onClick={() => props.setOpenModal(true)}
-                fullWidth="true"
-                variant="outlined"
-                style={{
-                    backgroundColor: "rgb(59,59,59)",
-                    fontWeight: "bold",
-                    color: "whitesmoke",
-                    marginTop: "5px",
-                }}
-            >
-                Edit Profile
-            </Button>
         </div>
     );
 };

@@ -59,25 +59,7 @@ const OtherUserInfo = (props) => {
     };
 
     return (
-        // <div className="user-info">
-        //     <div className="center">
-        //         <img
-        //             id="profile-pic"
-        //             src={process.env.PUBLIC_URL + props.user.avatar}
-        //             alt=""
-        //         />
-        //         <h2>{props.user.name}</h2>
-        //     </div>
-        //     <h3 className="inline">@{props.user.username}:</h3>
-        //     <Box className="inline" ml={1}>
-        //         <p>{props.user.bio}</p>
-        //     </Box>
-        //     <p>Following: {props.following.length}</p>
-        //     <p>Followers: {props.followers.length}</p>
-        //     <Box mt={2}>
-        //         {handleFollowButtons()}
-        //     </Box>
-        // </div>
+
         <div className="user-info">
             <div className="center">
                 <img
@@ -86,29 +68,34 @@ const OtherUserInfo = (props) => {
                     alt=""
                 />
             </div>
-            <h2>{props.user.name}</h2>
-            <p id="profile-username">{props.user.username}</p>
-            <Box mt={1} mb={2}>
-                <p>{props.user.bio}</p>
-            </Box>
-            <div className="follows-container">
-                <p
-                    onClick={() => handleFollowerModal()}
-                    className="followers-hover"
-                >
-                    <PeopleAltOutlinedIcon />
-                    <strong> {props.followers.length}</strong> followers{" "}
-                </p>
-                <p
-                    onClick={() => handleFollowingModal()}
-                    className="following-hover"
-                >
-                    <span id="bullet-point">{"\u0081"}</span>
-                    <strong>{props.following.length}</strong> following
-                </p>
+            <div className="user-info-text">
+                <div>
+                    <h2>{props.user.name}</h2>
+                    <p id="profile-username">{props.user.username}</p>
+                    <Box mt={1} mb={2}>
+                        <p>{props.user.bio}</p>
+                    </Box>
+                </div>
+                <div>
+                    <div className="follows-container">
+                        <p
+                            onClick={() => handleFollowerModal()}
+                            className="followers-hover"
+                        >
+                            <PeopleAltOutlinedIcon />
+                            <strong> {props.followers.length}</strong> followers{" "}
+                        </p>
+                        <p
+                            onClick={() => handleFollowingModal()}
+                            className="following-hover"
+                        >
+                            <span id="bullet-point">{"\u0081"}</span>
+                            <strong>{props.following.length}</strong> following
+                        </p>
+                    </div>
+                    {handleFollowButtons()}
+                </div>
             </div>
-
-            {handleFollowButtons()}
         </div>
     );
 };
