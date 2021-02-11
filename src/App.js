@@ -61,6 +61,8 @@ function App() {
             // set the current user
             setCurrentUser(user);
             setIsAuthenticated(true);
+            
+            return true
         } catch (error) {
             return await error
         }

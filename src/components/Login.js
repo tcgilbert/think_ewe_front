@@ -14,8 +14,8 @@ const Login = (props) => {
             identifier: props.identifier,
             password: props.password
         }
-        props.handleLogin(values)
-        if (props.isAuthenticated) {
+        let loggedIn = await props.handleLogin(values)
+        if (loggedIn === true) {
             props.handleClose()
             setErrorPresent(false)
             setPasswordError(false)

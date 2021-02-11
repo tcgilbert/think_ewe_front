@@ -20,7 +20,7 @@ const Signup = (props) => {
     }
 
     const emailError = () => {
-        if (props.emailAlreadyUsed || props.emailEmpty) {
+        if (props.emailAlreadyUsed || props.emptyEmail) {
             return true
         }
     }
